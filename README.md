@@ -1,7 +1,8 @@
 # LedgerL
 
 A Wallet(aim for a crypto wallet)
-Features
+
+#### Features
  - Authentication
  - Wallet
  - Balance Transfer
@@ -33,7 +34,7 @@ Offline:
 When the app is offline, the balance and transaction information are available to be viewed.
 But balance transfer are not allowed.
 
-### Technology Used
+## Technology Used
 
  - Architecture : Clean Architecture
  - State Management : Bloc
