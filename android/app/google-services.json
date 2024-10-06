@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150508276344",
+    "project_id": "ledgerl-e4673",
+    "storage_bucket": "ledgerl-e4673.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150508276344:android:33b480fdb4b0a9cbe2bb8d",
+        "android_client_info": {
+          "package_name": "com.lj.wallet_lj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiM2hiFOvWCzggex0piousC57-vS7rBjg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
