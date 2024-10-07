@@ -118,9 +118,6 @@ class AppStyles {
     tabBarTheme: TabBarTheme(
       indicatorColor: color.dark.colorScheme.primary,
     ),
-    navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: color.dark.colorScheme.primary,
-    ),
     textTheme: typography.light.copyWith(
       displayLarge: _darkTextTheme.displayLarge?.bold,
       displayMedium: _darkTextTheme.displayMedium?.bold,

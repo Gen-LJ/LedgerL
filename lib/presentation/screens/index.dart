@@ -3,21 +3,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../presentation.dart';
 
 class IndexScreen extends StatelessWidget {
-  const IndexScreen({super.key, required this.indexCallback});
+  final int initialTab;
+
+  const IndexScreen(
+      {super.key, required this.indexCallback, this.initialTab = 0});
 
   final void Function(void Function(int page) Function() useIndexPageNavigator)
       indexCallback;
 
   static const String routeName = "index";
   static const String routePath = "/";
+  static int? lastTab;
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<int> currentIndex = ValueNotifier<int>(0);
+    final ValueNotifier<int> currentIndex =
+        ValueNotifier<int>(lastTab ?? initialTab);
 
     indexCallback(() {
-      return (int page) {
-        currentIndex.value = page;
+      return (int index) {
+        currentIndex.value = index;
       };
     });
 
@@ -87,7 +92,6 @@ class IndexScreen extends StatelessWidget {
               children: screens,
             ),
             bottomNavigationBar: NavigationBar(
-              indicatorColor: context.theme.primaryColor,
               selectedIndex: index,
               elevation: 0,
               destinations: navItems
@@ -98,7 +102,8 @@ class IndexScreen extends StatelessWidget {
                       ))
                   .toList(),
               onDestinationSelected: (index) {
-                currentIndex.value = index; // Update the current index
+                currentIndex.value = index;
+                lastTab = index;
               },
             ));
       },
