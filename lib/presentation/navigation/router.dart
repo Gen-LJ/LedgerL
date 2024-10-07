@@ -2,11 +2,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 
 @lazySingleton
 class NavigationRouter {
-
   void Function(int page) Function()? _useIndexPageNavigator;
 
   void Function(int page) Function() get useIndexPageNavigator =>
@@ -29,29 +29,33 @@ class NavigationRouter {
       },
       routes: [
         GoRoute(
-            path: IndexScreen.routePath,
-            builder: (context, state) {
-              return IndexScreen(
-                hookCallback: (useIndexPageNavigator) {
+          path: IndexScreen.routePath,
+          builder: (context, state) {
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => inject<TransferCubit>()),
+                BlocProvider(create: (_) => inject<LedgerCubit>()),
+              ],
+              child: IndexScreen(
+                indexCallback: (useIndexPageNavigator) {
                   _useIndexPageNavigator = useIndexPageNavigator;
                 },
-              );
+              ),
+            );
+          },
+        ),
+        GoRoute(
+            onExit: (context, state) {
+              final auth = context.read<AuthenticationCubit>();
+              if (auth.state is! Authenticated) {
+                SystemNavigator.pop();
+              }
+              return true;
             },
-            routes: [
-              GoRoute(
-                  onExit: (context, state) {
-                    final auth = context.read<AuthenticationCubit>();
-                    if (auth.state is! Authenticated) {
-                      SystemNavigator.pop();
-                    }
-                    return true;
-                  },
-                  path: LoginScreen.routeName,
-                  builder: (context, state) {
-                    final redirectRoute =
-                        state.uri.queryParameters["redirectRoute"];
-                    return LoginScreen(redirectRoute: redirectRoute);
-                  }),
-            ])
+            path: LoginScreen.routePath,
+            builder: (context, state) {
+              final redirectRoute = state.uri.queryParameters["redirectRoute"];
+              return LoginScreen(redirectRoute: redirectRoute);
+            }),
       ]);
 }

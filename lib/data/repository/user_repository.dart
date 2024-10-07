@@ -44,7 +44,7 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<List<UserInfoEntity>> getAllWalletUserData() async {
     try {
-      bool onlineStatus = await isOnline();
+      // bool onlineStatus = await isOnline();
       // if (onlineStatus) {
         List<UserInfoEntity>? walletUsers = await _remote.getAllUsers();
         // await _local.saveAllWalletUsers(walletUsers);

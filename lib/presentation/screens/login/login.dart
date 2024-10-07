@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -22,8 +21,6 @@ class LoginScreen extends StatelessWidget {
     return BlocListener<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
         if (state is Authenticated) {
-          context.read<LedgerCubit>().loadData();
-          context.read<TransferCubit>().loadData();
           redirectRoute != null
               ? context.go(redirectRoute!)
               : context.goIndex();

@@ -19,8 +19,6 @@ class LedgerL extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => inject<AuthenticationCubit>()),
-        BlocProvider(create: (_) => inject<TransferCubit>()),
-        BlocProvider(create: (_) => inject<LedgerCubit>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

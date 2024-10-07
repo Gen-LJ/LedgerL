@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ledger_l/core/core.dart';
 import '../presentation.dart';
 
 class IndexScreen extends StatelessWidget {
-  const IndexScreen({super.key, required this.hookCallback});
+  const IndexScreen({super.key, required this.indexCallback});
   final void Function(void Function(int page) Function() useIndexPageNavigator)
-  hookCallback;
+  indexCallback;
 
   static const String routeName = "index";
   static const String routePath = "/";
@@ -15,9 +14,9 @@ class IndexScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ValueNotifier<int> currentIndex = ValueNotifier<int>(0);
 
-    hookCallback(() {
+    indexCallback(() {
       return (int page) {
-        currentIndex.value = page; // Reset currentIndex to 0
+        currentIndex.value = page;
       };
     });
 
@@ -64,8 +63,6 @@ class IndexScreen extends StatelessWidget {
                     ? IconButton(
                         onPressed: () {
                           context.read<AuthenticationCubit>().logOut();
-                          inject<NavigationRouter>().useIndexPageNavigator()(0);
-                          context.goIndex();
                         },
                         icon: const Icon(Icons.logout_sharp))
                     : IconButton(
