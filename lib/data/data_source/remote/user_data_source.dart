@@ -64,7 +64,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       }).toList();
 
       // Log the result for debugging
-      logger.i('Users fetched: $users');
+      logger.i(users);
       return users;
     } catch (e) {
       logger.e(e);

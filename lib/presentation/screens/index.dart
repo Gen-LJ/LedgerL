@@ -70,6 +70,7 @@ class IndexScreen extends StatelessWidget {
                         onPressed: () {
                           showLogoutConfirmation(context, () {
                             context.read<AuthenticationCubit>().logOut();
+                            lastTab = null;
                           });
                         },
                         icon: const Icon(Icons.logout_sharp))
