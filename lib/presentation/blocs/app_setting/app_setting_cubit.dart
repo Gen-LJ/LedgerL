@@ -21,6 +21,8 @@ class AppSettingCubit extends Cubit<AppSettingState> {
     initialize();
   }
 
+  bool get isDark => state.themeMode == ThemeMode.dark;
+
   Future<void> initialize() async {
     final theme = await _themeRepository.getTheme();
     emit(state.copyWith(themeMode: theme));

@@ -68,7 +68,9 @@ class IndexScreen extends StatelessWidget {
                 index == 2
                     ? IconButton(
                         onPressed: () {
-                          context.read<AuthenticationCubit>().logOut();
+                          showLogoutConfirmation(context, () {
+                            context.read<AuthenticationCubit>().logOut();
+                          });
                         },
                         icon: const Icon(Icons.logout_sharp))
                     : BlocBuilder<AppSettingCubit, AppSettingState>(

@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:ledger_l/presentation/styles/styles.dart';
 
 import 'colors.dart';
 import 'grid.dart';
@@ -80,7 +81,19 @@ class AppStyles {
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: color.clrSofterGrey
+      backgroundColor: color.clrSofterGrey,
+      indicatorColor: color.light.colorScheme.primary,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor: color.light.colorScheme.primaryContainer,
+        foregroundColor: color.dark.colorScheme.onPrimaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular($styles.insets.xs), // Rounded corners
+        ),
+      ),
     ),
     textTheme: typography.light.copyWith(
       displayLarge: _lightTextTheme.displayLarge?.bold,
@@ -115,8 +128,22 @@ class AppStyles {
         color: color.dark.colorScheme.primary,
       ),
     ),
+    navigationBarTheme: NavigationBarThemeData(
+      indicatorColor: color.light.colorScheme.primary,
+    ),
     tabBarTheme: TabBarTheme(
       indicatorColor: color.dark.colorScheme.primary,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        backgroundColor: color.light.colorScheme.primaryContainer,
+        foregroundColor: color.dark.colorScheme.onPrimaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius:
+          BorderRadius.circular($styles.insets.xs), // Rounded corners
+        ),
+      ),
     ),
     textTheme: typography.light.copyWith(
       displayLarge: _darkTextTheme.displayLarge?.bold,

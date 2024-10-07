@@ -1,8 +1,13 @@
 export 'app_bar/app_bar.dart';
+export 'button/confirm_cancel_row_button.dart';
+export 'button/elevated_button.dart';
 export 'icons/chvron.dart';
 export 'icons/circular_icon.dart';
 export 'icons/icons.dart';
 export 'icons/svg_icon.dart';
+export 'loading_indicator/circle_indicator.dart';
+export 'loading_indicator/loading_overlay.dart';
+export 'modal/logout_modal.dart';
 export 'nav_bar/nav_bar.dart';
 export 'nav_bar/nav_bar_item.dart';
 export 'nav_bar/nav_item.dart';

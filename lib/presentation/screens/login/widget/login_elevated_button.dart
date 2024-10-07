@@ -50,7 +50,7 @@ class LoginElevatedButton extends StatelessWidget {
                     // ),
                     Text(
                       text,
-                      style: context.textTheme.titleSmall?.medium,
+                      style: context.textTheme.titleSmall?.medium.copyWith(color: context.theme.colorScheme.onPrimary),
                     ),
                   ],
                 ),]
