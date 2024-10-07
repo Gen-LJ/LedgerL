@@ -4,8 +4,9 @@ import '../presentation.dart';
 
 class IndexScreen extends StatelessWidget {
   const IndexScreen({super.key, required this.indexCallback});
+
   final void Function(void Function(int page) Function() useIndexPageNavigator)
-  indexCallback;
+      indexCallback;
 
   static const String routeName = "index";
   static const String routePath = "/";
@@ -65,8 +66,20 @@ class IndexScreen extends StatelessWidget {
                           context.read<AuthenticationCubit>().logOut();
                         },
                         icon: const Icon(Icons.logout_sharp))
-                    : IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.dark_mode)),
+                    : BlocBuilder<AppSettingCubit, AppSettingState>(
+                        builder: (context, state) {
+                          return IconButton(
+                              onPressed: () {
+                                context.read<AppSettingCubit>().onChangeTheme(
+                                    state.themeMode == ThemeMode.dark
+                                        ? ThemeMode.light
+                                        : ThemeMode.dark);
+                              },
+                              icon: Icon(state.themeMode == ThemeMode.dark
+                                  ? Icons.light_mode
+                                  : Icons.dark_mode));
+                        },
+                      ),
               ],
             ),
             body: IndexedStack(

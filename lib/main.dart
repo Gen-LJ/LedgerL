@@ -19,13 +19,18 @@ class LedgerL extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => inject<AuthenticationCubit>()),
+        BlocProvider(create: (_) => inject<AppSettingCubit>()),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.light,
-        theme: $styles.light,
-        darkTheme: $styles.dark,
-        routerConfig: inject<NavigationRouter>().router,
+      child: BlocBuilder<AppSettingCubit, AppSettingState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            themeMode: state.themeMode,
+            theme: $styles.light,
+            darkTheme: $styles.dark,
+            routerConfig: inject<NavigationRouter>().router,
+          );
+        },
       ),
     );
   }

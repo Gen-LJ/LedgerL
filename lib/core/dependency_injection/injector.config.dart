@@ -26,8 +26,11 @@ import 'package:ledger_l/data/data_source/remote/balance_data_source.dart'
 import 'package:ledger_l/data/data_source/remote/user_data_source.dart'
     as _i125;
 import 'package:ledger_l/data/repository/balance_repository.dart' as _i25;
+import 'package:ledger_l/data/repository/theme_repository.dart' as _i402;
 import 'package:ledger_l/data/repository/user_repository.dart' as _i757;
 import 'package:ledger_l/domain/domain.dart' as _i560;
+import 'package:ledger_l/presentation/blocs/app_setting/app_setting_cubit.dart'
+    as _i538;
 import 'package:ledger_l/presentation/blocs/authentication/authentication_cubit.dart'
     as _i959;
 import 'package:ledger_l/presentation/blocs/authentication/authentication_cubit_provider.dart'
@@ -70,12 +73,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i925.UserLocalDataSourceImpl(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i125.UserRemoteDataSource>(
         () => _i125.UserRemoteDataSourceImpl(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i560.ThemeRepository>(
+        () => _i402.ThemeRepositoryImpl(gh<_i460.SharedPreferences>()));
     gh.lazySingleton<_i560.BalanceRepository>(
         () => _i25.BalanceRepositoryImpl(gh<_i278.BalanceRemoteDataSource>()));
     gh.lazySingleton<_i560.UserRepository>(() => _i757.UserRepositoryImpl(
           gh<_i760.UserLocalDataSource>(),
           gh<_i760.UserRemoteDataSource>(),
         ));
+    gh.singleton<_i538.AppSettingCubit>(
+        () => _i538.AppSettingCubit(gh<_i560.ThemeRepository>()));
     await gh.singletonAsync<_i959.AuthenticationCubit>(
       () => authenticationCubitProvider.provide(
         gh<_i59.FirebaseAuth>(),

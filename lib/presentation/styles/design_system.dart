@@ -109,11 +109,17 @@ class AppStyles {
     appBarTheme: AppBarTheme(
       backgroundColor: color.dark.scaffoldBackgroundColor,
       titleTextStyle: _lightTextTheme.titleMedium?.copyWith(
-        color: color.light.colorScheme.onPrimary,
+        color: color.dark.colorScheme.onPrimary,
       ),
-      iconTheme: color.light.iconTheme.copyWith(
+      iconTheme: color.dark.iconTheme.copyWith(
         color: color.dark.colorScheme.primary,
       ),
+    ),
+    tabBarTheme: TabBarTheme(
+      indicatorColor: color.dark.colorScheme.primary,
+    ),
+    navigationBarTheme: NavigationBarThemeData(
+      indicatorColor: color.dark.colorScheme.primary,
     ),
     textTheme: typography.light.copyWith(
       displayLarge: _darkTextTheme.displayLarge?.bold,
