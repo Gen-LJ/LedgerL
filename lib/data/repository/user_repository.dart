@@ -46,7 +46,7 @@ class UserRepositoryImpl implements UserRepository {
     try {
       // bool onlineStatus = await isOnline();
       // if (onlineStatus) {
-        List<UserInfoEntity>? walletUsers = await _remote.getAllUsers();
+        List<UserInfoEntity> walletUsers = await _remote.getAllUsers();
         // await _local.saveAllWalletUsers(walletUsers);
         return walletUsers;
       // } else {

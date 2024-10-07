@@ -21,11 +21,11 @@ class BalanceRemoteDataSourceImpl implements BalanceRemoteDataSource {
   Future<List<BalanceModel>> getAllBalance(String userId) async {
     try {
       CollectionReference refCurrency =
-          _firebaseFireStore.collection(FirebaseConfig.currencyCollectionKey);
+          _firebaseFireStore.collection(FirebaseConfig.balanceCollectionKey);
       DocumentSnapshot documentSnapshot = await refCurrency.doc(userId).get();
 
       List<Map<String, dynamic>> balanceData =
-      List<Map<String, dynamic>>.from(documentSnapshot.get(FirebaseConfig.currencyCollectionKey));
+      List<Map<String, dynamic>>.from(documentSnapshot.get(FirebaseConfig.balanceCollectionKey));
       List<BalanceModel> deserializedBalance =
       balanceData.map((item) => BalanceModel.fromJson(item)).toList();
 

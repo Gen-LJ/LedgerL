@@ -1,4 +1,4 @@
 class FirebaseConfig{
   static const usersCollectionKey = 'users';
-  static const currencyCollectionKey = 'balance';
+  static const balanceCollectionKey = 'balance';
 }

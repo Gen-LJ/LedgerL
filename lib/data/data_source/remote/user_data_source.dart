@@ -77,7 +77,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       UserInfoModel user) async {
     try {
       CollectionReference refCurrency =
-          _firebaseFireStore.collection(FirebaseConfig.currencyCollectionKey);
+          _firebaseFireStore.collection(FirebaseConfig.balanceCollectionKey);
 
       DocumentSnapshot existingBalanceSnapshot =
           await refCurrency.doc(user.id).get();
