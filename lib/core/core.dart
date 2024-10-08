@@ -5,3 +5,4 @@ export 'error/exception.dart';
 export 'error/failure.dart';
 export 'dependency_injection/dependency_injection.dart';
 export 'util/connection_checker.dart';
+export 'util/transaction_id_generator.dart';

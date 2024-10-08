@@ -7,17 +7,16 @@ import 'package:logger/logger.dart';
 
 abstract class UserRemoteDataSource {
   Future<UserInfoModel> saveUser(UserInfoModel user);
+
   Future<List<UserInfoModel>> getAllUsers();
 }
 
 @LazySingleton(as: UserRemoteDataSource)
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final FirebaseFirestore _firebaseFireStore;
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+  final Logger logger;
 
-  UserRemoteDataSourceImpl(this._firebaseFireStore);
+  UserRemoteDataSourceImpl(this._firebaseFireStore, this.logger);
 
   @override
   Future<UserInfoModel> saveUser(UserInfoModel user) async {
@@ -47,20 +46,20 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
   }
 
-
   @override
   Future<List<UserInfoModel>> getAllUsers() async {
     try {
       // Get the collection reference
       CollectionReference refUser =
-      _firebaseFireStore.collection(FirebaseConfig.usersCollectionKey);
+          _firebaseFireStore.collection(FirebaseConfig.usersCollectionKey);
 
       // Fetch all documents in the collection
       QuerySnapshot querySnapshot = await refUser.get();
 
       // Convert the QuerySnapshot into a list of UserInfoModel
       List<UserInfoModel> users = querySnapshot.docs.map((doc) {
-        return UserInfoModel.fromFireStore(doc); // Assuming fromFireStore method exists
+        return UserInfoModel.fromFireStore(
+            doc); // Assuming fromFireStore method exists
       }).toList();
 
       // Log the result for debugging
@@ -72,9 +71,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
   }
 
-
-  Future<void> _firstTimeAddBalanceToUser(
-      UserInfoModel user) async {
+  Future<void> _firstTimeAddBalanceToUser(UserInfoModel user) async {
     try {
       CollectionReference refCurrency =
           _firebaseFireStore.collection(FirebaseConfig.balanceCollectionKey);
@@ -93,9 +90,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         const BalanceModel(currency: 'SGD', amount: 20000),
       ];
 
-      List<Map<String, dynamic>> serializedBalance = balanceList
-          .map((balance) => balance.toJson())
-          .toList();
+      List<Map<String, dynamic>> serializedBalance =
+          balanceList.map((balance) => balance.toJson()).toList();
 
       await refCurrency
           .doc(user.id)
@@ -113,7 +109,6 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         balance: deserializedBalance,
       );
       logger.i(userBalance);
-
     } catch (e) {
       logger.e(e);
       throw ServerException(message: e.toString());

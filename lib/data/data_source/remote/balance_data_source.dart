@@ -11,23 +11,21 @@ abstract class BalanceRemoteDataSource {
 @LazySingleton(as: BalanceRemoteDataSource)
 class BalanceRemoteDataSourceImpl implements BalanceRemoteDataSource {
   final FirebaseFirestore _firebaseFireStore;
-  var logger = Logger(
-    printer: PrettyPrinter(),
-  );
+  final Logger logger;
 
-  BalanceRemoteDataSourceImpl(this._firebaseFireStore);
+  BalanceRemoteDataSourceImpl(this._firebaseFireStore, this.logger);
 
   @override
   Future<List<BalanceModel>> getAllBalance(String userId) async {
     try {
-      CollectionReference refCurrency =
+      CollectionReference refBalance =
           _firebaseFireStore.collection(FirebaseConfig.balanceCollectionKey);
-      DocumentSnapshot documentSnapshot = await refCurrency.doc(userId).get();
+      DocumentSnapshot documentSnapshot = await refBalance.doc(userId).get();
 
-      List<Map<String, dynamic>> balanceData =
-      List<Map<String, dynamic>>.from(documentSnapshot.get(FirebaseConfig.balanceCollectionKey));
+      List<Map<String, dynamic>> balanceData = List<Map<String, dynamic>>.from(
+          documentSnapshot.get(FirebaseConfig.balanceCollectionKey));
       List<BalanceModel> deserializedBalance =
-      balanceData.map((item) => BalanceModel.fromJson(item)).toList();
+          balanceData.map((item) => BalanceModel.fromJson(item)).toList();
 
       logger.i(deserializedBalance);
       return deserializedBalance;

@@ -17,8 +17,11 @@ import 'package:ledger_l/core/dependency_injection/modules/firebase.dart'
     as _i750;
 import 'package:ledger_l/core/dependency_injection/modules/google_sign_in.dart'
     as _i399;
+import 'package:ledger_l/core/dependency_injection/modules/logger.dart'
+    as _i595;
 import 'package:ledger_l/core/dependency_injection/modules/shared_preferences_provider.dart'
     as _i952;
+import 'package:ledger_l/core/util/transaction_id_generator.dart' as _i1004;
 import 'package:ledger_l/data/data.dart' as _i760;
 import 'package:ledger_l/data/data_source/local/user_data_source.dart' as _i925;
 import 'package:ledger_l/data/data_source/remote/balance_data_source.dart'
@@ -41,6 +44,7 @@ import 'package:ledger_l/presentation/screens/home/cubit/ledger/ledger_cubit.dar
     as _i133;
 import 'package:ledger_l/presentation/screens/home/cubit/transfer/transfer_cubit.dart'
     as _i938;
+import 'package:logger/logger.dart' as _i974;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -57,6 +61,7 @@ extension GetItInjectableX on _i174.GetIt {
     final firebaseModule = _$FirebaseModule();
     final googleSignInModule = _$GoogleSignInModule();
     final sharedPreferencesProvider = _$SharedPreferencesProvider();
+    final loggerModule = _$LoggerModule();
     final authenticationCubitProvider = _$AuthenticationCubitProvider();
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i974.FirebaseFirestore>(
@@ -67,14 +72,23 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.lazySingleton<_i426.NavigationRouter>(() => _i426.NavigationRouter());
-    gh.lazySingleton<_i278.BalanceRemoteDataSource>(
-        () => _i278.BalanceRemoteDataSourceImpl(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i974.Logger>(() => loggerModule.logger);
     gh.lazySingleton<_i925.UserLocalDataSource>(
         () => _i925.UserLocalDataSourceImpl(gh<_i460.SharedPreferences>()));
-    gh.lazySingleton<_i125.UserRemoteDataSource>(
-        () => _i125.UserRemoteDataSourceImpl(gh<_i974.FirebaseFirestore>()));
+    gh.factory<_i1004.ITransactionIdGenerator>(
+        () => _i1004.TransactionIdGenerator());
     gh.lazySingleton<_i560.ThemeRepository>(
         () => _i402.ThemeRepositoryImpl(gh<_i460.SharedPreferences>()));
+    gh.lazySingleton<_i125.UserRemoteDataSource>(
+        () => _i125.UserRemoteDataSourceImpl(
+              gh<_i974.FirebaseFirestore>(),
+              gh<_i974.Logger>(),
+            ));
+    gh.lazySingleton<_i278.BalanceRemoteDataSource>(
+        () => _i278.BalanceRemoteDataSourceImpl(
+              gh<_i974.FirebaseFirestore>(),
+              gh<_i974.Logger>(),
+            ));
     gh.lazySingleton<_i560.BalanceRepository>(
         () => _i25.BalanceRepositoryImpl(gh<_i278.BalanceRemoteDataSource>()));
     gh.lazySingleton<_i560.UserRepository>(() => _i757.UserRepositoryImpl(
@@ -106,6 +120,8 @@ class _$FirebaseModule extends _i750.FirebaseModule {}
 class _$GoogleSignInModule extends _i399.GoogleSignInModule {}
 
 class _$SharedPreferencesProvider extends _i952.SharedPreferencesProvider {}
+
+class _$LoggerModule extends _i595.LoggerModule {}
 
 class _$AuthenticationCubitProvider
     extends _i1015.AuthenticationCubitProvider {}
