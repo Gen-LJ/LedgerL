@@ -12,38 +12,14 @@ class LedgerBookView extends StatelessWidget {
     return BlocBuilder<LedgerCubit, LedgerState>(
       builder: (context, state) {
         return switch (state) {
-          LedgerReady() => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              $styles.grid.columnsMargin.toHeightSizedBox,
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: $styles.grid.columnsMargin),
-                child: const Text('Balance'),
-              ),
-              $styles.insets.sm.toHeightSizedBox,
-              Expanded(
-                  child: ListView.separated(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: $styles.grid.columnsMargin),
-                      separatorBuilder: (context, index) {
-                        return $styles.insets.xs.toHeightSizedBox;
-                      },
-                      itemCount: state.allBalance.length,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(state.allBalance[index].currency),
-                            Text(state.allBalance[index].amount.toString()),
-                          ],
-                        );
-                      }))
-            ],
-          ),
+          LedgerReady() => LedgerReadyView(
+              allBalance: state.allBalance,
+            ),
           _ => const Center(child: CircularProgressIndicator())
         };
       },
     );
   }
 }
+
+

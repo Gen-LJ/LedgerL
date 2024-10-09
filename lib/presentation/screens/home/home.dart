@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   children: [
                 LedgerBookView(),
-                TransferView()
+                TransferView(),
               ]))
         ],
       ),
