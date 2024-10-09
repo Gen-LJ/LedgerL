@@ -9,6 +9,8 @@ abstract class UserRemoteDataSource {
   Future<UserInfoModel> saveUser(UserInfoModel user);
 
   Future<List<UserInfoModel>> getAllUsers();
+
+  Future<UserInfoModel> getUser(String email);
 }
 
 @LazySingleton(as: UserRemoteDataSource)
@@ -109,6 +111,30 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         balance: deserializedBalance,
       );
       logger.i(userBalance);
+    } catch (e) {
+      logger.e(e);
+      throw ServerException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<UserInfoModel> getUser(String email) async {
+    try {
+      CollectionReference refUser =
+          _firebaseFireStore.collection(FirebaseConfig.usersCollectionKey);
+
+      QuerySnapshot querySnapshot =
+          await refUser.where('email', isEqualTo: email).limit(1).get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
+        UserInfoModel userInfo = UserInfoModel.fromFireStore(documentSnapshot);
+        logger.i(userInfo);
+        return userInfo;
+      } else {
+        logger.e('No user found with the email: $email');
+        throw ServerException(message: 'No user found with the email: $email');
+      }
     } catch (e) {
       logger.e(e);
       throw ServerException(message: e.toString());

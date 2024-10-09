@@ -30,6 +30,7 @@ import 'package:ledger_l/data/data_source/remote/user_data_source.dart'
     as _i125;
 import 'package:ledger_l/data/repository/balance_repository.dart' as _i25;
 import 'package:ledger_l/data/repository/theme_repository.dart' as _i402;
+import 'package:ledger_l/data/repository/transaction_repository.dart' as _i954;
 import 'package:ledger_l/data/repository/user_repository.dart' as _i757;
 import 'package:ledger_l/domain/domain.dart' as _i560;
 import 'package:ledger_l/presentation/blocs/app_setting/app_setting_cubit.dart'
@@ -38,12 +39,12 @@ import 'package:ledger_l/presentation/blocs/authentication/authentication_cubit.
     as _i959;
 import 'package:ledger_l/presentation/blocs/authentication/authentication_cubit_provider.dart'
     as _i1015;
+import 'package:ledger_l/presentation/blocs/blocs.dart' as _i65;
 import 'package:ledger_l/presentation/navigation/router.dart' as _i426;
-import 'package:ledger_l/presentation/presentation.dart' as _i890;
-import 'package:ledger_l/presentation/screens/home/cubit/ledger/ledger_cubit.dart'
-    as _i133;
-import 'package:ledger_l/presentation/screens/home/cubit/transfer/transfer_cubit.dart'
-    as _i938;
+import 'package:ledger_l/presentation/screens/home/tabs/ldeger_book/cubit/ledger_cubit.dart'
+    as _i1070;
+import 'package:ledger_l/presentation/screens/home/tabs/transfer/cubit/transfer_cubit.dart'
+    as _i71;
 import 'package:logger/logger.dart' as _i974;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
@@ -73,6 +74,8 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i426.NavigationRouter>(() => _i426.NavigationRouter());
     gh.lazySingleton<_i974.Logger>(() => loggerModule.logger);
+    gh.lazySingleton<_i560.TransactionRepository>(
+        () => _i954.TransactionRepositoryImpl());
     gh.lazySingleton<_i925.UserLocalDataSource>(
         () => _i925.UserLocalDataSourceImpl(gh<_i460.SharedPreferences>()));
     gh.factory<_i1004.ITransactionIdGenerator>(
@@ -105,12 +108,12 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       preResolve: true,
     );
-    gh.factory<_i133.LedgerCubit>(() => _i133.LedgerCubit(
+    gh.factory<_i71.TransferCubit>(
+        () => _i71.TransferCubit(gh<_i560.UserRepository>()));
+    gh.factory<_i1070.LedgerCubit>(() => _i1070.LedgerCubit(
           gh<_i560.BalanceRepository>(),
-          gh<_i890.AuthenticationCubit>(),
+          gh<_i65.AuthenticationCubit>(),
         ));
-    gh.factory<_i938.TransferCubit>(
-        () => _i938.TransferCubit(gh<_i560.UserRepository>()));
     return this;
   }
 }

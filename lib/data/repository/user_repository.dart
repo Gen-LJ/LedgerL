@@ -26,8 +26,20 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<UserInfoEntity?> getUserInfo() async {
+  Future<UserInfoEntity?> getSavedUserInfo() async {
     return _local.getUserInfo();
+  }
+
+  @override
+  Future<UserInfoEntity> getUserInfo(String email) async {
+    try {
+      final user = await _remote.getUser(email);
+      return user;
+    } on ServerException {
+      throw const ServerFailure();
+    } on SocketException {
+      throw const ConnectionFailure();
+    }
   }
 
   @override
@@ -46,9 +58,9 @@ class UserRepositoryImpl implements UserRepository {
     try {
       // bool onlineStatus = await isOnline();
       // if (onlineStatus) {
-        List<UserInfoEntity> walletUsers = await _remote.getAllUsers();
-        // await _local.saveAllWalletUsers(walletUsers);
-        return walletUsers;
+      List<UserInfoEntity> walletUsers = await _remote.getAllUsers();
+      // await _local.saveAllWalletUsers(walletUsers);
+      return walletUsers;
       // } else {
       //   List<UserInfoEntity>? walletUsers = await _local.getAllUsers();
       //   if (walletUsers == null) {
@@ -63,5 +75,3 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 }
-
-

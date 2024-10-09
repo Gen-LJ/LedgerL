@@ -14,9 +14,11 @@ abstract class TransactionRemoteDataSource {
 
 class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   final FirebaseFirestore _fireStore;
+  final TransactionIdGenerator _transactionIdGenerator;
   final Logger logger;
 
-  TransactionRemoteDataSourceImpl(this._fireStore, this.logger);
+  TransactionRemoteDataSourceImpl(
+      this._fireStore, this.logger, this._transactionIdGenerator);
 
   @override
   Future<StatusResponseModel> balanceTransfer({
@@ -25,24 +27,22 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
     required String currencyType,
     required num amount,
   }) async {
-    CollectionReference refTransaction =
-        _fireStore.collection(FirebaseConfig.transactionCollectionKey);
-
-    // Create a new TransactionModel instance
-    final transaction = TransactionModel(
-      transactionId: refTransaction.doc().id,
-      // Generate a unique transaction ID
-      senderId: senderId,
-      receiverId: receiverId,
-      currencyType: currencyType,
-      amount: amount,
-      createdAt: DateTime.now(),
-    );
-
-    // Convert the transaction to a map for Firestore
-    final transactionData = transaction.toFireStore();
-
     try {
+      CollectionReference refTransaction =
+          _fireStore.collection(FirebaseConfig.transactionCollectionKey);
+
+      final transaction = TransactionModel(
+        transactionId: _transactionIdGenerator.generate(),
+        senderId: senderId,
+        receiverId: receiverId,
+        currencyType: currencyType,
+        amount: amount,
+        createdAt: DateTime.now(),
+      );
+
+      // Convert the transaction to a map for Firestore
+      final transactionData = transaction.toFireStore();
+
       // Update or create the sender's document with the new transaction in the transaction list
       await refTransaction.doc(senderId).set({
         'userId': senderId,

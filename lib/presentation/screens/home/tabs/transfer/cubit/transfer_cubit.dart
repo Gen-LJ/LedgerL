@@ -17,7 +17,7 @@ class TransferCubit extends Cubit<TransferState> {
 
   Future<void> loadData() async {
     debugPrint('Loading Transfer Data');
-    final user = await _userRepository.getUserInfo();
+    final user = await _userRepository.getSavedUserInfo();
     final res = await _userRepository.getAllWalletUserData();
     res.remove(user);
     emit(TransferState.ready(walletUsers: res));

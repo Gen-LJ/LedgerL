@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/domain/domain.dart';
+import 'package:ledger_l/presentation/blocs/blocs.dart';
 
-import '../../../../presentation.dart';
 
 part 'ledger_state.dart';
 

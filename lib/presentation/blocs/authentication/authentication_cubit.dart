@@ -29,7 +29,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       };
 
   Future<void> loadData() async {
-    final user =  await _userRepository.getUserInfo();
+    final user =  await _userRepository.getSavedUserInfo();
 
     if (user != null) {
       emit(AuthenticationState.authenticated(user: user));

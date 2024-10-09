@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/domain/domain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../core/config/storage_config.dart';
 
 @LazySingleton(as: ThemeRepository)
