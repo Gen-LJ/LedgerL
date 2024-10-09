@@ -40,7 +40,10 @@ import 'package:ledger_l/presentation/blocs/authentication/authentication_cubit.
 import 'package:ledger_l/presentation/blocs/authentication/authentication_cubit_provider.dart'
     as _i1015;
 import 'package:ledger_l/presentation/blocs/blocs.dart' as _i65;
+import 'package:ledger_l/presentation/navigation/navigation_key_provider.dart'
+    as _i659;
 import 'package:ledger_l/presentation/navigation/router.dart' as _i426;
+import 'package:ledger_l/presentation/presentation.dart' as _i890;
 import 'package:ledger_l/presentation/screens/home/tabs/ldeger_book/cubit/ledger_cubit.dart'
     as _i1070;
 import 'package:ledger_l/presentation/screens/home/tabs/transfer/cubit/transfer_cubit.dart'
@@ -72,12 +75,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPreferencesProvider.provide(),
       preResolve: true,
     );
-    gh.lazySingleton<_i426.NavigationRouter>(() => _i426.NavigationRouter());
     gh.lazySingleton<_i974.Logger>(() => loggerModule.logger);
     gh.lazySingleton<_i560.TransactionRepository>(
         () => _i954.TransactionRepositoryImpl());
     gh.lazySingleton<_i925.UserLocalDataSource>(
         () => _i925.UserLocalDataSourceImpl(gh<_i460.SharedPreferences>()));
+    gh.singleton<_i659.INavigationKeyProvider>(
+        () => _i659.NavigationKeyProvider());
     gh.factory<_i1004.ITransactionIdGenerator>(
         () => _i1004.TransactionIdGenerator());
     gh.lazySingleton<_i560.ThemeRepository>(
@@ -98,6 +102,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i760.UserLocalDataSource>(),
           gh<_i760.UserRemoteDataSource>(),
         ));
+    gh.lazySingleton<_i426.NavigationRouter>(
+        () => _i426.NavigationRouter(gh<_i890.INavigationKeyProvider>()));
     gh.singleton<_i538.AppSettingCubit>(
         () => _i538.AppSettingCubit(gh<_i560.ThemeRepository>()));
     await gh.singletonAsync<_i959.AuthenticationCubit>(

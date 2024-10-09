@@ -22,11 +22,12 @@ class ProfileScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('ID - ${state.user.id}'),
+                    Text('UserName - ${state.user.name}'),
                     Text('Email - ${state.user.email}'),
                   ],
                 );
               }
-              return const Text('Auth Required');
+              return Text(R.strings.lblAuthRequired);
             },
           ),
         ),

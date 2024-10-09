@@ -7,6 +7,10 @@ import 'package:ledger_l/presentation/presentation.dart';
 
 @lazySingleton
 class NavigationRouter {
+  final INavigationKeyProvider _navigationKeyProvider;
+
+  NavigationRouter(this._navigationKeyProvider);
+
   void Function(int page) Function()? _useIndexPageNavigator;
 
   void Function(int page) Function() get useIndexPageNavigator =>
@@ -16,6 +20,7 @@ class NavigationRouter {
     IndexScreen.routePath,
   ];
   late final router = GoRouter(
+      navigatorKey: _navigationKeyProvider.globalKey,
       initialLocation: IndexScreen.routePath,
       redirect: (context, state) async {
         final currentRoute = state.fullPath;
@@ -29,21 +34,27 @@ class NavigationRouter {
       },
       routes: [
         GoRoute(
-          path: IndexScreen.routePath,
-          builder: (context, state) {
-            return MultiBlocProvider(
-              providers: [
-                BlocProvider(create: (_) => inject<TransferCubit>()),
-                BlocProvider(create: (_) => inject<LedgerCubit>()),
-              ],
-              child: IndexScreen(
-                indexCallback: (useIndexPageNavigator) {
-                  _useIndexPageNavigator = useIndexPageNavigator;
-                },
-              ),
-            );
-          },
-        ),
+            path: IndexScreen.routePath,
+            builder: (context, state) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider(create: (_) => inject<TransferCubit>()),
+                  BlocProvider(create: (_) => inject<LedgerCubit>()),
+                ],
+                child: IndexScreen(
+                  indexCallback: (useIndexPageNavigator) {
+                    _useIndexPageNavigator = useIndexPageNavigator;
+                  },
+                ),
+              );
+            },
+            routes: [
+              GoRoute(
+                  path: TransferUserCheckScreen.routeName,
+                  builder: (context, state) {
+                    return const TransferUserCheckScreen();
+                  }),
+            ]),
         GoRoute(
             onExit: (context, state) {
               final auth = context.read<AuthenticationCubit>();

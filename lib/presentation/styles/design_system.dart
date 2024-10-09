@@ -1,7 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:ledger_l/presentation/styles/styles.dart';
 
 import 'colors.dart';
 import 'grid.dart';
@@ -91,7 +90,7 @@ class AppStyles {
         foregroundColor: color.dark.colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(
           borderRadius:
-              BorderRadius.circular($styles.insets.xs), // Rounded corners
+              BorderRadius.circular(insets.xs), // Rounded corners
         ),
       ),
     ),
@@ -141,7 +140,7 @@ class AppStyles {
         foregroundColor: color.dark.colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(
           borderRadius:
-          BorderRadius.circular($styles.insets.xs), // Rounded corners
+          BorderRadius.circular(insets.xs), // Rounded corners
         ),
       ),
     ),
