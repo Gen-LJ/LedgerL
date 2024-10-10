@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/domain/domain.dart';
 import 'package:ledger_l/presentation/blocs/blocs.dart';
-
 
 part 'ledger_state.dart';
 
@@ -25,10 +23,6 @@ class LedgerCubit extends Cubit<LedgerState> {
     debugPrint('Loading Ledger Data');
     final userId = _auth.userId!;
     final allBalance = await _balanceRepository.getAllBalance(userId);
-    emit(state.maybeMap(ready: (state) {
-      return state.copyWith(allBalance: allBalance);
-    }, orElse: () {
-      return LedgerState.ready(allBalance: allBalance);
-    }));
+    emit(LedgerState.ready(allBalance: allBalance));
   }
 }
