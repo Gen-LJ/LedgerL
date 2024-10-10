@@ -29,15 +29,21 @@ class LoginScreen extends StatelessWidget {
       child: BlocSelector<AuthenticationCubit, AuthenticationState,
           Map<String, dynamic>>(
         selector: (state) {
-          if (state is AuthLoading) {
-            return {'isLoading': true, 'loadingMessage': state.message};
-          }
-          return {'isLoading': false, 'loadingMessage': ''};
+          return switch (state) {
+            AuthLoading() => {
+                'loading': true,
+                'message': state.message,
+              },
+            _ => {
+                'loading': false,
+                'message': null,
+              },
+          };
         },
         builder: (context, loadingInfo) {
           return LoadingOverlay(
-            isLoading: loadingInfo['isLoading'],
-            loadingInfo: loadingInfo['loadingMessage'],
+            isLoading: loadingInfo['loading'],
+            loadingInfo: loadingInfo['message'],
             child: Scaffold(
               body: SafeArea(
                 child: SingleChildScrollView(
@@ -58,13 +64,14 @@ class LoginScreen extends StatelessWidget {
                       ),
                       $styles.insets.md.toHeightSizedBox,
                       LoginElevatedButton(
-                          imagePath: R.images.googleLogo,
-                          text: R.strings.lblAuthRequired,
-                          onPressed: () {
-                            context
-                                .read<AuthenticationCubit>()
-                                .signInWithGoogle();
-                          }),
+                        imagePath: R.images.googleLogo,
+                        text: R.strings.lblAuthRequired,
+                        onPressed: () {
+                          context
+                              .read<AuthenticationCubit>()
+                              .signInWithGoogle();
+                        },
+                      ),
                     ],
                   ),
                 ),

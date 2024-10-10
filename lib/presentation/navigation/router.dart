@@ -47,7 +47,6 @@ class NavigationRouter {
                   initialTab: tabIndex,
                   indexCallback: (useIndexPageNavigator) {
                     _useIndexPageNavigator = useIndexPageNavigator;
-                    _useIndexPageNavigator!()(tabIndex);
                   },
                 ),
               );
