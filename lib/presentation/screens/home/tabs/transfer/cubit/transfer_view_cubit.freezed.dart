@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'transfer_cubit.dart';
+part of 'transfer_view_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -40,23 +40,23 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TransferInitial value) initial,
-    required TResult Function(TransferReady value) ready,
-    required TResult Function(TransferLoading value) loading,
+    required TResult Function(TransferViewInitial value) initial,
+    required TResult Function(TransferViewReady value) ready,
+    required TResult Function(TransferViewLoading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TransferInitial value)? initial,
-    TResult? Function(TransferReady value)? ready,
-    TResult? Function(TransferLoading value)? loading,
+    TResult? Function(TransferViewInitial value)? initial,
+    TResult? Function(TransferViewReady value)? ready,
+    TResult? Function(TransferViewLoading value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferInitial value)? initial,
-    TResult Function(TransferReady value)? ready,
-    TResult Function(TransferLoading value)? loading,
+    TResult Function(TransferViewInitial value)? initial,
+    TResult Function(TransferViewReady value)? ready,
+    TResult Function(TransferViewLoading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,12 +65,12 @@ mixin _$TransferState {
 /// @nodoc
 abstract class $TransferStateCopyWith<$Res> {
   factory $TransferStateCopyWith(
-          TransferState value, $Res Function(TransferState) then) =
-      _$TransferStateCopyWithImpl<$Res, TransferState>;
+          TransferViewState value, $Res Function(TransferViewState) then) =
+      _$TransferStateCopyWithImpl<$Res, TransferViewState>;
 }
 
 /// @nodoc
-class _$TransferStateCopyWithImpl<$Res, $Val extends TransferState>
+class _$TransferStateCopyWithImpl<$Res, $Val extends TransferViewState>
     implements $TransferStateCopyWith<$Res> {
   _$TransferStateCopyWithImpl(this._value, this._then);
 
@@ -104,7 +104,7 @@ class __$$TransferInitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransferInitialImpl implements TransferInitial {
+class _$TransferInitialImpl implements TransferViewInitial {
   const _$TransferInitialImpl();
 
   @override
@@ -158,9 +158,9 @@ class _$TransferInitialImpl implements TransferInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TransferInitial value) initial,
-    required TResult Function(TransferReady value) ready,
-    required TResult Function(TransferLoading value) loading,
+    required TResult Function(TransferViewInitial value) initial,
+    required TResult Function(TransferViewReady value) ready,
+    required TResult Function(TransferViewLoading value) loading,
   }) {
     return initial(this);
   }
@@ -168,9 +168,9 @@ class _$TransferInitialImpl implements TransferInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TransferInitial value)? initial,
-    TResult? Function(TransferReady value)? ready,
-    TResult? Function(TransferLoading value)? loading,
+    TResult? Function(TransferViewInitial value)? initial,
+    TResult? Function(TransferViewReady value)? ready,
+    TResult? Function(TransferViewLoading value)? loading,
   }) {
     return initial?.call(this);
   }
@@ -178,9 +178,9 @@ class _$TransferInitialImpl implements TransferInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferInitial value)? initial,
-    TResult Function(TransferReady value)? ready,
-    TResult Function(TransferLoading value)? loading,
+    TResult Function(TransferViewInitial value)? initial,
+    TResult Function(TransferViewReady value)? ready,
+    TResult Function(TransferViewLoading value)? loading,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -190,8 +190,8 @@ class _$TransferInitialImpl implements TransferInitial {
   }
 }
 
-abstract class TransferInitial implements TransferState {
-  const factory TransferInitial() = _$TransferInitialImpl;
+abstract class TransferViewInitial implements TransferViewState {
+  const factory TransferViewInitial() = _$TransferInitialImpl;
 }
 
 /// @nodoc
@@ -229,7 +229,7 @@ class __$$TransferReadyImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransferReadyImpl implements TransferReady {
+class _$TransferReadyImpl implements TransferViewReady {
   const _$TransferReadyImpl({required final List<UserInfoEntity> walletUsers})
       : _walletUsers = walletUsers;
 
@@ -304,9 +304,9 @@ class _$TransferReadyImpl implements TransferReady {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TransferInitial value) initial,
-    required TResult Function(TransferReady value) ready,
-    required TResult Function(TransferLoading value) loading,
+    required TResult Function(TransferViewInitial value) initial,
+    required TResult Function(TransferViewReady value) ready,
+    required TResult Function(TransferViewLoading value) loading,
   }) {
     return ready(this);
   }
@@ -314,9 +314,9 @@ class _$TransferReadyImpl implements TransferReady {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TransferInitial value)? initial,
-    TResult? Function(TransferReady value)? ready,
-    TResult? Function(TransferLoading value)? loading,
+    TResult? Function(TransferViewInitial value)? initial,
+    TResult? Function(TransferViewReady value)? ready,
+    TResult? Function(TransferViewLoading value)? loading,
   }) {
     return ready?.call(this);
   }
@@ -324,9 +324,9 @@ class _$TransferReadyImpl implements TransferReady {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferInitial value)? initial,
-    TResult Function(TransferReady value)? ready,
-    TResult Function(TransferLoading value)? loading,
+    TResult Function(TransferViewInitial value)? initial,
+    TResult Function(TransferViewReady value)? ready,
+    TResult Function(TransferViewLoading value)? loading,
     required TResult orElse(),
   }) {
     if (ready != null) {
@@ -336,8 +336,8 @@ class _$TransferReadyImpl implements TransferReady {
   }
 }
 
-abstract class TransferReady implements TransferState {
-  const factory TransferReady(
+abstract class TransferViewReady implements TransferViewState {
+  const factory TransferViewReady(
       {required final List<UserInfoEntity> walletUsers}) = _$TransferReadyImpl;
 
   List<UserInfoEntity> get walletUsers;
@@ -370,7 +370,7 @@ class __$$TransferLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransferLoadingImpl implements TransferLoading {
+class _$TransferLoadingImpl implements TransferViewLoading {
   const _$TransferLoadingImpl();
 
   @override
@@ -424,9 +424,9 @@ class _$TransferLoadingImpl implements TransferLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TransferInitial value) initial,
-    required TResult Function(TransferReady value) ready,
-    required TResult Function(TransferLoading value) loading,
+    required TResult Function(TransferViewInitial value) initial,
+    required TResult Function(TransferViewReady value) ready,
+    required TResult Function(TransferViewLoading value) loading,
   }) {
     return loading(this);
   }
@@ -434,9 +434,9 @@ class _$TransferLoadingImpl implements TransferLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TransferInitial value)? initial,
-    TResult? Function(TransferReady value)? ready,
-    TResult? Function(TransferLoading value)? loading,
+    TResult? Function(TransferViewInitial value)? initial,
+    TResult? Function(TransferViewReady value)? ready,
+    TResult? Function(TransferViewLoading value)? loading,
   }) {
     return loading?.call(this);
   }
@@ -444,9 +444,9 @@ class _$TransferLoadingImpl implements TransferLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferInitial value)? initial,
-    TResult Function(TransferReady value)? ready,
-    TResult Function(TransferLoading value)? loading,
+    TResult Function(TransferViewInitial value)? initial,
+    TResult Function(TransferViewReady value)? ready,
+    TResult Function(TransferViewLoading value)? loading,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -456,6 +456,6 @@ class _$TransferLoadingImpl implements TransferLoading {
   }
 }
 
-abstract class TransferLoading implements TransferState {
-  const factory TransferLoading() = _$TransferLoadingImpl;
+abstract class TransferViewLoading implements TransferViewState {
+  const factory TransferViewLoading() = _$TransferLoadingImpl;
 }

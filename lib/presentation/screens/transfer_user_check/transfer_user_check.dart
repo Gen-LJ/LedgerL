@@ -18,10 +18,30 @@ class TransferUserCheckScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: context.goHistory,
-            child:  Text(R.strings.lblHistory),
+            child: Text(R.strings.lblHistory),
           )
         ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: $styles.grid.columnsMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ReceiverDataCheckContainer(
+              onValidated: (value){
+              debugPrint('Validation Success');
+              debugPrint('Working on Transfer function');
+            },),
+            $styles.grid.columnsMargin.toHeightSizedBox,
+            Text(
+              'Related Users',
+              style: context.textTheme.titleMedium,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+

@@ -46,8 +46,10 @@ import 'package:ledger_l/presentation/navigation/router.dart' as _i426;
 import 'package:ledger_l/presentation/presentation.dart' as _i890;
 import 'package:ledger_l/presentation/screens/home/tabs/ldeger_book/cubit/ledger_cubit.dart'
     as _i1070;
-import 'package:ledger_l/presentation/screens/home/tabs/transfer/cubit/transfer_cubit.dart'
+import 'package:ledger_l/presentation/screens/home/tabs/transfer/cubit/transfer_view_cubit.dart'
     as _i71;
+import 'package:ledger_l/presentation/screens/transfer_user_check/receiver_data_check_container/cubit/transfer_user_check_cubit.dart'
+    as _i437;
 import 'package:logger/logger.dart' as _i974;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
@@ -67,6 +69,8 @@ extension GetItInjectableX on _i174.GetIt {
     final sharedPreferencesProvider = _$SharedPreferencesProvider();
     final loggerModule = _$LoggerModule();
     final authenticationCubitProvider = _$AuthenticationCubitProvider();
+    gh.factory<_i437.TransferUserCheckCubit>(
+        () => _i437.TransferUserCheckCubit());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i974.FirebaseFirestore>(
         () => firebaseModule.firebaseFireStore);
@@ -114,8 +118,8 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       preResolve: true,
     );
-    gh.factory<_i71.TransferCubit>(
-        () => _i71.TransferCubit(gh<_i560.UserRepository>()));
+    gh.factory<_i71.TransferViewCubit>(
+        () => _i71.TransferViewCubit(gh<_i560.UserRepository>()));
     gh.factory<_i1070.LedgerCubit>(() => _i1070.LedgerCubit(
           gh<_i560.BalanceRepository>(),
           gh<_i65.AuthenticationCubit>(),

@@ -4,13 +4,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/domain/domain.dart';
 
-part 'transfer_state.dart';
-part 'transfer_cubit.freezed.dart';
+part 'transfer_view_state.dart';
+part 'transfer_view_cubit.freezed.dart';
 
 @injectable
-class TransferCubit extends Cubit<TransferState> {
+class TransferViewCubit extends Cubit<TransferViewState> {
   final UserRepository _userRepository;
-  TransferCubit(this._userRepository) : super(const TransferState.initial()){
+  TransferViewCubit(this._userRepository) : super(const TransferViewState.initial()){
     debugPrint('Load Data call at cubit');
     loadData();
   }
@@ -20,6 +20,6 @@ class TransferCubit extends Cubit<TransferState> {
     final user = await _userRepository.getSavedUserInfo();
     final res = await _userRepository.getAllWalletUserData();
     res.remove(user);
-    emit(TransferState.ready(walletUsers: res));
+    emit(TransferViewState.ready(walletUsers: res));
   }
 }

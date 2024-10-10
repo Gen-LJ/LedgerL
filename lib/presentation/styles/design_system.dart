@@ -69,6 +69,7 @@ class AppStyles {
   late final _darkTextTheme = typography.dark;
 
   late final light = color.light.copyWith(
+    cardColor: color.clrSofterGrey,
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     scaffoldBackgroundColor: color.clrWhite,
@@ -78,6 +79,10 @@ class AppStyles {
       iconTheme: color.light.iconTheme.copyWith(
         color: color.light.colorScheme.primary,
       ),
+    ),
+    cardTheme:  CardTheme(
+      color: color.clrSofterGrey,
+      elevation: 0
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: color.clrSofterGrey,

@@ -18,7 +18,7 @@ class LedgerReadyView extends StatelessWidget {
         $styles.grid.columnsMargin.toHeightSizedBox,
         Padding(
           padding: EdgeInsets.symmetric(horizontal: $styles.grid.columnsMargin),
-          child: const Text('Balance'),
+          child: const SectionTitle(title: 'Balance'),
         ),
         $styles.insets.sm.toHeightSizedBox,
         Expanded(

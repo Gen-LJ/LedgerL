@@ -9,17 +9,33 @@ class TransferView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TransferCubit, TransferState>(
-      builder: (context, state) {
-        return switch (state) {
-          TransferReady() => TransferReadyView(
-              walletUsers: state.walletUsers,
+    return Padding(
+      padding: EdgeInsets.only(
+        left: $styles.grid.columnsMargin,
+        right: $styles.grid.columnsMargin,
+        top: $styles.grid.columnsMargin,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const TransferCard(),
+          $styles.grid.columnsMargin.toHeightSizedBox,
+          const SectionTitle(title: 'All Users'),
+          $styles.insets.xs.toHeightSizedBox,
+          Expanded(
+            child: BlocBuilder<TransferViewCubit, TransferViewState>(
+              builder: (context, state) {
+                return switch (state) {
+                  TransferViewReady() => TransferReadyView(
+                      walletUsers: state.walletUsers,
+                    ),
+                  _ => const TransferLoadingView(),
+                };
+              },
             ),
-          _ => const Center(child: CustomCircularIndicator())
-        };
-      },
+          ),
+        ],
+      ),
     );
   }
 }
-
-

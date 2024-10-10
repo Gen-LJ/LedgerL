@@ -36,15 +36,12 @@ class NavigationRouter {
         GoRoute(
             path: IndexScreen.routePath,
             builder: (context, state) {
-              final tabIndex =
-                  int.tryParse(state.uri.queryParameters['tab'] ?? '') ?? 0;
               return MultiBlocProvider(
                 providers: [
-                  BlocProvider(create: (_) => inject<TransferCubit>()),
+                  BlocProvider(create: (_) => inject<TransferViewCubit>()),
                   BlocProvider(create: (_) => inject<LedgerCubit>()),
                 ],
                 child: IndexScreen(
-                  initialTab: tabIndex,
                   indexCallback: (useIndexPageNavigator) {
                     _useIndexPageNavigator = useIndexPageNavigator;
                   },
