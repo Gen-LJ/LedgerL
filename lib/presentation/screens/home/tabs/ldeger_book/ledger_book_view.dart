@@ -15,7 +15,7 @@ class LedgerBookView extends StatelessWidget {
           LedgerReady() => LedgerReadyView(
               allBalance: state.allBalance,
             ),
-          _ => const Center(child: CircularProgressIndicator())
+          _ => const Center(child: CustomCircularIndicator())
         };
       },
     );

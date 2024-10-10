@@ -16,7 +16,7 @@ class CustomCircularIndicator extends StatelessWidget {
         height : $styles.insets.md,
         child: CircularProgressIndicator.adaptive(
           valueColor: AlwaysStoppedAnimation<Color>(
-            color ?? Colors.white,
+            color ?? context.theme.primaryColor,
           ),
         ));
   }

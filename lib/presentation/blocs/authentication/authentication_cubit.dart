@@ -8,7 +8,6 @@ part 'authentication_state.dart';
 
 part 'authentication_cubit.freezed.dart';
 
-
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   final FirebaseAuth _auth;
   final GoogleSignIn _googleSignIn;
@@ -29,7 +28,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       };
 
   Future<void> loadData() async {
-    final user =  await _userRepository.getSavedUserInfo();
+    final user = await _userRepository.getSavedUserInfo();
 
     if (user != null) {
       emit(AuthenticationState.authenticated(user: user));
@@ -37,27 +36,41 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   Future<void> signInWithGoogle() async {
-    emit(const AuthenticationState.loading(message: 'Initializing'));
+    _updateLoadingState('Initializing');
+
     await _googleSignIn.signOut();
-    emit(const AuthenticationState.loading(message: 'Retrieving Accounts'));
+
+    _updateLoadingState('Retrieving Accounts');
     final googleSignInAccount = await _googleSignIn.signIn();
-    emit(const AuthenticationState.loading(message: 'Checking Credential'));
+
     if (googleSignInAccount == null) {
       emit(const AuthenticationState.initial());
       return;
     }
+
+    _updateLoadingState('Checking Credential');
     final googleSignInAuthentication = await googleSignInAccount.authentication;
+
     final credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
-    emit(const AuthenticationState.loading(message: 'Signing In'));
+
+    _updateLoadingState('Signing In');
     await _auth.signInWithCredential(credential);
+
     await authenticateUser(UserInfoEntity(
       id: googleSignInAccount.id,
       email: googleSignInAccount.email,
       name: googleSignInAccount.displayName ?? googleSignInAccount.email,
       profileImage: googleSignInAccount.photoUrl,
+    ));
+  }
+
+  void _updateLoadingState(String message) {
+    emit(state.maybeMap(
+      loading: (loadingState) => loadingState.copyWith(message: message),
+      orElse: () => AuthenticationState.loading(message: message),
     ));
   }
 

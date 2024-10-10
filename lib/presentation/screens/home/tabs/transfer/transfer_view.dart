@@ -15,7 +15,7 @@ class TransferView extends StatelessWidget {
           TransferReady() => TransferReadyView(
               walletUsers: state.walletUsers,
             ),
-          _ => const Center(child: CircularProgressIndicator())
+          _ => const Center(child: CustomCircularIndicator())
         };
       },
     );
