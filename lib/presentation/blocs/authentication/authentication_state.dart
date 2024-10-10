@@ -6,4 +6,7 @@ sealed class AuthenticationState with _$AuthenticationState {
   const factory AuthenticationState.authenticated({
     required UserInfoEntity user,
   }) = Authenticated;
+  const factory AuthenticationState.loading({
+    required String message
+}) = AuthLoading;
 }

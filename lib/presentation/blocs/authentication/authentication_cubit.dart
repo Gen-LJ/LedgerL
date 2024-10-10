@@ -37,19 +37,21 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   Future<void> signInWithGoogle() async {
+    emit(const AuthenticationState.loading(message: 'Initializing'));
     await _googleSignIn.signOut();
-
+    emit(const AuthenticationState.loading(message: 'Retrieving Accounts'));
     final googleSignInAccount = await _googleSignIn.signIn();
+    emit(const AuthenticationState.loading(message: 'Checking Credential'));
     if (googleSignInAccount == null) {
+      emit(const AuthenticationState.initial());
       return;
     }
     final googleSignInAuthentication = await googleSignInAccount.authentication;
-
     final credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
-
+    emit(const AuthenticationState.loading(message: 'Signing In'));
     await _auth.signInWithCredential(credential);
     await authenticateUser(UserInfoEntity(
       id: googleSignInAccount.id,

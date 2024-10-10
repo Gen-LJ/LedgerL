@@ -23,6 +23,7 @@ class IndexScreen extends StatelessWidget {
     indexCallback(() {
       return (int index) {
         currentIndex.value = index;
+        lastTab = index;
       };
     });
 

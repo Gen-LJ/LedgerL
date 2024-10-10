@@ -31,12 +31,29 @@ class LoadingOverlay extends StatelessWidget {
             Positioned.fill(
               child: ColoredBox(
                 color: Colors.black.withOpacity(0.2),
-                child:  Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CustomCircularIndicator(color: Theme.of(context).colorScheme.primary,),
-                    ],
+                child: Center(
+                  child: Card(
+                    elevation: 0,
+                    color: context.theme.cardColor,
+                    child: Padding(
+                      padding:  EdgeInsets.all($styles.insets.sm),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomCircularIndicator(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          loadingInfo != null
+                              ? Column(
+                                  children: [
+                                    $styles.insets.xs.toHeightSizedBox,
+                                    Text(loadingInfo!),
+                                  ],
+                                )
+                              : const SizedBox.shrink()
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),

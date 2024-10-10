@@ -9,11 +9,20 @@ class TransferUserCheckScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AdaptiveBackAppbar(
-        title: Text(
-          R.strings.lblTransfer,
-          style: context.textTheme.titleLarge,
+    return LoadingOverlay(
+      isLoading: true,
+      child: Scaffold(
+        appBar: AdaptiveBackAppbar(
+          title: Text(
+            R.strings.lblTransfer,
+            style: context.textTheme.titleLarge,
+          ),
+          actions: [
+            TextButton(
+              onPressed: context.goHistory,
+              child:  Text(R.strings.lblHistory),
+            )
+          ],
         ),
       ),
     );

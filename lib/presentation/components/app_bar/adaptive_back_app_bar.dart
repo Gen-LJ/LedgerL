@@ -30,13 +30,14 @@ class AdaptiveBackAppbar extends AppBar {
       toolbarHeight: toolbarHeight,
       elevation: elevation,
       titleSpacing: titleSpacing,
-      title: title ,
+      title: title,
       leading: Platform.isAndroid || Platform.isIOS
           ? IconButton(
-          onPressed: navigationService.globalKey.context?.pop,
-          icon: Icon(Platform.isAndroid
-              ? Icons.arrow_back
-              : Icons.arrow_back_ios_new))
+              onPressed: navigationService.globalKey.context?.pop,
+              icon: Icon(Platform.isAndroid
+                  ? Icons.arrow_back
+                  : Icons.arrow_back_ios_new),
+            )
           : null,
       flexibleSpace: flexibleSpace,
       actions: [
