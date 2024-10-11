@@ -12,11 +12,18 @@ class TransferUserCheckScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<TransferUserCheckCubit, TransferUserCheckState>(
       listener: (context, state) {
-        if (state is TransferUserCheckSuccess) {
-          debugPrint('User Check Success listened');
-          debugPrint('Receiver data : ${state.receiverInfo}');
-          debugPrint('Sender Balance : ${state.senderBalance}');
-        }
+        return switch (state) {
+          TransferUserCheckSuccess() => context.pushTransferBalance(
+              senderBalance: state.senderBalance,
+              receiverInfo: state.receiverInfo,
+            ),
+          TransferUserCheckFail() => showDialog(
+              context: context,
+              builder: (context) {
+                return ErrorDialog(reason: state.failure.reason);
+              }),
+          _ => null
+        };
       },
       child: Scaffold(
         appBar: AdaptiveBackAppbar(
@@ -45,15 +52,13 @@ class TransferUserCheckScreen extends StatelessWidget {
               loadingInfo: 'Checking Receiver Data',
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: $styles.grid.columnsMargin),
+                  horizontal: $styles.grid.columnsMargin,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ReceiverDataValidateContainer(
                       onValidated: (email) {
-                        debugPrint('Validation Success');
-                        debugPrint('email: $email');
-                        debugPrint('Working on Transfer function');
                         context
                             .read<TransferUserCheckCubit>()
                             .checkForTransfer(email);

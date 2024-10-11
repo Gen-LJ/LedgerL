@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
+import 'package:ledger_l/domain/domain.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 
 @lazySingleton
@@ -34,30 +35,50 @@ class NavigationRouter {
       },
       routes: [
         GoRoute(
-            path: IndexScreen.routePath,
-            builder: (context, state) {
-              return MultiBlocProvider(
-                providers: [
-                  BlocProvider(create: (_) => inject<TransferViewCubit>()),
-                  BlocProvider(create: (_) => inject<LedgerCubit>()),
-                ],
-                child: IndexScreen(
-                  indexCallback: (useIndexPageNavigator) {
-                    _useIndexPageNavigator = useIndexPageNavigator;
-                  },
-                ),
-              );
-            },
-            routes: [
-              GoRoute(
-                  path: TransferUserCheckScreen.routeName,
-                  builder: (context, state) {
-                    return MultiBlocProvider(providers: [
-                      BlocProvider(create: (_) => inject<TransferUserCheckCubit>()),
-                      BlocProvider(create: (_) => inject<ReceiverDataValidationCubit>()),
-                    ], child: const TransferUserCheckScreen());
-                  }),
-            ]),
+          path: IndexScreen.routePath,
+          builder: (context, state) {
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (_) => inject<TransferViewCubit>()),
+                BlocProvider(create: (_) => inject<LedgerCubit>()),
+              ],
+              child: IndexScreen(
+                indexCallback: (useIndexPageNavigator) {
+                  _useIndexPageNavigator = useIndexPageNavigator;
+                },
+              ),
+            );
+          },
+          routes: [
+            GoRoute(
+              path: TransferUserCheckScreen.routeName,
+              builder: (context, state) {
+                return MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                        create: (_) => inject<TransferUserCheckCubit>()),
+                    BlocProvider(
+                        create: (_) => inject<ReceiverDataValidationCubit>()),
+                  ],
+                  child: const TransferUserCheckScreen(),
+                );
+              },
+            ),
+            GoRoute(
+              path: TransferBalanceScreen.routeName,
+              builder: (context, state) {
+                final extras = state.extra as List<dynamic>;
+                final List<BalanceEntity> senderBalance =
+                    extras[0] as List<BalanceEntity>;
+                final UserInfoEntity receiverInfo = extras[1] as UserInfoEntity;
+                return TransferBalanceScreen(
+                  senderBalance: senderBalance,
+                  receiverInfo: receiverInfo,
+                );
+              },
+            ),
+          ],
+        ),
         GoRoute(
             onExit: (context, state) {
               final auth = context.read<AuthenticationCubit>();

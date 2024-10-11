@@ -30,7 +30,7 @@ class TransferUserCheckCubit extends Cubit<TransferUserCheckState> {
         senderBalance: senderBalance,
       ));
     } catch (e) {
-      Failure failure = ServerFailure(e.toString());
+      Failure failure = e as Failure;
       emit(TransferUserCheckState.fail(failure));
     }
   }

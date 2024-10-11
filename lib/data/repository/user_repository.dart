@@ -39,6 +39,8 @@ class UserRepositoryImpl implements UserRepository {
       throw const ServerFailure();
     } on SocketException {
       throw const ConnectionFailure();
+    } on NoUserException {
+      throw const NoUserFailure();
     }
   }
 

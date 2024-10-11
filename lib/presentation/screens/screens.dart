@@ -11,6 +11,7 @@ export 'login/widget/login_elevated_button.dart';
 export 'login/login.dart';
 export 'history/history.dart';
 export 'profile/profile.dart';
+export 'transfer_balance/transfer_balance.dart';
 export 'transfer_user_check/cubit/transfer_user_check_cubit.dart';
 export 'transfer_user_check/receiver_data_check_container/cubit/receiver_data_validation_cubit.dart';
 export 'transfer_user_check/receiver_data_check_container/receiver_data_check_container.dart';

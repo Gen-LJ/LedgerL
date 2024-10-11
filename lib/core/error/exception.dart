@@ -3,3 +3,10 @@ class ServerException implements Exception {
 
   ServerException({ this.message});
 }
+
+
+class NoUserException  implements Exception{
+  final String? message;
+
+  NoUserException({ this.message});
+}

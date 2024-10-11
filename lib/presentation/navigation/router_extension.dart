@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ledger_l/core/core.dart';
+import 'package:ledger_l/domain/domain.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 
 extension NavigationExtension on BuildContext {
@@ -28,4 +29,10 @@ extension NavigationExtension on BuildContext {
   }
 
   void pushTransferUserCheck() => push(TransferUserCheckScreen.routePath);
+
+  void pushTransferBalance({
+    required List<BalanceEntity> senderBalance,
+    required UserInfoEntity receiverInfo,
+  }) =>
+      push(TransferBalanceScreen.routePath, extra: [senderBalance,receiverInfo]);
 }

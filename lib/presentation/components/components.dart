@@ -2,6 +2,7 @@ export 'app_bar/adaptive_back_app_bar.dart';
 export 'app_bar/app_bar.dart';
 export 'button/confirm_cancel_row_button.dart';
 export 'button/elevated_button.dart';
+export 'dialog/error_dialog.dart';
 export 'icons/chvron.dart';
 export 'icons/circular_icon.dart';
 export 'icons/icons.dart';
