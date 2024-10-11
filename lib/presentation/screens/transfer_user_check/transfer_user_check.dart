@@ -25,56 +25,54 @@ class TransferUserCheckScreen extends StatelessWidget {
           _ => null
         };
       },
-      child: Scaffold(
-        appBar: AdaptiveBackAppbar(
-          title: Text(
-            R.strings.lblTransfer,
-            style: context.textTheme.titleLarge,
-          ),
-          actions: [
-            TextButton(
-              onPressed: context.goHistory,
-              child: Text(R.strings.lblHistory),
-            )
-          ],
-        ),
-        body:
-            BlocSelector<TransferUserCheckCubit, TransferUserCheckState, bool>(
-          selector: (state) {
-            return switch (state) {
-              TransferUserCheckLoading() => true,
-              _ => false,
-            };
-          },
-          builder: (context, loading) {
-            return LoadingOverlay(
-              isLoading: loading,
-              loadingInfo: 'Checking Receiver Data',
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: $styles.grid.columnsMargin,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ReceiverDataValidateContainer(
-                      onValidated: (email) {
-                        context
-                            .read<TransferUserCheckCubit>()
-                            .checkForTransfer(email);
-                      },
-                    ),
-                    $styles.grid.columnsMargin.toHeightSizedBox,
-                    Text(
-                      'Related Users',
-                      style: context.textTheme.titleMedium,
-                    ),
+      child: BlocSelector<TransferUserCheckCubit, TransferUserCheckState, bool>(
+        selector: (state) {
+          return switch (state) {
+            TransferUserCheckLoading() => true,
+            _ => false,
+          };
+        },
+        builder: (context, loading) {
+          return LoadingOverlay(
+            isLoading: loading,
+            loadingInfo: 'Checking Receiver Data',
+            child: Scaffold(
+                appBar: AdaptiveBackAppbar(
+                  title: Text(
+                    R.strings.lblTransfer,
+                    style: context.textTheme.titleLarge,
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: context.goHistory,
+                      child: Text(R.strings.lblHistory),
+                    )
                   ],
                 ),
-              ),
-            );
-          },
-        ),
+                body: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: $styles.grid.columnsMargin,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ReceiverDataValidateContainer(
+                        onValidated: (email) {
+                          context
+                              .read<TransferUserCheckCubit>()
+                              .checkForTransfer(email);
+                        },
+                      ),
+                      $styles.grid.columnsMargin.toHeightSizedBox,
+                      Text(
+                        'Related Users',
+                        style: context.textTheme.titleMedium,
+                      ),
+                    ],
+                  ),
+                )),
+          );
+        },
       ),
     );
   }

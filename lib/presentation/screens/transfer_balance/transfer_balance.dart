@@ -18,6 +18,7 @@ class TransferBalanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.cardColor,
       appBar: AdaptiveBackAppbar(
         title: Text(
           R.strings.lblTransfer,
@@ -31,21 +32,56 @@ class TransferBalanceScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(
-          left: $styles.grid.columnsMargin,
-          right: $styles.grid.columnsMargin,
-          top: $styles.grid.columnsMargin / 2,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SectionTitle(title: 'To'),
-            ProfileCardTile(
-              imageUrl: receiverInfo.profileImage ?? '',
-              name: receiverInfo.name,
-              email: receiverInfo.email,
-            ),
-          ],
+        child: Container(
+          color: context.theme.scaffoldBackgroundColor,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: $styles.grid.columnsMargin,
+                  right: $styles.grid.columnsMargin,
+                  top: $styles.grid.columnsMargin / 2,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SectionTitle(title: 'To'),
+                    ProfileCardTile(
+                      imageUrl: receiverInfo.profileImage ?? '',
+                      name: receiverInfo.name,
+                      email: receiverInfo.email,
+                    ),
+                    $styles.grid.columnsMargin.toHeightSizedBox,
+                  ],
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: context.theme.cardColor,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular($styles.insets.sm),
+                      topLeft: Radius.circular($styles.insets.sm),
+                    )),
+                width: double.infinity,
+                padding: EdgeInsets.only(
+                  left: $styles.grid.columnsMargin,
+                  right: $styles.grid.columnsMargin,
+                  top: $styles.grid.columnsMargin / 2,
+                  bottom: 10
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SectionTitle(title: 'Currency'),
+                    Text('Hi'),
+                    Text('Hi'),
+                    Text('Hi'),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
