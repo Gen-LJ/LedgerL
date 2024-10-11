@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
-import 'package:ledger_l/data/data_source/remote/balance_data_source.dart';
+import 'package:ledger_l/data/data.dart';
+
 import 'package:ledger_l/domain/domain.dart';
 
 @LazySingleton(as: BalanceRepository)

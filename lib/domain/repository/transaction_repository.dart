@@ -1,7 +1,7 @@
 import 'package:ledger_l/domain/domain.dart';
 
 abstract interface class TransactionRepository {
-  Future<StatusResponseEntity> balanceTransfer({
+  Future<TransactionStatusResponseEntity> balanceTransfer({
     required String senderId,
     required String receiverId,
     required String currencyType,

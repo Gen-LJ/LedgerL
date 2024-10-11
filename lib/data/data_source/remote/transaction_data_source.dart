@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/data/data.dart';
 import 'package:logger/logger.dart';
@@ -12,9 +13,10 @@ abstract class TransactionRemoteDataSource {
   });
 }
 
+@LazySingleton(as: TransactionRemoteDataSource)
 class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   final FirebaseFirestore _fireStore;
-  final TransactionIdGenerator _transactionIdGenerator;
+  final ITransactionIdGenerator _transactionIdGenerator;
   final Logger logger;
 
   TransactionRemoteDataSourceImpl(this._fireStore, this.logger,

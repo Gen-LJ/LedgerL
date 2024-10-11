@@ -6,6 +6,7 @@ A Wallet(aim for a crypto wallet)
  - Authentication
  - Wallet
  - Balance Transfer
+ - Transaction guard
  - Transaction History
  - Offline
  - Notification
@@ -20,6 +21,10 @@ When the new account is created, that account will have automatically 10000 USD 
 
 Balance:
 User can transfer the balance to other account.
+
+Transaction guard:
+balance transfer method is guarded with fireStore runTransaction guard build-in .
+(This  method MUST be more atomic, sensitive and secure in production apps)
 
 Transaction History:
 Users can view their history and view detail. Transaction have two filter(in/out).

@@ -13,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:google_sign_in/google_sign_in.dart' as _i116;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:ledger_l/core/core.dart' as _i697;
 import 'package:ledger_l/core/dependency_injection/modules/firebase.dart'
     as _i750;
 import 'package:ledger_l/core/dependency_injection/modules/google_sign_in.dart'
@@ -26,6 +27,8 @@ import 'package:ledger_l/data/data.dart' as _i760;
 import 'package:ledger_l/data/data_source/local/user_data_source.dart' as _i925;
 import 'package:ledger_l/data/data_source/remote/balance_data_source.dart'
     as _i278;
+import 'package:ledger_l/data/data_source/remote/transaction_data_source.dart'
+    as _i632;
 import 'package:ledger_l/data/data_source/remote/user_data_source.dart'
     as _i125;
 import 'package:ledger_l/data/repository/balance_repository.dart' as _i25;
@@ -80,8 +83,6 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.lazySingleton<_i974.Logger>(() => loggerModule.logger);
-    gh.lazySingleton<_i560.TransactionRepository>(
-        () => _i954.TransactionRepositoryImpl());
     gh.lazySingleton<_i925.UserLocalDataSource>(
         () => _i925.UserLocalDataSourceImpl(gh<_i460.SharedPreferences>()));
     gh.singleton<_i659.INavigationKeyProvider>(
@@ -100,8 +101,12 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i974.FirebaseFirestore>(),
               gh<_i974.Logger>(),
             ));
-    gh.lazySingleton<_i560.BalanceRepository>(
-        () => _i25.BalanceRepositoryImpl(gh<_i278.BalanceRemoteDataSource>()));
+    gh.lazySingleton<_i632.TransactionRemoteDataSource>(
+        () => _i632.TransactionRemoteDataSourceImpl(
+              gh<_i974.FirebaseFirestore>(),
+              gh<_i974.Logger>(),
+              gh<_i697.ITransactionIdGenerator>(),
+            ));
     gh.lazySingleton<_i560.UserRepository>(() => _i757.UserRepositoryImpl(
           gh<_i760.UserLocalDataSource>(),
           gh<_i760.UserRemoteDataSource>(),
@@ -120,6 +125,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i725.TransferViewCubit>(
         () => _i725.TransferViewCubit(gh<_i560.UserRepository>()));
+    gh.lazySingleton<_i560.TransactionRepository>(() =>
+        _i954.TransactionRepositoryImpl(
+            gh<_i760.TransactionRemoteDataSource>()));
+    gh.lazySingleton<_i560.BalanceRepository>(
+        () => _i25.BalanceRepositoryImpl(gh<_i760.BalanceRemoteDataSource>()));
     gh.factory<_i1070.LedgerCubit>(() => _i1070.LedgerCubit(
           gh<_i560.BalanceRepository>(),
           gh<_i65.AuthenticationCubit>(),
