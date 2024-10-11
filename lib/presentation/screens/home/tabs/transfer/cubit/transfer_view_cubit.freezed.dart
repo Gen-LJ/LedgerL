@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$TransferState {
+mixin _$TransferViewState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -63,59 +63,60 @@ mixin _$TransferState {
 }
 
 /// @nodoc
-abstract class $TransferStateCopyWith<$Res> {
-  factory $TransferStateCopyWith(
+abstract class $TransferViewStateCopyWith<$Res> {
+  factory $TransferViewStateCopyWith(
           TransferViewState value, $Res Function(TransferViewState) then) =
-      _$TransferStateCopyWithImpl<$Res, TransferViewState>;
+      _$TransferViewStateCopyWithImpl<$Res, TransferViewState>;
 }
 
 /// @nodoc
-class _$TransferStateCopyWithImpl<$Res, $Val extends TransferViewState>
-    implements $TransferStateCopyWith<$Res> {
-  _$TransferStateCopyWithImpl(this._value, this._then);
+class _$TransferViewStateCopyWithImpl<$Res, $Val extends TransferViewState>
+    implements $TransferViewStateCopyWith<$Res> {
+  _$TransferViewStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TransferState
+  /// Create a copy of TransferViewState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$TransferInitialImplCopyWith<$Res> {
-  factory _$$TransferInitialImplCopyWith(_$TransferInitialImpl value,
-          $Res Function(_$TransferInitialImpl) then) =
-      __$$TransferInitialImplCopyWithImpl<$Res>;
+abstract class _$$TransferViewInitialImplCopyWith<$Res> {
+  factory _$$TransferViewInitialImplCopyWith(_$TransferViewInitialImpl value,
+          $Res Function(_$TransferViewInitialImpl) then) =
+      __$$TransferViewInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TransferInitialImplCopyWithImpl<$Res>
-    extends _$TransferStateCopyWithImpl<$Res, _$TransferInitialImpl>
-    implements _$$TransferInitialImplCopyWith<$Res> {
-  __$$TransferInitialImplCopyWithImpl(
-      _$TransferInitialImpl _value, $Res Function(_$TransferInitialImpl) _then)
+class __$$TransferViewInitialImplCopyWithImpl<$Res>
+    extends _$TransferViewStateCopyWithImpl<$Res, _$TransferViewInitialImpl>
+    implements _$$TransferViewInitialImplCopyWith<$Res> {
+  __$$TransferViewInitialImplCopyWithImpl(_$TransferViewInitialImpl _value,
+      $Res Function(_$TransferViewInitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TransferState
+  /// Create a copy of TransferViewState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$TransferInitialImpl implements TransferViewInitial {
-  const _$TransferInitialImpl();
+class _$TransferViewInitialImpl implements TransferViewInitial {
+  const _$TransferViewInitialImpl();
 
   @override
   String toString() {
-    return 'TransferState.initial()';
+    return 'TransferViewState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TransferInitialImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$TransferViewInitialImpl);
   }
 
   @override
@@ -191,34 +192,34 @@ class _$TransferInitialImpl implements TransferViewInitial {
 }
 
 abstract class TransferViewInitial implements TransferViewState {
-  const factory TransferViewInitial() = _$TransferInitialImpl;
+  const factory TransferViewInitial() = _$TransferViewInitialImpl;
 }
 
 /// @nodoc
-abstract class _$$TransferReadyImplCopyWith<$Res> {
-  factory _$$TransferReadyImplCopyWith(
-          _$TransferReadyImpl value, $Res Function(_$TransferReadyImpl) then) =
-      __$$TransferReadyImplCopyWithImpl<$Res>;
+abstract class _$$TransferViewReadyImplCopyWith<$Res> {
+  factory _$$TransferViewReadyImplCopyWith(_$TransferViewReadyImpl value,
+          $Res Function(_$TransferViewReadyImpl) then) =
+      __$$TransferViewReadyImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<UserInfoEntity> walletUsers});
 }
 
 /// @nodoc
-class __$$TransferReadyImplCopyWithImpl<$Res>
-    extends _$TransferStateCopyWithImpl<$Res, _$TransferReadyImpl>
-    implements _$$TransferReadyImplCopyWith<$Res> {
-  __$$TransferReadyImplCopyWithImpl(
-      _$TransferReadyImpl _value, $Res Function(_$TransferReadyImpl) _then)
+class __$$TransferViewReadyImplCopyWithImpl<$Res>
+    extends _$TransferViewStateCopyWithImpl<$Res, _$TransferViewReadyImpl>
+    implements _$$TransferViewReadyImplCopyWith<$Res> {
+  __$$TransferViewReadyImplCopyWithImpl(_$TransferViewReadyImpl _value,
+      $Res Function(_$TransferViewReadyImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TransferState
+  /// Create a copy of TransferViewState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? walletUsers = null,
   }) {
-    return _then(_$TransferReadyImpl(
+    return _then(_$TransferViewReadyImpl(
       walletUsers: null == walletUsers
           ? _value._walletUsers
           : walletUsers // ignore: cast_nullable_to_non_nullable
@@ -229,8 +230,9 @@ class __$$TransferReadyImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransferReadyImpl implements TransferViewReady {
-  const _$TransferReadyImpl({required final List<UserInfoEntity> walletUsers})
+class _$TransferViewReadyImpl implements TransferViewReady {
+  const _$TransferViewReadyImpl(
+      {required final List<UserInfoEntity> walletUsers})
       : _walletUsers = walletUsers;
 
   final List<UserInfoEntity> _walletUsers;
@@ -243,14 +245,14 @@ class _$TransferReadyImpl implements TransferViewReady {
 
   @override
   String toString() {
-    return 'TransferState.ready(walletUsers: $walletUsers)';
+    return 'TransferViewState.ready(walletUsers: $walletUsers)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TransferReadyImpl &&
+            other is _$TransferViewReadyImpl &&
             const DeepCollectionEquality()
                 .equals(other._walletUsers, _walletUsers));
   }
@@ -259,13 +261,14 @@ class _$TransferReadyImpl implements TransferViewReady {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_walletUsers));
 
-  /// Create a copy of TransferState
+  /// Create a copy of TransferViewState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TransferReadyImplCopyWith<_$TransferReadyImpl> get copyWith =>
-      __$$TransferReadyImplCopyWithImpl<_$TransferReadyImpl>(this, _$identity);
+  _$$TransferViewReadyImplCopyWith<_$TransferViewReadyImpl> get copyWith =>
+      __$$TransferViewReadyImplCopyWithImpl<_$TransferViewReadyImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -338,50 +341,52 @@ class _$TransferReadyImpl implements TransferViewReady {
 
 abstract class TransferViewReady implements TransferViewState {
   const factory TransferViewReady(
-      {required final List<UserInfoEntity> walletUsers}) = _$TransferReadyImpl;
+          {required final List<UserInfoEntity> walletUsers}) =
+      _$TransferViewReadyImpl;
 
   List<UserInfoEntity> get walletUsers;
 
-  /// Create a copy of TransferState
+  /// Create a copy of TransferViewState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TransferReadyImplCopyWith<_$TransferReadyImpl> get copyWith =>
+  _$$TransferViewReadyImplCopyWith<_$TransferViewReadyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TransferLoadingImplCopyWith<$Res> {
-  factory _$$TransferLoadingImplCopyWith(_$TransferLoadingImpl value,
-          $Res Function(_$TransferLoadingImpl) then) =
-      __$$TransferLoadingImplCopyWithImpl<$Res>;
+abstract class _$$TransferViewLoadingImplCopyWith<$Res> {
+  factory _$$TransferViewLoadingImplCopyWith(_$TransferViewLoadingImpl value,
+          $Res Function(_$TransferViewLoadingImpl) then) =
+      __$$TransferViewLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TransferLoadingImplCopyWithImpl<$Res>
-    extends _$TransferStateCopyWithImpl<$Res, _$TransferLoadingImpl>
-    implements _$$TransferLoadingImplCopyWith<$Res> {
-  __$$TransferLoadingImplCopyWithImpl(
-      _$TransferLoadingImpl _value, $Res Function(_$TransferLoadingImpl) _then)
+class __$$TransferViewLoadingImplCopyWithImpl<$Res>
+    extends _$TransferViewStateCopyWithImpl<$Res, _$TransferViewLoadingImpl>
+    implements _$$TransferViewLoadingImplCopyWith<$Res> {
+  __$$TransferViewLoadingImplCopyWithImpl(_$TransferViewLoadingImpl _value,
+      $Res Function(_$TransferViewLoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TransferState
+  /// Create a copy of TransferViewState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$TransferLoadingImpl implements TransferViewLoading {
-  const _$TransferLoadingImpl();
+class _$TransferViewLoadingImpl implements TransferViewLoading {
+  const _$TransferViewLoadingImpl();
 
   @override
   String toString() {
-    return 'TransferState.loading()';
+    return 'TransferViewState.loading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TransferLoadingImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$TransferViewLoadingImpl);
   }
 
   @override
@@ -457,5 +462,5 @@ class _$TransferLoadingImpl implements TransferViewLoading {
 }
 
 abstract class TransferViewLoading implements TransferViewState {
-  const factory TransferViewLoading() = _$TransferLoadingImpl;
+  const factory TransferViewLoading() = _$TransferViewLoadingImpl;
 }

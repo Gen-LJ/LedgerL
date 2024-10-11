@@ -4,7 +4,7 @@ import 'package:ledger_l/data/data.dart';
 import 'package:logger/logger.dart';
 
 abstract class TransactionRemoteDataSource {
-  Future<StatusResponseModel> balanceTransfer({
+  Future<TransactionStatusResponseModel> balanceTransfer({
     required String senderId,
     required String receiverId,
     required String currencyType,
@@ -17,58 +17,83 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   final TransactionIdGenerator _transactionIdGenerator;
   final Logger logger;
 
-  TransactionRemoteDataSourceImpl(
-      this._fireStore, this.logger, this._transactionIdGenerator);
+  TransactionRemoteDataSourceImpl(this._fireStore, this.logger,
+      this._transactionIdGenerator);
 
   @override
-  Future<StatusResponseModel> balanceTransfer({
+  Future<TransactionStatusResponseModel> balanceTransfer({
     required String senderId,
     required String receiverId,
     required String currencyType,
     required num amount,
   }) async {
+    final transactionModel = TransactionModel(
+      transactionId: _transactionIdGenerator.generate(),
+      senderId: senderId,
+      receiverId: receiverId,
+      currencyType: currencyType,
+      amount: amount,
+      createdAt: DateTime.now(),
+    );
+
     try {
       CollectionReference refTransaction =
-          _fireStore.collection(FirebaseConfig.transactionCollectionKey);
+      _fireStore.collection(FirebaseConfig.transactionCollectionKey);
+      DocumentReference senderRef = _fireStore
+          .collection(FirebaseConfig.balanceCollectionKey)
+          .doc(senderId);
+      DocumentReference receiverRef = _fireStore
+          .collection(FirebaseConfig.balanceCollectionKey)
+          .doc(receiverId);
 
-      final transaction = TransactionModel(
-        transactionId: _transactionIdGenerator.generate(),
-        senderId: senderId,
-        receiverId: receiverId,
-        currencyType: currencyType,
-        amount: amount,
-        createdAt: DateTime.now(),
-      );
+      // Firestore transaction ensures atomic updates
+      await _fireStore.runTransaction((transaction) async {
+        // Fetch sender's balance inside the transaction
+        DocumentSnapshot senderSnapshot = await transaction.get(senderRef);
+        BalanceModel senderBalance = BalanceModel.fromFirestore(senderSnapshot);
+        if (senderBalance.currency != currencyType || senderBalance.amount < amount) {
+          throw Exception('Insufficient balance');
+        }
 
-      // Convert the transaction to a map for Firestore
-      final transactionData = transaction.toFireStore();
+        // Fetch receiver's balance inside the transaction
+        DocumentSnapshot receiverSnapshot = await transaction.get(receiverRef);
+        BalanceModel receiverBalance = receiverSnapshot.exists
+            ? BalanceModel.fromFirestore(receiverSnapshot)
+            : BalanceModel(currency: currencyType, amount: 0); // Default if no balance
 
-      // Update or create the sender's document with the new transaction in the transaction list
-      await refTransaction.doc(senderId).set({
-        'userId': senderId,
-        'transactions': FieldValue.arrayUnion([transactionData]),
-        // Append the transaction to the list
-      }, SetOptions(merge: true));
+        // Update balances atomically
+        transaction.update(senderRef, {
+          'amount': senderBalance.amount - amount,
+        });
+        transaction.update(receiverRef, {
+          'amount': receiverBalance.amount + amount,
+        });
 
-      // Update or create the receiver's document with the new transaction in the transaction list
-      await refTransaction.doc(receiverId).set({
-        'userId': receiverId,
-        'transactions': FieldValue.arrayUnion([transactionData]),
-        // Append the transaction to the list
-      }, SetOptions(merge: true));
+        // Add the transaction to both sender and receiver's transaction history
+        final transactionData = transactionModel.toFireStore();
+        transaction.set(refTransaction.doc(senderId), {
+          'userId': senderId,
+          'transactions': FieldValue.arrayUnion([transactionData]),
+        }, SetOptions(merge: true));
 
-      // Return success response
-      logger.i(transactionData);
-      return const StatusResponseModel(
+        transaction.set(refTransaction.doc(receiverId), {
+          'userId': receiverId,
+          'transactions': FieldValue.arrayUnion([transactionData]),
+        }, SetOptions(merge: true));
+      });
+
+      logger.i('Transaction successful');
+      return TransactionStatusResponseModel(
         status: true,
         message: 'Transaction success.',
+        transactionData: transactionModel,
       );
     } catch (e) {
-      // Handle any errors and return a failure response
       logger.e(e);
-      return StatusResponseModel(
+      return TransactionStatusResponseModel(
         status: false,
-        message: 'Transaction fail: $e',
+        message: 'Transaction failed: $e',
+        transactionData: transactionModel,
       );
     }
   }
