@@ -13,4 +13,5 @@ export 'modal/logout_modal.dart';
 export 'nav_bar/nav_bar.dart';
 export 'nav_bar/nav_bar_item.dart';
 export 'nav_bar/nav_item.dart';
+export 'tile/profile_card_tile.dart';
 export 'title/section_title.dart';

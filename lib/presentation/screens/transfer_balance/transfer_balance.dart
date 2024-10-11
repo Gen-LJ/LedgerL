@@ -34,14 +34,17 @@ class TransferBalanceScreen extends StatelessWidget {
         padding: EdgeInsets.only(
           left: $styles.grid.columnsMargin,
           right: $styles.grid.columnsMargin,
-          top: $styles.grid.columnsMargin,
+          top: $styles.grid.columnsMargin / 2,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SectionTitle(title: 'To'),
-            Text(receiverInfo.name),
-            Text('(${receiverInfo.email})'),
+            ProfileCardTile(
+              imageUrl: receiverInfo.profileImage ?? '',
+              name: receiverInfo.name,
+              email: receiverInfo.email,
+            ),
           ],
         ),
       ),

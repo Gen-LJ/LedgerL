@@ -178,6 +178,23 @@ class _Colors {
 
   _Colors(this._useMaterial3, this._typography);
 
+
+  final List<Color> colors = [
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.orange,
+    Colors.purple,
+    Colors.teal,
+    Colors.amber,
+  ];
+
+  Color getRandomColor(String firstChar) {
+    // Get the ASCII value of the first character and map it to the color list
+    int index = firstChar.codeUnitAt(0) % colors.length;
+    return colors[index];
+  }
+
   Color get clrSuccess => AppColors.clrSuccess;
 
   Color get clrPrimary => AppColors.clrPrimary;
