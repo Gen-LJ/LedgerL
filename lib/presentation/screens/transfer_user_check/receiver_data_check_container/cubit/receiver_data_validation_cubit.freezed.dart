@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'transfer_user_check_cubit.dart';
+part of 'receiver_data_validation_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$TransferUserCheckState {
+mixin _$ReceiverDataValidationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -51,24 +51,26 @@ mixin _$TransferUserCheckState {
 }
 
 /// @nodoc
-abstract class $TransferUserCheckStateCopyWith<$Res> {
-  factory $TransferUserCheckStateCopyWith(TransferUserCheckState value,
-          $Res Function(TransferUserCheckState) then) =
-      _$TransferUserCheckStateCopyWithImpl<$Res, TransferUserCheckState>;
+abstract class $ReceiverDataValidationStateCopyWith<$Res> {
+  factory $ReceiverDataValidationStateCopyWith(
+          ReceiverDataValidationState value,
+          $Res Function(ReceiverDataValidationState) then) =
+      _$ReceiverDataValidationStateCopyWithImpl<$Res,
+          ReceiverDataValidationState>;
 }
 
 /// @nodoc
-class _$TransferUserCheckStateCopyWithImpl<$Res,
-        $Val extends TransferUserCheckState>
-    implements $TransferUserCheckStateCopyWith<$Res> {
-  _$TransferUserCheckStateCopyWithImpl(this._value, this._then);
+class _$ReceiverDataValidationStateCopyWithImpl<$Res,
+        $Val extends ReceiverDataValidationState>
+    implements $ReceiverDataValidationStateCopyWith<$Res> {
+  _$ReceiverDataValidationStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TransferUserCheckState
+  /// Create a copy of ReceiverDataValidationState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -81,13 +83,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$TransferUserCheckStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ReceiverDataValidationStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TransferUserCheckState
+  /// Create a copy of ReceiverDataValidationState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -98,7 +100,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'TransferUserCheckState.initial()';
+    return 'ReceiverDataValidationState.initial()';
   }
 
   @override
@@ -167,6 +169,6 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements TransferUserCheckState {
+abstract class _Initial implements ReceiverDataValidationState {
   const factory _Initial() = _$InitialImpl;
 }

@@ -51,8 +51,10 @@ import 'package:ledger_l/presentation/screens/home/tabs/ldeger_book/cubit/ledger
     as _i1070;
 import 'package:ledger_l/presentation/screens/home/tabs/transfer/cubit/transfer_view_cubit.dart'
     as _i725;
-import 'package:ledger_l/presentation/screens/transfer_user_check/receiver_data_check_container/cubit/transfer_user_check_cubit.dart'
-    as _i437;
+import 'package:ledger_l/presentation/screens/transfer_user_check/cubit/transfer_user_check_cubit.dart'
+    as _i693;
+import 'package:ledger_l/presentation/screens/transfer_user_check/receiver_data_check_container/cubit/receiver_data_validation_cubit.dart'
+    as _i431;
 import 'package:logger/logger.dart' as _i974;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
@@ -72,8 +74,8 @@ extension GetItInjectableX on _i174.GetIt {
     final sharedPreferencesProvider = _$SharedPreferencesProvider();
     final loggerModule = _$LoggerModule();
     final authenticationCubitProvider = _$AuthenticationCubitProvider();
-    gh.factory<_i437.TransferUserCheckCubit>(
-        () => _i437.TransferUserCheckCubit());
+    gh.factory<_i431.ReceiverDataValidationCubit>(
+        () => _i431.ReceiverDataValidationCubit());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i974.FirebaseFirestore>(
         () => firebaseModule.firebaseFireStore);
@@ -130,6 +132,11 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i760.TransactionRemoteDataSource>()));
     gh.lazySingleton<_i560.BalanceRepository>(
         () => _i25.BalanceRepositoryImpl(gh<_i760.BalanceRemoteDataSource>()));
+    gh.factory<_i693.TransferUserCheckCubit>(() => _i693.TransferUserCheckCubit(
+          gh<_i560.UserRepository>(),
+          gh<_i560.BalanceRepository>(),
+          gh<_i890.AuthenticationCubit>(),
+        ));
     gh.factory<_i1070.LedgerCubit>(() => _i1070.LedgerCubit(
           gh<_i560.BalanceRepository>(),
           gh<_i65.AuthenticationCubit>(),

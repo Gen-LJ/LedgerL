@@ -133,7 +133,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         return userInfo;
       } else {
         logger.e('No user found : $email');
-        throw ServerException(message: 'No user found : $email');
+        throw Exception('No user found : $email');
       }
     } catch (e) {
       logger.e(e);

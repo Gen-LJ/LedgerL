@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:ledger_l/core/core.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../presentation.dart';
-import 'cubit/transfer_user_check_cubit.dart';
 
-class ReceiverDataCheckContainer extends StatelessWidget {
-  const ReceiverDataCheckContainer({
-    super.key, this.onValidated,
+class ReceiverDataValidateContainer extends StatelessWidget {
+  const ReceiverDataValidateContainer({
+    super.key,
+    this.onValidated,
   });
 
-  final void Function(String phoneNumber)? onValidated;
-
+  final void Function(String email)? onValidated;
 
   @override
   Widget build(BuildContext context) {
-    final bloc = inject<TransferUserCheckCubit>()..onValidated = onValidated;
+    final bloc = context.read<ReceiverDataValidationCubit>()
+      ..onValidated = onValidated;
 
     return Container(
       decoration: BoxDecoration(

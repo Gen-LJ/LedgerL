@@ -52,7 +52,10 @@ class NavigationRouter {
               GoRoute(
                   path: TransferUserCheckScreen.routeName,
                   builder: (context, state) {
-                    return const TransferUserCheckScreen();
+                    return MultiBlocProvider(providers: [
+                      BlocProvider(create: (_) => inject<TransferUserCheckCubit>()),
+                      BlocProvider(create: (_) => inject<ReceiverDataValidationCubit>()),
+                    ], child: const TransferUserCheckScreen());
                   }),
             ]),
         GoRoute(
