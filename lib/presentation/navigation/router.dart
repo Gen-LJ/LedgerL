@@ -71,9 +71,12 @@ class NavigationRouter {
                 final List<BalanceEntity> senderBalance =
                     extras[0] as List<BalanceEntity>;
                 final UserInfoEntity receiverInfo = extras[1] as UserInfoEntity;
-                return TransferBalanceScreen(
-                  senderBalance: senderBalance,
-                  receiverInfo: receiverInfo,
+                return BlocProvider(
+                  create: (_) => inject<TransferBalanceCubit>(),
+                  child: TransferBalanceScreen(
+                    senderBalance: senderBalance,
+                    receiverInfo: receiverInfo,
+                  ),
                 );
               },
             ),

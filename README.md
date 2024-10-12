@@ -10,6 +10,7 @@ A Wallet(aim for a crypto wallet)
  - Transaction History
  - Offline
  - Notification
+ - Responsive UI
 
 ## Feature Details
 
@@ -38,6 +39,9 @@ Users can view their history and view detail. Transaction will have two filter(i
 Offline:
 When the app is offline, the balance and transaction information are available to be viewed.
 But balance transfer are not allowed.
+
+Responsive UI:
+Centralize Design System for Responsive UI.
 
 ## Technology Used
 

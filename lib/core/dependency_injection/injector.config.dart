@@ -51,6 +51,8 @@ import 'package:ledger_l/presentation/screens/home/tabs/ldeger_book/cubit/ledger
     as _i1070;
 import 'package:ledger_l/presentation/screens/home/tabs/transfer/cubit/transfer_view_cubit.dart'
     as _i725;
+import 'package:ledger_l/presentation/screens/transfer_balance/cubit/transfer_balance_cubit.dart'
+    as _i515;
 import 'package:ledger_l/presentation/screens/transfer_user_check/cubit/transfer_user_check_cubit.dart'
     as _i693;
 import 'package:ledger_l/presentation/screens/transfer_user_check/receiver_data_check_container/cubit/receiver_data_validation_cubit.dart'
@@ -71,20 +73,21 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final firebaseModule = _$FirebaseModule();
     final googleSignInModule = _$GoogleSignInModule();
-    final sharedPreferencesProvider = _$SharedPreferencesProvider();
     final loggerModule = _$LoggerModule();
+    final sharedPreferencesProvider = _$SharedPreferencesProvider();
     final authenticationCubitProvider = _$AuthenticationCubitProvider();
+    gh.factory<_i515.TransferBalanceCubit>(() => _i515.TransferBalanceCubit());
     gh.factory<_i431.ReceiverDataValidationCubit>(
         () => _i431.ReceiverDataValidationCubit());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i974.FirebaseFirestore>(
         () => firebaseModule.firebaseFireStore);
     gh.lazySingleton<_i116.GoogleSignIn>(() => googleSignInModule.googleSignIn);
+    gh.lazySingleton<_i974.Logger>(() => loggerModule.logger);
     await gh.lazySingletonAsync<_i460.SharedPreferences>(
       () => sharedPreferencesProvider.provide(),
       preResolve: true,
     );
-    gh.lazySingleton<_i974.Logger>(() => loggerModule.logger);
     gh.lazySingleton<_i925.UserLocalDataSource>(
         () => _i925.UserLocalDataSourceImpl(gh<_i460.SharedPreferences>()));
     gh.singleton<_i659.INavigationKeyProvider>(
@@ -149,9 +152,9 @@ class _$FirebaseModule extends _i750.FirebaseModule {}
 
 class _$GoogleSignInModule extends _i399.GoogleSignInModule {}
 
-class _$SharedPreferencesProvider extends _i952.SharedPreferencesProvider {}
-
 class _$LoggerModule extends _i595.LoggerModule {}
+
+class _$SharedPreferencesProvider extends _i952.SharedPreferencesProvider {}
 
 class _$AuthenticationCubitProvider
     extends _i1015.AuthenticationCubitProvider {}
