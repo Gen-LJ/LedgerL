@@ -39,7 +39,7 @@ class TransferBalanceScreen extends StatelessWidget {
             children: [
               ReceiverProfile(receiverInfo: receiverInfo),
               $styles.grid.columnsMargin.toHeightSizedBox,
-              TransactionContainer(senderBalance: senderBalance)
+              TransactionContainer(senderBalance: senderBalance,receiverInfo: receiverInfo,)
             ],
           ),
         ),

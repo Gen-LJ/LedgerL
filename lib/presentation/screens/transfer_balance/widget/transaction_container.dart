@@ -7,9 +7,11 @@ class TransactionContainer extends StatelessWidget {
   const TransactionContainer({
     super.key,
     required this.senderBalance,
+    required this.receiverInfo,
   });
 
   final List<BalanceEntity> senderBalance;
+  final UserInfoEntity receiverInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,6 @@ class TransactionContainer extends StatelessWidget {
                           context.textTheme.bodyLarge?.copyWith(fontSize: 30),
                       controller: bloc.textEditingController,
                       focusNode: bloc.focusNode,
-                      onFieldSubmitted: (value) {},
                       keyboardType: const TextInputType.numberWithOptions(),
                     ),
                     $styles.insets.sm.toHeightSizedBox,
@@ -109,7 +110,34 @@ class TransactionContainer extends StatelessWidget {
               ),
               $styles.insets.sm.toHeightSizedBox,
               CustomElevatedButton(
-                  onPressed: () {}, child: Text(R.strings.lblTransfer))
+                  onPressed: () {
+                    if (bloc.textEditingController.text.isNotEmpty) {
+                      bloc.focusNode.unfocus();
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Transfer Confirmation',
+                              style: context.textTheme.titleMedium,
+                            ),
+                            content: Text(
+                                maxLines: 10,
+                                'Transfer ${bloc.textEditingController.text} (${senderBalance[bloc.currentIndex].currency}) to ${receiverInfo.email} ?'),
+                            actions: [
+                              ConfirmCancelRowButton(
+                                onPressed: () {
+
+                                },
+                                name: R.strings.lblTransfer,
+                              )
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  },
+                  child: Text(R.strings.lblTransfer))
             ],
           );
         },
