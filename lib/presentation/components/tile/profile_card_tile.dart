@@ -29,7 +29,7 @@ class ProfileCardTile extends StatelessWidget {
               imageUrl: imageUrl,
               placeholderFadeInDuration: $styles.time.slow,
               placeholder: (context, url) => Padding(
-                padding: EdgeInsets.all($styles.insets.xs),
+                padding: EdgeInsets.all($styles.insets.sm),
                 child: const CustomCircularIndicator(),
               ),
               errorWidget: (context, url, error) {

@@ -16,22 +16,26 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TransferBalanceState {
-  int? get currentIndex => throw _privateConstructorUsedError;
+  int get currentIndex => throw _privateConstructorUsedError;
   BalanceEntity? get currency => throw _privateConstructorUsedError;
+  bool get onHide => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? currentIndex, BalanceEntity? currency)
+    required TResult Function(
+            int currentIndex, BalanceEntity? currency, bool onHide)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? currentIndex, BalanceEntity? currency)? initial,
+    TResult? Function(int currentIndex, BalanceEntity? currency, bool onHide)?
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? currentIndex, BalanceEntity? currency)? initial,
+    TResult Function(int currentIndex, BalanceEntity? currency, bool onHide)?
+        initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,7 +69,7 @@ abstract class $TransferBalanceStateCopyWith<$Res> {
           $Res Function(TransferBalanceState) then) =
       _$TransferBalanceStateCopyWithImpl<$Res, TransferBalanceState>;
   @useResult
-  $Res call({int? currentIndex, BalanceEntity? currency});
+  $Res call({int currentIndex, BalanceEntity? currency, bool onHide});
 }
 
 /// @nodoc
@@ -84,18 +88,23 @@ class _$TransferBalanceStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentIndex = freezed,
+    Object? currentIndex = null,
     Object? currency = freezed,
+    Object? onHide = null,
   }) {
     return _then(_value.copyWith(
-      currentIndex: freezed == currentIndex
+      currentIndex: null == currentIndex
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       currency: freezed == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as BalanceEntity?,
+      onHide: null == onHide
+          ? _value.onHide
+          : onHide // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -108,7 +117,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? currentIndex, BalanceEntity? currency});
+  $Res call({int currentIndex, BalanceEntity? currency, bool onHide});
 }
 
 /// @nodoc
@@ -124,18 +133,23 @@ class __$$InitialImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentIndex = freezed,
+    Object? currentIndex = null,
     Object? currency = freezed,
+    Object? onHide = null,
   }) {
     return _then(_$InitialImpl(
-      freezed == currentIndex
+      null == currentIndex
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       freezed == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
               as BalanceEntity?,
+      null == onHide
+          ? _value.onHide
+          : onHide // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -143,16 +157,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl(this.currentIndex, this.currency);
+  const _$InitialImpl(this.currentIndex, this.currency, this.onHide);
 
   @override
-  final int? currentIndex;
+  final int currentIndex;
   @override
   final BalanceEntity? currency;
+  @override
+  final bool onHide;
 
   @override
   String toString() {
-    return 'TransferBalanceState.initial(currentIndex: $currentIndex, currency: $currency)';
+    return 'TransferBalanceState.initial(currentIndex: $currentIndex, currency: $currency, onHide: $onHide)';
   }
 
   @override
@@ -163,11 +179,12 @@ class _$InitialImpl implements _Initial {
             (identical(other.currentIndex, currentIndex) ||
                 other.currentIndex == currentIndex) &&
             (identical(other.currency, currency) ||
-                other.currency == currency));
+                other.currency == currency) &&
+            (identical(other.onHide, onHide) || other.onHide == onHide));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentIndex, currency);
+  int get hashCode => Object.hash(runtimeType, currentIndex, currency, onHide);
 
   /// Create a copy of TransferBalanceState
   /// with the given fields replaced by the non-null parameter values.
@@ -180,28 +197,31 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int? currentIndex, BalanceEntity? currency)
+    required TResult Function(
+            int currentIndex, BalanceEntity? currency, bool onHide)
         initial,
   }) {
-    return initial(currentIndex, currency);
+    return initial(currentIndex, currency, onHide);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int? currentIndex, BalanceEntity? currency)? initial,
+    TResult? Function(int currentIndex, BalanceEntity? currency, bool onHide)?
+        initial,
   }) {
-    return initial?.call(currentIndex, currency);
+    return initial?.call(currentIndex, currency, onHide);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int? currentIndex, BalanceEntity? currency)? initial,
+    TResult Function(int currentIndex, BalanceEntity? currency, bool onHide)?
+        initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(currentIndex, currency);
+      return initial(currentIndex, currency, onHide);
     }
     return orElse();
   }
@@ -236,13 +256,15 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements TransferBalanceState {
-  const factory _Initial(
-      final int? currentIndex, final BalanceEntity? currency) = _$InitialImpl;
+  const factory _Initial(final int currentIndex, final BalanceEntity? currency,
+      final bool onHide) = _$InitialImpl;
 
   @override
-  int? get currentIndex;
+  int get currentIndex;
   @override
   BalanceEntity? get currency;
+  @override
+  bool get onHide;
 
   /// Create a copy of TransferBalanceState
   /// with the given fields replaced by the non-null parameter values.

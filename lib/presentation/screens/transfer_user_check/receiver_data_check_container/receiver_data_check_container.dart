@@ -46,6 +46,9 @@ class ReceiverDataValidateContainer extends StatelessWidget {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Address cannot be empty";
+                      } else if (value ==
+                          context.read<AuthenticationCubit>().userEmail) {
+                        return "You can't transfer your own account";
                       }
                       if (!RegExp(r'^[a-zA-Z0-9._%+-]+@gmail\.com$')
                           .hasMatch(value)) {

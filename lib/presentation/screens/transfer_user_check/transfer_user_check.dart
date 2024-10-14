@@ -35,7 +35,7 @@ class TransferUserCheckScreen extends StatelessWidget {
         builder: (context, loading) {
           return LoadingOverlay(
             isLoading: loading,
-            loadingInfo: 'Checking Receiver Data',
+            loadingInfo: 'Receiver Data Validation',
             child: Scaffold(
                 appBar: AdaptiveBackAppbar(
                   title: Text(
@@ -65,7 +65,7 @@ class TransferUserCheckScreen extends StatelessWidget {
                       ),
                       $styles.grid.columnsMargin.toHeightSizedBox,
                       Text(
-                        'Related Users',
+                        'Recent Transfer',
                         style: context.textTheme.titleMedium,
                       ),
                     ],
