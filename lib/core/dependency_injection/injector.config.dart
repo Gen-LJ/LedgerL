@@ -76,7 +76,6 @@ extension GetItInjectableX on _i174.GetIt {
     final loggerModule = _$LoggerModule();
     final sharedPreferencesProvider = _$SharedPreferencesProvider();
     final authenticationCubitProvider = _$AuthenticationCubitProvider();
-    gh.factory<_i515.TransferBalanceCubit>(() => _i515.TransferBalanceCubit());
     gh.factory<_i431.ReceiverDataValidationCubit>(
         () => _i431.ReceiverDataValidationCubit());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
@@ -139,6 +138,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i560.UserRepository>(),
           gh<_i560.BalanceRepository>(),
           gh<_i890.AuthenticationCubit>(),
+        ));
+    gh.factory<_i515.TransferBalanceCubit>(() => _i515.TransferBalanceCubit(
+          gh<_i560.TransactionRepository>(),
+          gh<_i959.AuthenticationCubit>(),
         ));
     gh.factory<_i1070.LedgerCubit>(() => _i1070.LedgerCubit(
           gh<_i560.BalanceRepository>(),

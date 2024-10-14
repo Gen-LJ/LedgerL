@@ -2,6 +2,12 @@ part of 'transfer_balance_cubit.dart';
 
 @freezed
 class TransferBalanceState with _$TransferBalanceState {
-  const factory TransferBalanceState.initial(
-      int currentIndex,BalanceEntity? currency,@Default(false) bool onHide) = _Initial;
+  const factory TransferBalanceState.initial({
+    @Default(0) int currentIndex,
+    BalanceEntity? currency,
+    @Default(false) bool onHide,
+  }) = TransferInitial;
+  const factory TransferBalanceState.loading() = TransferLoading;
+  const factory TransferBalanceState.success() = TransferSuccess;
+  const factory TransferBalanceState.fail(String errorMessage) = TransferFail;
 }
