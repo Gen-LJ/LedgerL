@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/domain/domain.dart';
-import 'package:ledger_l/presentation/blocs/authentication/authentication_cubit.dart';
+import '../../../presentation.dart';
 
 part 'transfer_balance_state.dart';
 
@@ -16,18 +16,17 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
   final AuthenticationCubit _auth;
   final TextEditingController _textEditingController;
   final FocusNode _focusNode;
+  final INavigationKeyProvider _navigationKeyProvider;
   bool _hideAvailable = false;
   int _currentIndex = 0;
-  BalanceEntity? _currency;
 
-  TransferBalanceCubit(this._transactionRepository, this._auth)
+  TransferBalanceCubit(
+      this._transactionRepository, this._auth, this._navigationKeyProvider)
       : _textEditingController = TextEditingController(),
         _focusNode = FocusNode(),
         super(const TransferBalanceState.initial());
 
   int get currentIndex => _currentIndex;
-
-  BalanceEntity? get currency => _currency;
 
   TextEditingController get textEditingController => _textEditingController;
 
@@ -35,15 +34,17 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
 
   bool get hideAvailable => _hideAvailable;
 
-  void onTapCurrency({required int index, required BalanceEntity currency}) {
+  void onTapCurrency({required int index}) {
     _focusNode.unfocus();
     _textEditingController.text = '';
     _currentIndex = index;
-    _currency = currency;
     emit(state.maybeMap(initial: (state) {
-      return state.copyWith(currentIndex: _currentIndex, currency: _currency);
+      return state.copyWith(
+        currentIndex: _currentIndex,
+      );
     }, orElse: () {
-      return state;
+      return TransferBalanceState.initial(
+          currentIndex: _currentIndex, onHide: _hideAvailable);
     }));
   }
 
@@ -52,7 +53,8 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
     emit(state.maybeMap(initial: (state) {
       return state.copyWith(onHide: _hideAvailable);
     }, orElse: () {
-      return state;
+      return TransferBalanceState.initial(
+          currentIndex: _currentIndex, onHide: _hideAvailable);
     }));
   }
 
@@ -67,11 +69,22 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
           receiverId: receiverId,
           currencyType: currency,
           amount: num.parse(_textEditingController.text));
-      response.status?
-      emit(const TransferBalanceState.success()) : emit(TransferBalanceState.fail(response.message));
+      response.status
+          ? emit(const TransferBalanceState.success())
+          : throw ServerFailure(response.message);
     } catch (e) {
+      debugPrint('Error at try catch');
       Failure failure = e as Failure;
-      emit(TransferBalanceState.fail(failure.reason));
+      final context = _navigationKeyProvider.globalKey.currentState!.context;
+      if (context.mounted) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return ErrorDialog(reason: failure.reason);
+            });
+      }
+      emit(TransferBalanceState.initial(
+          currentIndex: _currentIndex, onHide: _hideAvailable));
     }
   }
 }

@@ -17,7 +17,9 @@ class ConfirmCancelRowButton extends StatelessWidget {
           child: CustomElevatedButton(
             cancelButton: true,
             onPressed: context.pop,
-            child: const Text('Cancel'),
+            child:  const FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text('Cancel')),
           ),
         ),
         SizedBox(
@@ -26,7 +28,9 @@ class ConfirmCancelRowButton extends StatelessWidget {
         Expanded(
           child: CustomElevatedButton(
             onPressed: onPressed,
-            child:  Text(name ?? 'Confirm'),
+            child:  FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(name ?? 'Confirm')),
           ),
         ),
       ],

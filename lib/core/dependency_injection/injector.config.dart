@@ -141,15 +141,16 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i560.BalanceRepository>(),
           gh<_i890.AuthenticationCubit>(),
         ));
-    gh.factory<_i515.TransferBalanceCubit>(() => _i515.TransferBalanceCubit(
-          gh<_i560.TransactionRepository>(),
-          gh<_i959.AuthenticationCubit>(),
-        ));
     gh.factory<_i373.TransactionHistoryCubit>(
         () => _i373.TransactionHistoryCubit(
               gh<_i560.TransactionRepository>(),
               gh<_i959.AuthenticationCubit>(),
             ));
+    gh.factory<_i515.TransferBalanceCubit>(() => _i515.TransferBalanceCubit(
+          gh<_i560.TransactionRepository>(),
+          gh<_i890.AuthenticationCubit>(),
+          gh<_i890.INavigationKeyProvider>(),
+        ));
     gh.factory<_i1070.LedgerCubit>(() => _i1070.LedgerCubit(
           gh<_i560.BalanceRepository>(),
           gh<_i65.AuthenticationCubit>(),

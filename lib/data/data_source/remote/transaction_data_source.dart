@@ -79,7 +79,7 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
         Map<String, dynamic> receiverBalanceMap =
         Map<String, dynamic>.from(receiverData['balance'] ?? {});
 
-        num receiverBalance = receiverBalanceMap[currencyType] ?? 0;
+        receiverBalanceMap[currencyType] ?? 0;
 
         // Update sender's balance by decrementing the amount
         transaction.update(senderRef, {

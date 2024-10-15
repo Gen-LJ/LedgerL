@@ -4,7 +4,6 @@ part of 'transfer_balance_cubit.dart';
 class TransferBalanceState with _$TransferBalanceState {
   const factory TransferBalanceState.initial({
     @Default(0) int currentIndex,
-    BalanceEntity? currency,
     @Default(false) bool onHide,
   }) = TransferInitial;
   const factory TransferBalanceState.loading() = TransferLoading;

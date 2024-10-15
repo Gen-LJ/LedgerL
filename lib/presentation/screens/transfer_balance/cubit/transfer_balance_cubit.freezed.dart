@@ -18,9 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransferBalanceState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentIndex, BalanceEntity? currency, bool onHide)
-        initial,
+    required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String errorMessage) fail,
@@ -28,8 +26,7 @@ mixin _$TransferBalanceState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String errorMessage)? fail,
@@ -37,8 +34,7 @@ mixin _$TransferBalanceState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String errorMessage)? fail,
@@ -100,7 +96,7 @@ abstract class _$$TransferInitialImplCopyWith<$Res> {
           $Res Function(_$TransferInitialImpl) then) =
       __$$TransferInitialImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int currentIndex, BalanceEntity? currency, bool onHide});
+  $Res call({int currentIndex, bool onHide});
 }
 
 /// @nodoc
@@ -117,7 +113,6 @@ class __$$TransferInitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentIndex = null,
-    Object? currency = freezed,
     Object? onHide = null,
   }) {
     return _then(_$TransferInitialImpl(
@@ -125,10 +120,6 @@ class __$$TransferInitialImplCopyWithImpl<$Res>
           ? _value.currentIndex
           : currentIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      currency: freezed == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as BalanceEntity?,
       onHide: null == onHide
           ? _value.onHide
           : onHide // ignore: cast_nullable_to_non_nullable
@@ -140,21 +131,18 @@ class __$$TransferInitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TransferInitialImpl implements TransferInitial {
-  const _$TransferInitialImpl(
-      {this.currentIndex = 0, this.currency, this.onHide = false});
+  const _$TransferInitialImpl({this.currentIndex = 0, this.onHide = false});
 
   @override
   @JsonKey()
   final int currentIndex;
-  @override
-  final BalanceEntity? currency;
   @override
   @JsonKey()
   final bool onHide;
 
   @override
   String toString() {
-    return 'TransferBalanceState.initial(currentIndex: $currentIndex, currency: $currency, onHide: $onHide)';
+    return 'TransferBalanceState.initial(currentIndex: $currentIndex, onHide: $onHide)';
   }
 
   @override
@@ -164,13 +152,11 @@ class _$TransferInitialImpl implements TransferInitial {
             other is _$TransferInitialImpl &&
             (identical(other.currentIndex, currentIndex) ||
                 other.currentIndex == currentIndex) &&
-            (identical(other.currency, currency) ||
-                other.currency == currency) &&
             (identical(other.onHide, onHide) || other.onHide == onHide));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentIndex, currency, onHide);
+  int get hashCode => Object.hash(runtimeType, currentIndex, onHide);
 
   /// Create a copy of TransferBalanceState
   /// with the given fields replaced by the non-null parameter values.
@@ -184,40 +170,36 @@ class _$TransferInitialImpl implements TransferInitial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentIndex, BalanceEntity? currency, bool onHide)
-        initial,
+    required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String errorMessage) fail,
   }) {
-    return initial(currentIndex, currency, onHide);
+    return initial(currentIndex, onHide);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String errorMessage)? fail,
   }) {
-    return initial?.call(currentIndex, currency, onHide);
+    return initial?.call(currentIndex, onHide);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String errorMessage)? fail,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(currentIndex, currency, onHide);
+      return initial(currentIndex, onHide);
     }
     return orElse();
   }
@@ -261,13 +243,10 @@ class _$TransferInitialImpl implements TransferInitial {
 }
 
 abstract class TransferInitial implements TransferBalanceState {
-  const factory TransferInitial(
-      {final int currentIndex,
-      final BalanceEntity? currency,
-      final bool onHide}) = _$TransferInitialImpl;
+  const factory TransferInitial({final int currentIndex, final bool onHide}) =
+      _$TransferInitialImpl;
 
   int get currentIndex;
-  BalanceEntity? get currency;
   bool get onHide;
 
   /// Create a copy of TransferBalanceState
@@ -318,9 +297,7 @@ class _$TransferLoadingImpl implements TransferLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentIndex, BalanceEntity? currency, bool onHide)
-        initial,
+    required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String errorMessage) fail,
@@ -331,8 +308,7 @@ class _$TransferLoadingImpl implements TransferLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String errorMessage)? fail,
@@ -343,8 +319,7 @@ class _$TransferLoadingImpl implements TransferLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String errorMessage)? fail,
@@ -439,9 +414,7 @@ class _$TransferSuccessImpl implements TransferSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentIndex, BalanceEntity? currency, bool onHide)
-        initial,
+    required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String errorMessage) fail,
@@ -452,8 +425,7 @@ class _$TransferSuccessImpl implements TransferSuccess {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String errorMessage)? fail,
@@ -464,8 +436,7 @@ class _$TransferSuccessImpl implements TransferSuccess {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String errorMessage)? fail,
@@ -588,9 +559,7 @@ class _$TransferFailImpl implements TransferFail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            int currentIndex, BalanceEntity? currency, bool onHide)
-        initial,
+    required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String errorMessage) fail,
@@ -601,8 +570,7 @@ class _$TransferFailImpl implements TransferFail {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String errorMessage)? fail,
@@ -613,8 +581,7 @@ class _$TransferFailImpl implements TransferFail {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int currentIndex, BalanceEntity? currency, bool onHide)?
-        initial,
+    TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String errorMessage)? fail,

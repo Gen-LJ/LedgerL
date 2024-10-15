@@ -34,13 +34,6 @@ class TransactionContainer extends StatelessWidget {
             if (state is TransferSuccess) {
               context.goTransferSuccess();
             }
-            if (state is TransferFail) {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return ErrorDialog(reason: state.errorMessage);
-                  });
-            }
           },
           builder: (context, state) {
             final bloc = context.read<TransferBalanceCubit>();
@@ -58,7 +51,6 @@ class TransactionContainer extends StatelessWidget {
                         onTap: () {
                           bloc.onTapCurrency(
                             index: index,
-                            currency: senderBalance[index],
                           );
                         },
                         child: Container(
@@ -131,7 +123,7 @@ class TransactionContainer extends StatelessWidget {
                           builder: (context) {
                             return AlertDialog(
                               title: Text(
-                                'Transfer Confirmation',
+                                'Confirmation',
                                 style: context.textTheme.titleMedium,
                               ),
                               content: Text(
