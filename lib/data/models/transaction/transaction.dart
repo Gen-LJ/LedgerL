@@ -13,8 +13,9 @@ class TransactionModel extends TransactionEntity with _$TransactionModel {
     required String transactionId,
     required String senderId,
     required String receiverId,
+    required String receiverEmail,
     required String currencyType,
-    required num amount,
+    required int amount,
     required DateTime createdAt,
   }) = _TransactionModel;
 
@@ -26,8 +27,9 @@ class TransactionModel extends TransactionEntity with _$TransactionModel {
       transactionId: json['transactionId'] as String? ?? '', // Handle null
       currencyType: json['currencyType'] as String? ?? '', // Handle null
       senderId: json['senderId'] as String? ?? '', // Handle null
-      amount: (json['amount'] as num?)?.toDouble() ?? 0.0, // Handle null
+      amount: json['amount'] as int? ?? 0, // Handle null
       receiverId: json['receiverId'] as String? ?? '', // Handle null
+      receiverEmail: json['receiverEmail'] as String? ?? '', // Handle null
       createdAt: (json['timestamp'] as Timestamp?)?.toDate() ?? DateTime.now(), // Handle null
     );
   }
@@ -42,6 +44,7 @@ extension TransactionModelExtension on TransactionModel {
       'id': transactionId,
       'senderId': senderId,
       'receiverId': receiverId,
+      'receiverEmail': receiverEmail,
       'currencyType': currencyType,
       'amount': amount,
       'createdAt': Timestamp.fromDate(createdAt),

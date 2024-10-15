@@ -16,4 +16,5 @@ class AppColors {
   static const clrOffBlack = Color(0xFF141414);
   
   static const clrSuccess = Color(0xFF57FFA8);
+  static const clrGreen = Color(0xFF19FA09);
 }

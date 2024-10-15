@@ -14,12 +14,14 @@ class TransactionRepositoryImpl implements TransactionRepository {
   Future<TransactionStatusResponseEntity> balanceTransfer({
     required String senderId,
     required String receiverId,
+    required String receiverEmail,
     required String currencyType,
-    required num amount,
+    required int amount,
   }) async {
     final response = await _remoteDataSource.balanceTransfer(
         senderId: senderId,
         receiverId: receiverId,
+        receiverEmail: receiverEmail,
         currencyType: currencyType,
         amount: amount);
     return response;

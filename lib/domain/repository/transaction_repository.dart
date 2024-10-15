@@ -7,8 +7,9 @@ abstract interface class TransactionRepository {
   Future<TransactionStatusResponseEntity> balanceTransfer({
     required String senderId,
     required String receiverId,
+    required String receiverEmail,
     required String currencyType,
-    required num amount,
+    required int amount,
   });
 
   Future<PaginatedTransactionEntity> getTransactionByUser({required String userId,DocumentSnapshot? lastDocument});

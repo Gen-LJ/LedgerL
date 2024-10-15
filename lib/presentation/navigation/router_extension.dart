@@ -14,7 +14,7 @@ extension NavigationExtension on BuildContext {
     goIndex();
   }
 
-  void goTransferSuccess()=> go(TransferSuccessScreen.routePath);
+  void goTransferSuccess(TransactionEntity transactionData)=> go(TransferSuccessScreen.routePath,extra: transactionData);
 
   void goHistory() {
     final router = inject<NavigationRouter>();

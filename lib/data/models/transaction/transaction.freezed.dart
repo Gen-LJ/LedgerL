@@ -23,8 +23,9 @@ mixin _$TransactionModel {
   String get transactionId => throw _privateConstructorUsedError;
   String get senderId => throw _privateConstructorUsedError;
   String get receiverId => throw _privateConstructorUsedError;
+  String get receiverEmail => throw _privateConstructorUsedError;
   String get currencyType => throw _privateConstructorUsedError;
-  num get amount => throw _privateConstructorUsedError;
+  int get amount => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this TransactionModel to a JSON map.
@@ -47,8 +48,9 @@ abstract class $TransactionModelCopyWith<$Res> {
       {String transactionId,
       String senderId,
       String receiverId,
+      String receiverEmail,
       String currencyType,
-      num amount,
+      int amount,
       DateTime createdAt});
 }
 
@@ -70,6 +72,7 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
     Object? transactionId = null,
     Object? senderId = null,
     Object? receiverId = null,
+    Object? receiverEmail = null,
     Object? currencyType = null,
     Object? amount = null,
     Object? createdAt = null,
@@ -87,6 +90,10 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
           ? _value.receiverId
           : receiverId // ignore: cast_nullable_to_non_nullable
               as String,
+      receiverEmail: null == receiverEmail
+          ? _value.receiverEmail
+          : receiverEmail // ignore: cast_nullable_to_non_nullable
+              as String,
       currencyType: null == currencyType
           ? _value.currencyType
           : currencyType // ignore: cast_nullable_to_non_nullable
@@ -94,7 +101,7 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as num,
+              as int,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -115,8 +122,9 @@ abstract class _$$TransactionModelImplCopyWith<$Res>
       {String transactionId,
       String senderId,
       String receiverId,
+      String receiverEmail,
       String currencyType,
-      num amount,
+      int amount,
       DateTime createdAt});
 }
 
@@ -136,6 +144,7 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
     Object? transactionId = null,
     Object? senderId = null,
     Object? receiverId = null,
+    Object? receiverEmail = null,
     Object? currencyType = null,
     Object? amount = null,
     Object? createdAt = null,
@@ -153,6 +162,10 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
           ? _value.receiverId
           : receiverId // ignore: cast_nullable_to_non_nullable
               as String,
+      receiverEmail: null == receiverEmail
+          ? _value.receiverEmail
+          : receiverEmail // ignore: cast_nullable_to_non_nullable
+              as String,
       currencyType: null == currencyType
           ? _value.currencyType
           : currencyType // ignore: cast_nullable_to_non_nullable
@@ -160,7 +173,7 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as num,
+              as int,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -176,6 +189,7 @@ class _$TransactionModelImpl implements _TransactionModel {
       {required this.transactionId,
       required this.senderId,
       required this.receiverId,
+      required this.receiverEmail,
       required this.currencyType,
       required this.amount,
       required this.createdAt});
@@ -190,15 +204,17 @@ class _$TransactionModelImpl implements _TransactionModel {
   @override
   final String receiverId;
   @override
+  final String receiverEmail;
+  @override
   final String currencyType;
   @override
-  final num amount;
+  final int amount;
   @override
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'TransactionModel(transactionId: $transactionId, senderId: $senderId, receiverId: $receiverId, currencyType: $currencyType, amount: $amount, createdAt: $createdAt)';
+    return 'TransactionModel(transactionId: $transactionId, senderId: $senderId, receiverId: $receiverId, receiverEmail: $receiverEmail, currencyType: $currencyType, amount: $amount, createdAt: $createdAt)';
   }
 
   @override
@@ -212,6 +228,8 @@ class _$TransactionModelImpl implements _TransactionModel {
                 other.senderId == senderId) &&
             (identical(other.receiverId, receiverId) ||
                 other.receiverId == receiverId) &&
+            (identical(other.receiverEmail, receiverEmail) ||
+                other.receiverEmail == receiverEmail) &&
             (identical(other.currencyType, currencyType) ||
                 other.currencyType == currencyType) &&
             (identical(other.amount, amount) || other.amount == amount) &&
@@ -222,7 +240,7 @@ class _$TransactionModelImpl implements _TransactionModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, transactionId, senderId,
-      receiverId, currencyType, amount, createdAt);
+      receiverId, receiverEmail, currencyType, amount, createdAt);
 
   /// Create a copy of TransactionModel
   /// with the given fields replaced by the non-null parameter values.
@@ -246,8 +264,9 @@ abstract class _TransactionModel implements TransactionModel {
       {required final String transactionId,
       required final String senderId,
       required final String receiverId,
+      required final String receiverEmail,
       required final String currencyType,
-      required final num amount,
+      required final int amount,
       required final DateTime createdAt}) = _$TransactionModelImpl;
 
   factory _TransactionModel.fromJson(Map<String, dynamic> json) =
@@ -260,9 +279,11 @@ abstract class _TransactionModel implements TransactionModel {
   @override
   String get receiverId;
   @override
+  String get receiverEmail;
+  @override
   String get currencyType;
   @override
-  num get amount;
+  int get amount;
   @override
   DateTime get createdAt;
 

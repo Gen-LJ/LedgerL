@@ -7,6 +7,6 @@ class TransferBalanceState with _$TransferBalanceState {
     @Default(false) bool onHide,
   }) = TransferInitial;
   const factory TransferBalanceState.loading() = TransferLoading;
-  const factory TransferBalanceState.success() = TransferSuccess;
+  const factory TransferBalanceState.success(TransactionEntity transactionData) = TransferSuccess;
   const factory TransferBalanceState.fail(String errorMessage) = TransferFail;
 }

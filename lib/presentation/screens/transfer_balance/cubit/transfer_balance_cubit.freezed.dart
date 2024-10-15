@@ -20,7 +20,7 @@ mixin _$TransferBalanceState {
   TResult when<TResult extends Object?>({
     required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(TransactionEntity transactionData) success,
     required TResult Function(String errorMessage) fail,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$TransferBalanceState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(TransactionEntity transactionData)? success,
     TResult? Function(String errorMessage)? fail,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$TransferBalanceState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(TransactionEntity transactionData)? success,
     TResult Function(String errorMessage)? fail,
     required TResult orElse(),
   }) =>
@@ -172,7 +172,7 @@ class _$TransferInitialImpl implements TransferInitial {
   TResult when<TResult extends Object?>({
     required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(TransactionEntity transactionData) success,
     required TResult Function(String errorMessage) fail,
   }) {
     return initial(currentIndex, onHide);
@@ -183,7 +183,7 @@ class _$TransferInitialImpl implements TransferInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(TransactionEntity transactionData)? success,
     TResult? Function(String errorMessage)? fail,
   }) {
     return initial?.call(currentIndex, onHide);
@@ -194,7 +194,7 @@ class _$TransferInitialImpl implements TransferInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(TransactionEntity transactionData)? success,
     TResult Function(String errorMessage)? fail,
     required TResult orElse(),
   }) {
@@ -299,7 +299,7 @@ class _$TransferLoadingImpl implements TransferLoading {
   TResult when<TResult extends Object?>({
     required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(TransactionEntity transactionData) success,
     required TResult Function(String errorMessage) fail,
   }) {
     return loading();
@@ -310,7 +310,7 @@ class _$TransferLoadingImpl implements TransferLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(TransactionEntity transactionData)? success,
     TResult? Function(String errorMessage)? fail,
   }) {
     return loading?.call();
@@ -321,7 +321,7 @@ class _$TransferLoadingImpl implements TransferLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(TransactionEntity transactionData)? success,
     TResult Function(String errorMessage)? fail,
     required TResult orElse(),
   }) {
@@ -378,6 +378,8 @@ abstract class _$$TransferSuccessImplCopyWith<$Res> {
   factory _$$TransferSuccessImplCopyWith(_$TransferSuccessImpl value,
           $Res Function(_$TransferSuccessImpl) then) =
       __$$TransferSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TransactionEntity transactionData});
 }
 
 /// @nodoc
@@ -390,36 +392,63 @@ class __$$TransferSuccessImplCopyWithImpl<$Res>
 
   /// Create a copy of TransferBalanceState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? transactionData = null,
+  }) {
+    return _then(_$TransferSuccessImpl(
+      null == transactionData
+          ? _value.transactionData
+          : transactionData // ignore: cast_nullable_to_non_nullable
+              as TransactionEntity,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$TransferSuccessImpl implements TransferSuccess {
-  const _$TransferSuccessImpl();
+  const _$TransferSuccessImpl(this.transactionData);
+
+  @override
+  final TransactionEntity transactionData;
 
   @override
   String toString() {
-    return 'TransferBalanceState.success()';
+    return 'TransferBalanceState.success(transactionData: $transactionData)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TransferSuccessImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$TransferSuccessImpl &&
+            (identical(other.transactionData, transactionData) ||
+                other.transactionData == transactionData));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, transactionData);
+
+  /// Create a copy of TransferBalanceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TransferSuccessImplCopyWith<_$TransferSuccessImpl> get copyWith =>
+      __$$TransferSuccessImplCopyWithImpl<_$TransferSuccessImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(TransactionEntity transactionData) success,
     required TResult Function(String errorMessage) fail,
   }) {
-    return success();
+    return success(transactionData);
   }
 
   @override
@@ -427,10 +456,10 @@ class _$TransferSuccessImpl implements TransferSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(TransactionEntity transactionData)? success,
     TResult? Function(String errorMessage)? fail,
   }) {
-    return success?.call();
+    return success?.call(transactionData);
   }
 
   @override
@@ -438,12 +467,12 @@ class _$TransferSuccessImpl implements TransferSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(TransactionEntity transactionData)? success,
     TResult Function(String errorMessage)? fail,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(transactionData);
     }
     return orElse();
   }
@@ -487,7 +516,16 @@ class _$TransferSuccessImpl implements TransferSuccess {
 }
 
 abstract class TransferSuccess implements TransferBalanceState {
-  const factory TransferSuccess() = _$TransferSuccessImpl;
+  const factory TransferSuccess(final TransactionEntity transactionData) =
+      _$TransferSuccessImpl;
+
+  TransactionEntity get transactionData;
+
+  /// Create a copy of TransferBalanceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TransferSuccessImplCopyWith<_$TransferSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -561,7 +599,7 @@ class _$TransferFailImpl implements TransferFail {
   TResult when<TResult extends Object?>({
     required TResult Function(int currentIndex, bool onHide) initial,
     required TResult Function() loading,
-    required TResult Function() success,
+    required TResult Function(TransactionEntity transactionData) success,
     required TResult Function(String errorMessage) fail,
   }) {
     return fail(errorMessage);
@@ -572,7 +610,7 @@ class _$TransferFailImpl implements TransferFail {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int currentIndex, bool onHide)? initial,
     TResult? Function()? loading,
-    TResult? Function()? success,
+    TResult? Function(TransactionEntity transactionData)? success,
     TResult? Function(String errorMessage)? fail,
   }) {
     return fail?.call(errorMessage);
@@ -583,7 +621,7 @@ class _$TransferFailImpl implements TransferFail {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int currentIndex, bool onHide)? initial,
     TResult Function()? loading,
-    TResult Function()? success,
+    TResult Function(TransactionEntity transactionData)? success,
     TResult Function(String errorMessage)? fail,
     required TResult orElse(),
   }) {

@@ -60,6 +60,7 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
 
   Future<void> onTapTransfer({
     required String receiverId,
+    required String receiverEmail,
     required String currency,
   }) async {
     emit(const TransferBalanceState.loading());
@@ -67,20 +68,30 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
       final response = await _transactionRepository.balanceTransfer(
           senderId: _auth.userId!,
           receiverId: receiverId,
+          receiverEmail: receiverEmail,
           currencyType: currency,
-          amount: num.parse(_textEditingController.text));
+          amount: int.parse(_textEditingController.text));
       response.status
-          ? emit(const TransferBalanceState.success())
+          ? emit(TransferBalanceState.success(response.transactionData))
           : throw ServerFailure(response.message);
     } catch (e) {
       debugPrint('Error at try catch');
-      Failure failure = e as Failure;
+      String? reason;
+      if(e is FormatException){
+        reason = "Transferring fractional amounts is not allowed.";
+      } else if(e is Exception) {
+        reason = e.toString();
+      } else {
+        Failure failure = e as Failure;
+        reason = failure.reason;
+      }
+
       final context = _navigationKeyProvider.globalKey.currentState!.context;
       if (context.mounted) {
         showDialog(
             context: context,
             builder: (context) {
-              return ErrorDialog(reason: failure.reason);
+              return ErrorDialog(reason: reason ?? 'Something went Wrong!!!');
             });
       }
       emit(TransferBalanceState.initial(

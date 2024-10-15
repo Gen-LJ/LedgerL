@@ -11,8 +11,9 @@ abstract class TransactionRemoteDataSource {
   Future<TransactionStatusResponseModel> balanceTransfer({
     required String senderId,
     required String receiverId,
+    required String receiverEmail,
     required String currencyType,
-    required num amount,
+    required int amount,
   });
 
   Future<PaginatedTransactionModel> getTransactionsByUserId(
@@ -34,8 +35,9 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   Future<TransactionStatusResponseModel> balanceTransfer({
     required String senderId,
     required String receiverId,
+    required String receiverEmail,
     required String currencyType,
-    required num amount,
+    required int amount,
   }) async {
     final DateTime createdAt = DateTime.now();
     final Timestamp modifiedAt = Timestamp.fromDate(createdAt);
@@ -44,6 +46,7 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
       transactionId: _transactionIdGenerator.generate(),
       senderId: senderId,
       receiverId: receiverId,
+      receiverEmail: receiverEmail,
       currencyType: currencyType,
       amount: amount,
       createdAt: createdAt,

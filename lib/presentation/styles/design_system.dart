@@ -197,6 +197,8 @@ class _Colors {
 
   Color get clrSuccess => AppColors.clrSuccess;
 
+  Color get clrGreen => AppColors.clrGreen;
+
   Color get clrPrimary => AppColors.clrPrimary;
 
   Color get clrSecondary => AppColors.clrSecondary;

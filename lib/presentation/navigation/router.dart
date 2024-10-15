@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -101,7 +102,9 @@ class NavigationRouter {
           },
             path: TransferSuccessScreen.routePath,
             builder: (context, state) {
-              return const TransferSuccessScreen();
+              final extras = state.extra as TransactionEntity;
+              debugPrint('Transaction Data = $extras');
+              return  TransferSuccessScreen(transactionData: extras,);
             })
       ]);
 }

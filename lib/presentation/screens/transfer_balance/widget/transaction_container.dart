@@ -32,7 +32,7 @@ class TransactionContainer extends StatelessWidget {
         child: BlocConsumer<TransferBalanceCubit, TransferBalanceState>(
           listener: (context, state) {
             if (state is TransferSuccess) {
-              context.goTransferSuccess();
+              context.goTransferSuccess(state.transactionData);
             }
           },
           builder: (context, state) {
@@ -128,15 +128,37 @@ class TransactionContainer extends StatelessWidget {
                                 'Confirmation',
                                 style: context.textTheme.titleMedium,
                               ),
-                              content: Text(
-                                  maxLines: 10,
-                                  'Transfer ${bloc.textEditingController.text} (${senderBalance[bloc.currentIndex].currency}) to ${receiverInfo.email} ?'),
+                              content:RichText(
+                                text: TextSpan(
+                                  children: [
+                                     TextSpan(text: 'Transfer ',style: context.textTheme.bodyMedium),
+                                    TextSpan(
+                                      text: bloc.textEditingController.text, // Highlighted amount
+                                      style: context.textTheme.titleLarge
+                                          ?.copyWith(color: context.theme.primaryColor),
+                                    ),
+                                    TextSpan(
+                                        text: ' (${senderBalance[bloc.currentIndex].currency}) to ',
+                                        style: context.textTheme.bodyMedium),
+                                    TextSpan(
+                                      text: receiverInfo.email,
+                                      // Highlighted email
+                                      style: context.textTheme.bodyLarge
+                                          ,
+                                    ),
+                                    TextSpan(
+                                        text: '?',
+                                        style: context.textTheme.bodyMedium),
+                                  ],
+                                ),
+                              ),
                               actions: [
                                 ConfirmCancelRowButton(
                                   onPressed: () {
                                     context.pop();
                                     bloc.onTapTransfer(
                                       receiverId: receiverInfo.id,
+                                      receiverEmail: receiverInfo.email,
                                       currency: senderBalance[bloc.currentIndex]
                                           .currency,
                                     );
