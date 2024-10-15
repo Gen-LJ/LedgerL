@@ -30,12 +30,6 @@ class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
 
   ScrollController get historyScrollController => _scrollController;
 
-  // Combine all transactions from _paginatedData
-  List<TransactionEntity> get allTransactions {
-    return _paginatedData.values
-        .expand((paginatedEntity) => paginatedEntity.transactions)
-        .toList();
-  }
 
   // Initial load of data
   Future<void> loadData() async {
@@ -55,8 +49,9 @@ class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
     _hasMore = result.transactions.isNotEmpty; // Check if more data is available
 
     // Emit all transactions from _paginatedData
+    final values = _paginatedData.values;
     emit(TransactionHistoryState.ready(
-      allTransactions, // Emit all transactions from the paginated data
+      values.fold([], (p, e) => [...p, ...e.transactions]),// Emit all transactions from the paginated data
       _lastDocument!,
     ));
   }
@@ -81,13 +76,15 @@ class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
       result.lastDocument, // Update the last document snapshot
     );
 
+    final values = _paginatedData.values;
+
     _hasMore = result.transactions.isNotEmpty; // Check if more data is available
 
     _isLoadingMore = false;
 
     // Emit all transactions from _paginatedData
     emit(TransactionHistoryState.ready(
-      allTransactions, // Emit all transactions from the paginated data
+      values.fold([], (p, e) => [...p, ...e.transactions]), // Emit all transactions from the paginated data
       _lastDocument!,
     ));
   }
