@@ -30,9 +30,13 @@ class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
 
   ScrollController get historyScrollController => _scrollController;
 
+  bool get isLoadingMore => _isLoadingMore;
+
 
   // Initial load of data
   Future<void> loadData() async {
+    _isLoadingMore=false;
+    _paginatedData.clear();
     final userId = _auth.userId!;
     emit(const TransactionHistoryState.loading());
 
