@@ -116,7 +116,9 @@ class TransactionContainer extends StatelessWidget {
                 $styles.insets.sm.toHeightSizedBox,
                 CustomElevatedButton(
                     onPressed: () {
-                      if (bloc.textEditingController.text.isNotEmpty) {
+                      if (bloc.textEditingController.text.isNotEmpty &&
+                          !RegExp(r'^0+$')
+                              .hasMatch(bloc.textEditingController.text)) {
                         bloc.focusNode.unfocus();
                         showDialog(
                           context: context,
