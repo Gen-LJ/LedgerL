@@ -30,7 +30,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
       if (documentSnapshot.exists) {
         debugPrint('User Data Exist');
-        _firstTimeAddBalanceToUser(user);
+        await _firstTimeAddBalanceToUser(user);
         logger.i(user);
         return UserInfoModel.fromFireStore(documentSnapshot);
       } else {
@@ -38,7 +38,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         CollectionReference refUser =
             _firebaseFireStore.collection(FirebaseConfig.usersCollectionKey);
         await refUser.doc(user.id).set(user.toJson());
-        _firstTimeAddBalanceToUser(user);
+        await _firstTimeAddBalanceToUser(user);
         logger.i(user);
         return user;
       }
@@ -76,46 +76,52 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<void> _firstTimeAddBalanceToUser(UserInfoModel user) async {
     try {
       CollectionReference refCurrency =
-          _firebaseFireStore.collection(FirebaseConfig.balanceCollectionKey);
+      _firebaseFireStore.collection(FirebaseConfig.balanceCollectionKey);
 
       DocumentSnapshot existingBalanceSnapshot =
-          await refCurrency.doc(user.id).get();
+      await refCurrency.doc(user.id).get();
       if (existingBalanceSnapshot.exists) {
-        debugPrint('User Already have Balance');
+        debugPrint('User Already has Balance');
+        // If the user already has a balance, log the data
         logger.i(UserBalanceModel.fromFireStore(existingBalanceSnapshot));
         return;
       }
 
       debugPrint('Creating User Balance');
-      List<BalanceModel> balanceList = [
-        const BalanceModel(currency: 'USD', amount: 10000),
-        const BalanceModel(currency: 'SGD', amount: 20000),
-      ];
 
-      List<Map<String, dynamic>> serializedBalance =
-          balanceList.map((balance) => balance.toJson()).toList();
+      // Storing balances as a map with currency as the key
+      Map<String, num> balanceMap = {
+        'USD': 10000,
+        'SGD': 20000,
+      };
 
+      // Save the balance as a map instead of a list
       await refCurrency
           .doc(user.id)
-          .set({'id': user.id, 'balance': serializedBalance});
+          .set({'id': user.id, 'balance': balanceMap});
 
       DocumentSnapshot documentSnapshot = await refCurrency.doc(user.id).get();
 
-      List<Map<String, dynamic>> balanceData =
-          List<Map<String, dynamic>>.from(documentSnapshot.get('balance'));
-      List<BalanceModel> deserializedBalance =
-          balanceData.map((item) => BalanceModel.fromJson(item)).toList();
+      // Retrieve the balance map
+      Map<String, dynamic> balanceData = Map<String, dynamic>.from(documentSnapshot.get('balance'));
+
+      // Convert the map back to a list of BalanceModel objects for logging or further use
+      List<BalanceModel> deserializedBalance = balanceData.entries
+          .map((entry) => BalanceModel(currency: entry.key, amount: entry.value as num))
+          .toList();
 
       UserBalanceModel userBalance = UserBalanceModel(
         id: documentSnapshot.get('id') as String,
         balance: deserializedBalance,
       );
+
       logger.i(userBalance);
     } catch (e) {
       logger.e(e);
       throw ServerException(message: e.toString());
     }
   }
+
 
   @override
   Future<UserInfoModel> getUser(String email) async {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ledger_l/presentation/components/app_bar/adaptive_back_app_bar.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 import '../../../../domain/domain.dart';
 
@@ -32,7 +31,9 @@ class TransactionContainer extends StatelessWidget {
             bottom: 10),
         child: BlocConsumer<TransferBalanceCubit, TransferBalanceState>(
           listener: (context, state) {
-            if (state is TransferSuccess) {}
+            if (state is TransferSuccess) {
+              context.read<LedgerCubit>().loadData();
+            }
             if (state is TransferFail) {
               showDialog(
                   context: context,

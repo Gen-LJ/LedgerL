@@ -20,6 +20,7 @@ class LedgerL extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => inject<AuthenticationCubit>()),
         BlocProvider(create: (_) => inject<AppSettingCubit>()),
+        BlocProvider(create: (_) => inject<LedgerCubit>()),
       ],
       child: BlocBuilder<AppSettingCubit, AppSettingState>(
         builder: (context, state) {

@@ -16,7 +16,6 @@ class LedgerCubit extends Cubit<LedgerState> {
 
   LedgerCubit(this._balanceRepository, this._auth)
       : super(const LedgerState.initial()) {
-    loadData();
   }
 
   Future<void> loadData() async {
