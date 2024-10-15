@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/data/data.dart';
@@ -134,15 +135,31 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
           .doc(userId)
           .collection('transactions');
 
+      debugPrint('Fetching transactions from: ${transactionsRef.path}'); // Log the path
+
       final snapshot = await transactionsRef.orderBy('createdAt', descending: true).get();
+
+      debugPrint('snapshot = $snapshot');
+
+      // Check if there are any documents in the snapshot
+      if (snapshot.docs.isEmpty) {
+        debugPrint('No transactions found for user: $userId');
+        return []; // Return an empty list if no transactions are found
+      }
 
       // Convert the snapshot to a list of TransactionModel using fromJson
       final transactions = snapshot.docs.map((doc) {
-        final data = doc.data();
+        final data = doc.data() as Map<String, dynamic>?; // Ensure it's of the right type
+        if (data == null) {
+          throw Exception('Document data is null for document ID: ${doc.id}');
+        }
+
+        debugPrint('Transaction data = $data');
         // Set transactionId to doc.id and then create TransactionModel from JSON
         data['transactionId'] = doc.id; // Add transactionId to the data map
-        return TransactionModel.fromJson(data);
+        return TransactionModel.fromFireStore(data);
       }).toList();
+
       logger.i(transactions);
       return transactions;
     } catch (e) {
@@ -150,5 +167,7 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
       throw Exception('Failed to fetch transactions for user $userId');
     }
   }
+
+
 
 }

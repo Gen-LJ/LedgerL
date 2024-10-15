@@ -40,7 +40,6 @@ class NavigationRouter {
             return MultiBlocProvider(
               providers: [
                 BlocProvider(create: (_) => inject<TransferViewCubit>()),
-
               ],
               child: IndexScreen(
                 indexCallback: (useIndexPageNavigator) {
@@ -95,5 +94,14 @@ class NavigationRouter {
               final redirectRoute = state.uri.queryParameters["redirectRoute"];
               return LoginScreen(redirectRoute: redirectRoute);
             }),
+        GoRoute(
+          onExit: (context,state){
+            context.goIndex();
+            return true;
+          },
+            path: TransferSuccessScreen.routePath,
+            builder: (context, state) {
+              return const TransferSuccessScreen();
+            })
       ]);
 }

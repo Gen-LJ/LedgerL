@@ -14,6 +14,8 @@ extension NavigationExtension on BuildContext {
     goIndex();
   }
 
+  void goTransferSuccess()=> go(TransferSuccessScreen.routePath);
+
   void goHistory() {
     final router = inject<NavigationRouter>();
     final selectTab = router.useIndexPageNavigator();

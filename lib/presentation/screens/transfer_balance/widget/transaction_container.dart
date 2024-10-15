@@ -32,7 +32,7 @@ class TransactionContainer extends StatelessWidget {
         child: BlocConsumer<TransferBalanceCubit, TransferBalanceState>(
           listener: (context, state) {
             if (state is TransferSuccess) {
-              context.read<LedgerCubit>().loadData();
+              context.goTransferSuccess();
             }
             if (state is TransferFail) {
               showDialog(

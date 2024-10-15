@@ -22,4 +22,10 @@ class TransactionRepositoryImpl implements TransactionRepository {
         amount: amount);
     return response;
   }
+
+  @override
+  Future<List<TransactionEntity>> getTransactionByUser(String userId) async {
+    final response = await _remoteDataSource.getTransactionsByUserId(userId);
+    return response;
+  }
 }

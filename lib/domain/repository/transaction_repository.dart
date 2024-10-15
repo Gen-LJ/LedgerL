@@ -7,4 +7,6 @@ abstract interface class TransactionRepository {
     required String currencyType,
     required num amount,
   });
+
+  Future<List<TransactionEntity>> getTransactionByUser(String userId);
 }

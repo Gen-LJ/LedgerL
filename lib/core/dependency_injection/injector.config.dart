@@ -47,6 +47,8 @@ import 'package:ledger_l/presentation/navigation/navigation_key_provider.dart'
     as _i659;
 import 'package:ledger_l/presentation/navigation/router.dart' as _i426;
 import 'package:ledger_l/presentation/presentation.dart' as _i890;
+import 'package:ledger_l/presentation/screens/history/cubit/transaction_history_cubit.dart'
+    as _i373;
 import 'package:ledger_l/presentation/screens/home/tabs/ldeger_book/cubit/ledger_cubit.dart'
     as _i1070;
 import 'package:ledger_l/presentation/screens/home/tabs/transfer/cubit/transfer_view_cubit.dart'
@@ -143,6 +145,11 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i560.TransactionRepository>(),
           gh<_i959.AuthenticationCubit>(),
         ));
+    gh.factory<_i373.TransactionHistoryCubit>(
+        () => _i373.TransactionHistoryCubit(
+              gh<_i560.TransactionRepository>(),
+              gh<_i959.AuthenticationCubit>(),
+            ));
     gh.factory<_i1070.LedgerCubit>(() => _i1070.LedgerCubit(
           gh<_i560.BalanceRepository>(),
           gh<_i65.AuthenticationCubit>(),

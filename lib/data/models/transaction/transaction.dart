@@ -21,6 +21,17 @@ class TransactionModel extends TransactionEntity with _$TransactionModel {
   factory TransactionModel.fromJson(Map<String, dynamic> json) =>
       _$TransactionModelFromJson(json);
 
+  factory TransactionModel.fromFireStore(Map<String, dynamic> json) {
+    return TransactionModel(
+      transactionId: json['transactionId'] as String? ?? '', // Handle null
+      currencyType: json['currencyType'] as String? ?? '', // Handle null
+      senderId: json['senderId'] as String? ?? '', // Handle null
+      amount: (json['amount'] as num?)?.toDouble() ?? 0.0, // Handle null
+      receiverId: json['receiverId'] as String? ?? '', // Handle null
+      createdAt: (json['timestamp'] as Timestamp?)?.toDate() ?? DateTime.now(), // Handle null
+    );
+  }
+
 }
 
 
@@ -33,7 +44,7 @@ extension TransactionModelExtension on TransactionModel {
       'receiverId': receiverId,
       'currencyType': currencyType,
       'amount': amount,
-      'timestamp': Timestamp.fromDate(createdAt),
+      'createdAt': Timestamp.fromDate(createdAt),
     };
   }
 
