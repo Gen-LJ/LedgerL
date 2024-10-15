@@ -8,6 +8,7 @@ class TransactionEntity {
   final num amount;
   final DateTime createdAt;
 
+
   TransactionEntity({
     required this.transactionId,
     required this.senderId,

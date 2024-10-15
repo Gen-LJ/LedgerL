@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ledger_l/domain/domain.dart';
+
+import '../entities/paginated_transaction.dart';
 
 abstract interface class TransactionRepository {
   Future<TransactionStatusResponseEntity> balanceTransfer({
@@ -8,5 +11,5 @@ abstract interface class TransactionRepository {
     required num amount,
   });
 
-  Future<List<TransactionEntity>> getTransactionByUser(String userId);
+  Future<PaginatedTransactionEntity> getTransactionByUser({required String userId,DocumentSnapshot? lastDocument});
 }

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/data/data.dart';
 import 'package:ledger_l/domain/domain.dart';
+import 'package:ledger_l/domain/entities/paginated_transaction.dart';
 
 @LazySingleton(as: TransactionRepository)
 class TransactionRepositoryImpl implements TransactionRepository {
@@ -24,8 +26,8 @@ class TransactionRepositoryImpl implements TransactionRepository {
   }
 
   @override
-  Future<List<TransactionEntity>> getTransactionByUser(String userId) async {
-    final response = await _remoteDataSource.getTransactionsByUserId(userId);
+  Future<PaginatedTransactionEntity> getTransactionByUser({required String userId,DocumentSnapshot? lastDocument}) async {
+    final response = await _remoteDataSource.getTransactionsByUserId(userId,lastDocument: lastDocument);
     return response;
   }
 }

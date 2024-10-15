@@ -5,6 +5,8 @@ import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/data/data.dart';
 import 'package:logger/logger.dart';
 
+import '../../models/paginated_transactions/paginated_transaction.dart';
+
 abstract class TransactionRemoteDataSource {
   Future<TransactionStatusResponseModel> balanceTransfer({
     required String senderId,
@@ -13,7 +15,11 @@ abstract class TransactionRemoteDataSource {
     required num amount,
   });
 
-  Future<List<TransactionModel>> getTransactionsByUserId(String userId);
+  Future<PaginatedTransactionModel> getTransactionsByUserId(
+      String userId, {
+        int limit = 10,
+        DocumentSnapshot? lastDocument, // Used for pagination
+      });
 }
 
 @LazySingleton(as: TransactionRemoteDataSource)
@@ -128,7 +134,11 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
 
 
   @override
-  Future<List<TransactionModel>> getTransactionsByUserId(String userId) async {
+  Future<PaginatedTransactionModel> getTransactionsByUserId(
+      String userId, {
+        int limit = 10,
+        DocumentSnapshot? lastDocument, // Used for pagination
+      }) async {
     try {
       final transactionsRef = _fireStore
           .collection(FirebaseConfig.transactionCollectionKey)
@@ -137,14 +147,22 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
 
       debugPrint('Fetching transactions from: ${transactionsRef.path}'); // Log the path
 
-      final snapshot = await transactionsRef.orderBy('createdAt', descending: true).get();
+      // Start building the query
+      Query query = transactionsRef.orderBy('createdAt', descending: true).limit(limit);
+
+      // If `lastDocument` is provided, use it for pagination
+      if (lastDocument != null) {
+        query = query.startAfterDocument(lastDocument);
+      }
+
+      final snapshot = await query.get();
 
       debugPrint('snapshot = $snapshot');
 
       // Check if there are any documents in the snapshot
       if (snapshot.docs.isEmpty) {
         debugPrint('No transactions found for user: $userId');
-        return []; // Return an empty list if no transactions are found
+        throw Exception('No transactions found for user: $userId');// Return an empty list if no transactions are found
       }
 
       // Convert the snapshot to a list of TransactionModel using fromJson
@@ -154,19 +172,24 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
           throw Exception('Document data is null for document ID: ${doc.id}');
         }
 
-        debugPrint('Transaction data = $data');
         // Set transactionId to doc.id and then create TransactionModel from JSON
         data['transactionId'] = doc.id; // Add transactionId to the data map
         return TransactionModel.fromFireStore(data);
       }).toList();
 
+      // Get the last document in the snapshot to use for pagination
+      final lastDoc = snapshot.docs.isNotEmpty ? snapshot.docs.last : null;
+
+      // Logging the results for debugging
       logger.i(transactions);
-      return transactions;
+
+      return PaginatedTransactionModel(transactions: transactions, lastDocument: lastDoc!);
     } catch (e) {
       logger.e('Failed to fetch transactions: $e');
       throw Exception('Failed to fetch transactions for user $userId');
     }
   }
+
 
 
 

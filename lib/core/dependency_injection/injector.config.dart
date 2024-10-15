@@ -136,16 +136,16 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i760.TransactionRemoteDataSource>()));
     gh.lazySingleton<_i560.BalanceRepository>(
         () => _i25.BalanceRepositoryImpl(gh<_i760.BalanceRemoteDataSource>()));
+    gh.factory<_i373.TransactionHistoryCubit>(
+        () => _i373.TransactionHistoryCubit(
+              gh<_i560.TransactionRepository>(),
+              gh<_i890.AuthenticationCubit>(),
+            ));
     gh.factory<_i693.TransferUserCheckCubit>(() => _i693.TransferUserCheckCubit(
           gh<_i560.UserRepository>(),
           gh<_i560.BalanceRepository>(),
           gh<_i890.AuthenticationCubit>(),
         ));
-    gh.factory<_i373.TransactionHistoryCubit>(
-        () => _i373.TransactionHistoryCubit(
-              gh<_i560.TransactionRepository>(),
-              gh<_i959.AuthenticationCubit>(),
-            ));
     gh.factory<_i515.TransferBalanceCubit>(() => _i515.TransferBalanceCubit(
           gh<_i560.TransactionRepository>(),
           gh<_i890.AuthenticationCubit>(),
