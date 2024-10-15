@@ -23,6 +23,7 @@ mixin _$TransactionHistoryState {
             DocumentSnapshot<Object?> lastDocument)
         ready,
     required TResult Function() loading,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$TransactionHistoryState {
             DocumentSnapshot<Object?> lastDocument)?
         ready,
     TResult? Function()? loading,
+    TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$TransactionHistoryState {
             DocumentSnapshot<Object?> lastDocument)?
         ready,
     TResult Function()? loading,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,7 @@ mixin _$TransactionHistoryState {
     required TResult Function(THistoryInitial value) initial,
     required TResult Function(THistoryReady value) ready,
     required TResult Function(THistoryLoading value) loading,
+    required TResult Function(THistoryError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$TransactionHistoryState {
     TResult? Function(THistoryInitial value)? initial,
     TResult? Function(THistoryReady value)? ready,
     TResult? Function(THistoryLoading value)? loading,
+    TResult? Function(THistoryError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$TransactionHistoryState {
     TResult Function(THistoryInitial value)? initial,
     TResult Function(THistoryReady value)? ready,
     TResult Function(THistoryLoading value)? loading,
+    TResult Function(THistoryError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,6 +142,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
             DocumentSnapshot<Object?> lastDocument)
         ready,
     required TResult Function() loading,
+    required TResult Function(String message) error,
   }) {
     return initial();
   }
@@ -148,6 +155,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
             DocumentSnapshot<Object?> lastDocument)?
         ready,
     TResult? Function()? loading,
+    TResult? Function(String message)? error,
   }) {
     return initial?.call();
   }
@@ -160,6 +168,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
             DocumentSnapshot<Object?> lastDocument)?
         ready,
     TResult Function()? loading,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -174,6 +183,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
     required TResult Function(THistoryInitial value) initial,
     required TResult Function(THistoryReady value) ready,
     required TResult Function(THistoryLoading value) loading,
+    required TResult Function(THistoryError value) error,
   }) {
     return initial(this);
   }
@@ -184,6 +194,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
     TResult? Function(THistoryInitial value)? initial,
     TResult? Function(THistoryReady value)? ready,
     TResult? Function(THistoryLoading value)? loading,
+    TResult? Function(THistoryError value)? error,
   }) {
     return initial?.call(this);
   }
@@ -194,6 +205,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
     TResult Function(THistoryInitial value)? initial,
     TResult Function(THistoryReady value)? ready,
     TResult Function(THistoryLoading value)? loading,
+    TResult Function(THistoryError value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -301,6 +313,7 @@ class _$THistoryReadyImpl implements THistoryReady {
             DocumentSnapshot<Object?> lastDocument)
         ready,
     required TResult Function() loading,
+    required TResult Function(String message) error,
   }) {
     return ready(transactions, lastDocument);
   }
@@ -313,6 +326,7 @@ class _$THistoryReadyImpl implements THistoryReady {
             DocumentSnapshot<Object?> lastDocument)?
         ready,
     TResult? Function()? loading,
+    TResult? Function(String message)? error,
   }) {
     return ready?.call(transactions, lastDocument);
   }
@@ -325,6 +339,7 @@ class _$THistoryReadyImpl implements THistoryReady {
             DocumentSnapshot<Object?> lastDocument)?
         ready,
     TResult Function()? loading,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (ready != null) {
@@ -339,6 +354,7 @@ class _$THistoryReadyImpl implements THistoryReady {
     required TResult Function(THistoryInitial value) initial,
     required TResult Function(THistoryReady value) ready,
     required TResult Function(THistoryLoading value) loading,
+    required TResult Function(THistoryError value) error,
   }) {
     return ready(this);
   }
@@ -349,6 +365,7 @@ class _$THistoryReadyImpl implements THistoryReady {
     TResult? Function(THistoryInitial value)? initial,
     TResult? Function(THistoryReady value)? ready,
     TResult? Function(THistoryLoading value)? loading,
+    TResult? Function(THistoryError value)? error,
   }) {
     return ready?.call(this);
   }
@@ -359,6 +376,7 @@ class _$THistoryReadyImpl implements THistoryReady {
     TResult Function(THistoryInitial value)? initial,
     TResult Function(THistoryReady value)? ready,
     TResult Function(THistoryLoading value)? loading,
+    TResult Function(THistoryError value)? error,
     required TResult orElse(),
   }) {
     if (ready != null) {
@@ -428,6 +446,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
             DocumentSnapshot<Object?> lastDocument)
         ready,
     required TResult Function() loading,
+    required TResult Function(String message) error,
   }) {
     return loading();
   }
@@ -440,6 +459,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
             DocumentSnapshot<Object?> lastDocument)?
         ready,
     TResult? Function()? loading,
+    TResult? Function(String message)? error,
   }) {
     return loading?.call();
   }
@@ -452,6 +472,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
             DocumentSnapshot<Object?> lastDocument)?
         ready,
     TResult Function()? loading,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -466,6 +487,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
     required TResult Function(THistoryInitial value) initial,
     required TResult Function(THistoryReady value) ready,
     required TResult Function(THistoryLoading value) loading,
+    required TResult Function(THistoryError value) error,
   }) {
     return loading(this);
   }
@@ -476,6 +498,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
     TResult? Function(THistoryInitial value)? initial,
     TResult? Function(THistoryReady value)? ready,
     TResult? Function(THistoryLoading value)? loading,
+    TResult? Function(THistoryError value)? error,
   }) {
     return loading?.call(this);
   }
@@ -486,6 +509,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
     TResult Function(THistoryInitial value)? initial,
     TResult Function(THistoryReady value)? ready,
     TResult Function(THistoryLoading value)? loading,
+    TResult Function(THistoryError value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -497,4 +521,162 @@ class _$THistoryLoadingImpl implements THistoryLoading {
 
 abstract class THistoryLoading implements TransactionHistoryState {
   const factory THistoryLoading() = _$THistoryLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$THistoryErrorImplCopyWith<$Res> {
+  factory _$$THistoryErrorImplCopyWith(
+          _$THistoryErrorImpl value, $Res Function(_$THistoryErrorImpl) then) =
+      __$$THistoryErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$THistoryErrorImplCopyWithImpl<$Res>
+    extends _$TransactionHistoryStateCopyWithImpl<$Res, _$THistoryErrorImpl>
+    implements _$$THistoryErrorImplCopyWith<$Res> {
+  __$$THistoryErrorImplCopyWithImpl(
+      _$THistoryErrorImpl _value, $Res Function(_$THistoryErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TransactionHistoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$THistoryErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$THistoryErrorImpl implements THistoryError {
+  const _$THistoryErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'TransactionHistoryState.error(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$THistoryErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of TransactionHistoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$THistoryErrorImplCopyWith<_$THistoryErrorImpl> get copyWith =>
+      __$$THistoryErrorImplCopyWithImpl<_$THistoryErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<TransactionEntity> transactions,
+            DocumentSnapshot<Object?> lastDocument)
+        ready,
+    required TResult Function() loading,
+    required TResult Function(String message) error,
+  }) {
+    return error(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<TransactionEntity> transactions,
+            DocumentSnapshot<Object?> lastDocument)?
+        ready,
+    TResult? Function()? loading,
+    TResult? Function(String message)? error,
+  }) {
+    return error?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<TransactionEntity> transactions,
+            DocumentSnapshot<Object?> lastDocument)?
+        ready,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(THistoryInitial value) initial,
+    required TResult Function(THistoryReady value) ready,
+    required TResult Function(THistoryLoading value) loading,
+    required TResult Function(THistoryError value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(THistoryInitial value)? initial,
+    TResult? Function(THistoryReady value)? ready,
+    TResult? Function(THistoryLoading value)? loading,
+    TResult? Function(THistoryError value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(THistoryInitial value)? initial,
+    TResult Function(THistoryReady value)? ready,
+    TResult Function(THistoryLoading value)? loading,
+    TResult Function(THistoryError value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class THistoryError implements TransactionHistoryState {
+  const factory THistoryError(final String message) = _$THistoryErrorImpl;
+
+  String get message;
+
+  /// Create a copy of TransactionHistoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$THistoryErrorImplCopyWith<_$THistoryErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

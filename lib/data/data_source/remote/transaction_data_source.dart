@@ -188,8 +188,8 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
 
       return PaginatedTransactionModel(transactions: transactions, lastDocument: lastDoc!);
     } catch (e) {
-      logger.e('Failed to fetch transactions: $e');
-      throw Exception('Failed to fetch transactions for user $userId');
+      logger.e(e);
+      throw ServerException(message: 'Failed: ${e.toString().replaceAll('Exception:', '')}');
     }
   }
 

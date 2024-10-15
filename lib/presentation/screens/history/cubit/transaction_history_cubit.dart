@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/domain/domain.dart';
 import 'package:ledger_l/domain/entities/paginated_transaction.dart';
 import '../../../presentation.dart';
@@ -20,93 +21,88 @@ class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
   bool _isLoadingMore = false;
   bool _hasMore = true;
   DocumentSnapshot? _lastDocument;
-  final Map<DocumentSnapshot, PaginatedTransactionEntity> _paginatedData = {}; // Updated map type
+  final Map<DocumentSnapshot, PaginatedTransactionEntity> _paginatedData = {};
 
   TransactionHistoryCubit(this._transactionRepository, this._auth)
       : _scrollController = ScrollController(),
         super(const TransactionHistoryState.initial()) {
-    _scrollController.addListener(_onScroll); // Listen for scrolling
+    _scrollController.addListener(_onScroll);
   }
 
   ScrollController get historyScrollController => _scrollController;
 
   bool get isLoadingMore => _isLoadingMore;
 
-
-  // Initial load of data
   Future<void> loadData() async {
-    _isLoadingMore=false;
+    _isLoadingMore = false;
     _paginatedData.clear();
     final userId = _auth.userId!;
     emit(const TransactionHistoryState.loading());
 
-    // Fetch the initial data
-    final result = await _transactionRepository.getTransactionByUser(userId: userId);
+    try {
+      final result =
+          await _transactionRepository.getTransactionByUser(userId: userId);
 
-    // Add result to _paginatedData linking the lastDocument with PaginatedTransactionEntity
-    _lastDocument = result.lastDocument;
-    _paginatedData[_lastDocument!] = PaginatedTransactionEntity(
-       result.transactions, // Store transactions for this document
-       result.lastDocument,  // Store the last document snapshot
-    );
+      _lastDocument = result.lastDocument;
+      _paginatedData[_lastDocument!] = PaginatedTransactionEntity(
+        result.transactions,
+        result.lastDocument,
+      );
 
-    _hasMore = result.transactions.isNotEmpty; // Check if more data is available
+      _hasMore = result.transactions.isNotEmpty;
 
-    // Emit all transactions from _paginatedData
-    final values = _paginatedData.values;
-    emit(TransactionHistoryState.ready(
-      values.fold([], (p, e) => [...p, ...e.transactions]),// Emit all transactions from the paginated data
-      _lastDocument!,
-    ));
+      final values = _paginatedData.values;
+      emit(TransactionHistoryState.ready(
+        values.fold([], (p, e) => [...p, ...e.transactions]),
+        _lastDocument!,
+      ));
+    } on ServerFailure {
+      emit(const TransactionHistoryState.error('No transactions found.'));
+    }
   }
 
-  // Load more transactions for pagination
   Future<void> loadMoreData() async {
-    if (_isLoadingMore || !_hasMore) return; // Prevent loading more if already loading or no more data
+    if (_isLoadingMore || !_hasMore) {
+      return;
+    }
 
     _isLoadingMore = true;
     final userId = _auth.userId!;
 
-    // Fetch more transactions using the last document
     final result = await _transactionRepository.getTransactionByUser(
       userId: userId,
-      lastDocument: _lastDocument, // Use the last document for pagination
+      lastDocument: _lastDocument,
     );
 
-    // Add the new transactions to _paginatedData and update the lastDocument
     _lastDocument = result.lastDocument;
     _paginatedData[_lastDocument!] = PaginatedTransactionEntity(
-       result.transactions, // Add the new batch of transactions
-      result.lastDocument, // Update the last document snapshot
+      result.transactions,
+      result.lastDocument,
     );
 
     final values = _paginatedData.values;
 
-    _hasMore = result.transactions.isNotEmpty; // Check if more data is available
+    _hasMore = result.transactions.isNotEmpty;
 
     _isLoadingMore = false;
 
-    // Emit all transactions from _paginatedData
     emit(TransactionHistoryState.ready(
-      values.fold([], (p, e) => [...p, ...e.transactions]), // Emit all transactions from the paginated data
+      values.fold([], (p, e) => [...p, ...e.transactions]),
       _lastDocument!,
     ));
   }
 
-  // Detect if the user has scrolled to the bottom
   void _onScroll() {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent * 0.9) {
-      loadMoreData(); // Trigger loading more data when near bottom
+      loadMoreData();
     }
   }
 
   @override
   Future<void> close() {
-    _scrollController.removeListener(_onScroll); // Remove listener to prevent memory leaks
+    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     return super.close();
   }
 }
-
-
