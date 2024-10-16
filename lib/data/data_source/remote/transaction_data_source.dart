@@ -163,8 +163,6 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
         if (data == null) {
           throw Exception('Document data is null for document ID: ${doc.id}');
         }
-
-        data['transactionId'] = doc.id; // Add transactionId to the data map
         return TransactionModel.fromFireStore(data);
       }).toList();
 

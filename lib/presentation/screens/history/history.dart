@@ -7,20 +7,16 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<TransactionHistoryCubit>().loadData();
-
+    final bloc = context.read<TransactionHistoryCubit>()..loadData();
     return BlocBuilder<TransactionHistoryCubit, TransactionHistoryState>(
       builder: (context, state) {
         return switch (state) {
           THistoryReady() => ListView.separated(
-              controller: context
-                  .read<TransactionHistoryCubit>()
-                  .scrollController,
+              controller: bloc.scrollController,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               itemBuilder: (context, index) {
-                final cubit = context.read<TransactionHistoryCubit>();
                 if (index == state.transactions.length) {
-                  if (cubit.isLoadingMore) {
+                  if (state.loadingMore) {
                     return const Center(
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
@@ -28,7 +24,7 @@ class HistoryScreen extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return const SizedBox(); // Return empty widget if not loading
+                    return const SizedBox.shrink();
                   }
                 }
                 final transaction = state.transactions[index];
@@ -38,15 +34,13 @@ class HistoryScreen extends StatelessWidget {
                 );
               },
               separatorBuilder: (context, index) => const Divider(),
-              itemCount: state.transactions.length
-                  + (state.loadingMore ? 1 : 0),
+              itemCount:
+                  state.transactions.length + (state.loadingMore ? 1 : 0),
             ),
           THistoryError() => Center(
               child: Text(state.message),
             ),
-          _ => const Center(
-              child:
-                  CustomCircularIndicator()), // Show global loading while fetching initial data
+          _ => const Center(child: CustomCircularIndicator()),
         };
       },
     );

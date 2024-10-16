@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/data/data.dart';
 import 'package:ledger_l/domain/domain.dart';
-import 'package:ledger_l/domain/entities/paginated_transaction.dart';
 
 @LazySingleton(as: TransactionRepository)
 class TransactionRepositoryImpl implements TransactionRepository {

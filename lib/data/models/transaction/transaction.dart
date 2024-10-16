@@ -24,13 +24,13 @@ class TransactionModel extends TransactionEntity with _$TransactionModel {
 
   factory TransactionModel.fromFireStore(Map<String, dynamic> json) {
     return TransactionModel(
-      transactionId: json['transactionId'] as String? ?? '', // Handle null
+      transactionId: json['id'] as String? ?? '', // Handle null
       currencyType: json['currencyType'] as String? ?? '', // Handle null
       senderId: json['senderId'] as String? ?? '', // Handle null
       amount: json['amount'] as int? ?? 0, // Handle null
       receiverId: json['receiverId'] as String? ?? '', // Handle null
       receiverEmail: json['receiverEmail'] as String? ?? '', // Handle null
-      createdAt: (json['timestamp'] as Timestamp?)?.toDate() ?? DateTime.now(), // Handle null
+      createdAt: (json['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(), // Handle null
     );
   }
 
