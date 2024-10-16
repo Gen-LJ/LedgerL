@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
-import 'package:ledger_l/data/models/balance/balance.dart';
 import 'package:logger/logger.dart';
+import '../../data.dart';
 
 abstract class BalanceRemoteDataSource {
   Future<List<BalanceModel>> getAllBalance(String userId);
@@ -23,11 +23,9 @@ class BalanceRemoteDataSourceImpl implements BalanceRemoteDataSource {
 
       DocumentSnapshot documentSnapshot = await refBalance.doc(userId).get();
 
-      // Retrieve the balance map from Firestore
       Map<String, dynamic> balanceData =
       Map<String, dynamic>.from(documentSnapshot.get('balance'));
 
-      // Convert the map entries into a list of BalanceModel objects
       List<BalanceModel> deserializedBalance = balanceData.entries
           .map((entry) => BalanceModel(currency: entry.key, amount: entry.value as num))
           .toList();

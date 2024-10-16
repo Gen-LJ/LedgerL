@@ -51,20 +51,16 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<List<UserInfoModel>> getAllUsers() async {
     try {
-      // Get the collection reference
       CollectionReference refUser =
           _firebaseFireStore.collection(FirebaseConfig.usersCollectionKey);
 
-      // Fetch all documents in the collection
       QuerySnapshot querySnapshot = await refUser.get();
 
-      // Convert the QuerySnapshot into a list of UserInfoModel
       List<UserInfoModel> users = querySnapshot.docs.map((doc) {
         return UserInfoModel.fromFireStore(
-            doc); // Assuming fromFireStore method exists
+            doc);
       }).toList();
 
-      // Log the result for debugging
       logger.i(users);
       return users;
     } catch (e) {
@@ -82,30 +78,25 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       await refCurrency.doc(user.id).get();
       if (existingBalanceSnapshot.exists) {
         debugPrint('User Already has Balance');
-        // If the user already has a balance, log the data
         logger.i(UserBalanceModel.fromFireStore(existingBalanceSnapshot));
         return;
       }
 
       debugPrint('Creating User Balance');
 
-      // Storing balances as a map with currency as the key
       Map<String, num> balanceMap = {
         'USD': 10000,
         'SGD': 20000,
       };
 
-      // Save the balance as a map instead of a list
       await refCurrency
           .doc(user.id)
           .set({'id': user.id, 'balance': balanceMap});
 
       DocumentSnapshot documentSnapshot = await refCurrency.doc(user.id).get();
 
-      // Retrieve the balance map
       Map<String, dynamic> balanceData = Map<String, dynamic>.from(documentSnapshot.get('balance'));
 
-      // Convert the map back to a list of BalanceModel objects for logging or further use
       List<BalanceModel> deserializedBalance = balanceData.entries
           .map((entry) => BalanceModel(currency: entry.key, amount: entry.value as num))
           .toList();
