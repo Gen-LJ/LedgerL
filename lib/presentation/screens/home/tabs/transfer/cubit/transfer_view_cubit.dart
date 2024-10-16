@@ -16,6 +16,7 @@ class TransferViewCubit extends Cubit<TransferViewState> {
   }
 
   Future<void> loadData() async {
+    emit(const TransferViewState.loading());
     debugPrint('Loading Transfer Data');
     final user = await _userRepository.getSavedUserInfo();
     final res = await _userRepository.getAllWalletUserData();

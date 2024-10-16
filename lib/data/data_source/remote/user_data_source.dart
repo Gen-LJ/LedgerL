@@ -3,7 +3,9 @@ import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/data/data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ledger_l/domain/domain.dart';
 import 'package:logger/logger.dart';
+import 'dart:math';
 
 abstract class UserRemoteDataSource {
   Future<UserInfoModel> saveUser(UserInfoModel user);
@@ -30,7 +32,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
       if (documentSnapshot.exists) {
         debugPrint('User Data Exist');
-        await _firstTimeAddBalanceToUser(user);
+        await _firstTimeBalanceChecker(user);
         logger.i(user);
         return UserInfoModel.fromFireStore(documentSnapshot);
       } else {
@@ -38,7 +40,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         CollectionReference refUser =
             _firebaseFireStore.collection(FirebaseConfig.usersCollectionKey);
         await refUser.doc(user.id).set(user.toJson());
-        await _firstTimeAddBalanceToUser(user);
+        await _firstTimeBalanceChecker(user);
         logger.i(user);
         return user;
       }
@@ -69,13 +71,14 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     }
   }
 
-  Future<void> _firstTimeAddBalanceToUser(UserInfoModel user) async {
+
+
+  Future<void> _firstTimeBalanceChecker(UserInfoModel user) async {
     try {
       CollectionReference refCurrency =
       _firebaseFireStore.collection(FirebaseConfig.balanceCollectionKey);
 
-      DocumentSnapshot existingBalanceSnapshot =
-      await refCurrency.doc(user.id).get();
+      DocumentSnapshot existingBalanceSnapshot = await refCurrency.doc(user.id).get();
       if (existingBalanceSnapshot.exists) {
         debugPrint('User Already has Balance');
         logger.i(UserBalanceModel.fromFireStore(existingBalanceSnapshot));
@@ -84,18 +87,30 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
       debugPrint('Creating User Balance');
 
+      const List<Currency> availableCurrencies = Currency.values;
+
+      final random = Random();
+
+      final List<Currency> selectedCurrencies = [];
+      while (selectedCurrencies.length < 2) {
+        final randomCurrency = availableCurrencies[random.nextInt(availableCurrencies.length)];
+        if (!selectedCurrencies.contains(randomCurrency)) {
+          selectedCurrencies.add(randomCurrency);
+        }
+      }
+
+      // Map with random currencies (using enum code) and their respective amounts
       Map<String, num> balanceMap = {
-        'USD': 10000,
-        'SGD': 20000,
+        selectedCurrencies[0].code: 10000,
+        selectedCurrencies[1].code: 20000,
       };
 
-      await refCurrency
-          .doc(user.id)
-          .set({'id': user.id, 'balance': balanceMap});
+      await refCurrency.doc(user.id).set({'id': user.id, 'balance': balanceMap});
 
       DocumentSnapshot documentSnapshot = await refCurrency.doc(user.id).get();
 
-      Map<String, dynamic> balanceData = Map<String, dynamic>.from(documentSnapshot.get('balance'));
+      Map<String, dynamic> balanceData =
+      Map<String, dynamic>.from(documentSnapshot.get('balance'));
 
       List<BalanceModel> deserializedBalance = balanceData.entries
           .map((entry) => BalanceModel(currency: entry.key, amount: entry.value as num))
@@ -112,6 +127,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       throw ServerException(message: e.toString());
     }
   }
+
 
 
   @override

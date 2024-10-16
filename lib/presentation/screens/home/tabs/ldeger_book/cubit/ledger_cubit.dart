@@ -18,6 +18,7 @@ class LedgerCubit extends Cubit<LedgerState> {
       : super(const LedgerState.initial());
 
   Future<void> loadData() async {
+    emit(const LedgerState.loading());
     debugPrint('Loading Ledger Data');
     final userId = _auth.userId!;
     final allBalance = await _balanceRepository.getAllBalance(userId);

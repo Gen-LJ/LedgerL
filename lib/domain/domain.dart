@@ -1,3 +1,4 @@
+export 'entities/value_objects/currency.dart';
 export 'entities/balance.dart';
 export 'entities/paginated_transaction.dart';
 export 'entities/status_response.dart';
