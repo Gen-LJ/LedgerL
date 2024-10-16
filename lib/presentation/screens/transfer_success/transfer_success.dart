@@ -25,9 +25,8 @@ class TransferSuccessScreen extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   children: [
-                    // const TextSpan(text: 'Successfully Transfer '),
                     TextSpan(
-                      text: '${transactionData.amount}', // Highlighted amount
+                      text: '${transactionData.amount}',
                       style: context.textTheme.titleMedium
                           ?.copyWith(color: context.theme.primaryColor),
                     ),

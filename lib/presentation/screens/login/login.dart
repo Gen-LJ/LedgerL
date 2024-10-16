@@ -47,10 +47,11 @@ class LoginScreen extends StatelessWidget {
             child: Scaffold(
               body: SafeArea(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: $styles.grid.columnsMargin),
+                  padding: EdgeInsets.only(
+                      left: $styles.grid.columnsMargin,
+                      right: $styles.grid.columnsMargin,
+                      top: $styles.grid.columnsMargin ),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       (context.height / 4).toHeightSizedBox,
@@ -72,10 +73,26 @@ class LoginScreen extends StatelessWidget {
                               .signInWithGoogle();
                         },
                       ),
+                      $styles.insets.sm.toHeightSizedBox,
                     ],
                   ),
                 ),
               ),
+              bottomNavigationBar: Padding(
+                  padding: EdgeInsets.all($styles.grid.columnsMargin),
+                  child: RichText(
+                      text: TextSpan(
+                          style: context.textTheme.labelSmall
+                              ?.copyWith(fontSize: 10),
+                          children: [
+                        TextSpan(
+                            text: 'Note: ',
+                            style: context.textTheme.labelSmall?.copyWith(
+                                fontSize: 10, fontWeight: FontWeight.bold)),
+                        const TextSpan(
+                            text:
+                                'As part of the first-time login process, users will be randomly awarded two different currencies with amounts of 10,000 and 20,000. The currencies in this project are only used for logical operations such as transfers and are purely imaginary.'),
+                      ]))),
             ),
           );
         },
