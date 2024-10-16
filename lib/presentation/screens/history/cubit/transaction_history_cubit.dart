@@ -5,7 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ledger_l/core/core.dart';
 import 'package:ledger_l/domain/domain.dart';
-import 'package:ledger_l/domain/entities/paginated_transaction.dart';
 import '../../../presentation.dart';
 
 part 'transaction_history_state.dart';
@@ -29,32 +28,25 @@ class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
     _scrollController.addListener(_onScroll);
   }
 
-  ScrollController get historyScrollController => _scrollController;
+  ScrollController get scrollController => _scrollController;
 
   bool get isLoadingMore => _isLoadingMore;
 
   Future<void> loadData() async {
-    _isLoadingMore = false;
-    _paginatedData.clear();
-    final userId = _auth.userId!;
+    _resetPagination();
     emit(const TransactionHistoryState.loading());
 
     try {
+      final userId = _auth.userId!;
       final result =
           await _transactionRepository.getTransactionByUser(userId: userId);
 
       _lastDocument = result.lastDocument;
-      _paginatedData[_lastDocument!] = PaginatedTransactionEntity(
-        result.transactions,
-        result.lastDocument,
-      );
+      _updatePaginatedData(result);
 
-      _hasMore = result.transactions.isNotEmpty;
-
-      final values = _paginatedData.values;
       emit(TransactionHistoryState.ready(
-        values.fold([], (p, e) => [...p, ...e.transactions]),
-        _lastDocument!,
+        transactions: _getAllTransactions(),
+        lastDocument: _lastDocument!,
       ));
     } on ServerFailure {
       emit(const TransactionHistoryState.error('No transactions found.'));
@@ -62,41 +54,76 @@ class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
   }
 
   Future<void> loadMoreData() async {
-    if (_isLoadingMore || !_hasMore) {
-      return;
-    }
+    if (_shouldNotLoadMore()) return;
 
-    _isLoadingMore = true;
+    _startLoadingMore();
     final userId = _auth.userId!;
 
-    final result = await _transactionRepository.getTransactionByUser(
-      userId: userId,
-      lastDocument: _lastDocument,
-    );
+    try {
+      final result = await _transactionRepository.getTransactionByUser(
+        userId: userId,
+        lastDocument: _lastDocument,
+      );
 
-    _lastDocument = result.lastDocument;
+      _lastDocument = result.lastDocument;
+      _updatePaginatedData(result);
+
+      _hasMore = result.transactions.isNotEmpty;
+      await Future.delayed(const Duration(seconds: 1)); //This is to certify loading more indicator
+      _stopLoadingMore();
+      emit(TransactionHistoryState.ready(
+        transactions: _getAllTransactions(),
+        lastDocument: _lastDocument!,
+      ));
+    } catch (e) {
+      _stopLoadingMore();
+      _hasMore = false;
+    }
+  }
+
+  void _onScroll() {
+    if (_isNearBottom()) loadMoreData();
+  }
+
+  bool _isNearBottom() =>
+      _scrollController.offset >=
+          _scrollController.position.maxScrollExtent * 0.9 &&
+      !_scrollController.position.outOfRange;
+
+  void _resetPagination() {
+    _isLoadingMore = false;
+    _hasMore = true;
+    _paginatedData.clear();
+  }
+
+  void _updatePaginatedData(PaginatedTransactionEntity result) {
     _paginatedData[_lastDocument!] = PaginatedTransactionEntity(
       result.transactions,
       result.lastDocument,
     );
+  }
 
-    final values = _paginatedData.values;
+  List<TransactionEntity> _getAllTransactions() {
+    return _paginatedData.values
+        .fold([], (prev, entity) => [...prev, ...entity.transactions]);
+  }
 
-    _hasMore = result.transactions.isNotEmpty;
+  bool _shouldNotLoadMore() => _isLoadingMore || !_hasMore;
 
-    _isLoadingMore = false;
-
-    emit(TransactionHistoryState.ready(
-      values.fold([], (p, e) => [...p, ...e.transactions]),
-      _lastDocument!,
+  void _startLoadingMore() {
+    _isLoadingMore = true;
+    emit(state.maybeMap(
+      ready: (state) => state.copyWith(loadingMore: _isLoadingMore),
+      orElse: () => state,
     ));
   }
 
-  void _onScroll() {
-    if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent * 0.9) {
-      loadMoreData();
-    }
+  void _stopLoadingMore() {
+    _isLoadingMore = false;
+    emit(state.maybeMap(
+      ready: (state) => state.copyWith(loadingMore: _isLoadingMore),
+      orElse: () => state,
+    ));
   }
 
   @override

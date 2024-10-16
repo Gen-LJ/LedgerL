@@ -20,7 +20,7 @@ mixin _$TransactionHistoryState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)
         ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
@@ -30,7 +30,7 @@ mixin _$TransactionHistoryState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
@@ -40,7 +40,7 @@ mixin _$TransactionHistoryState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
@@ -139,7 +139,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)
         ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
@@ -152,7 +152,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
@@ -165,7 +165,7 @@ class _$THistoryInitialImpl implements THistoryInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
@@ -227,7 +227,8 @@ abstract class _$$THistoryReadyImplCopyWith<$Res> {
   @useResult
   $Res call(
       {List<TransactionEntity> transactions,
-      DocumentSnapshot<Object?> lastDocument});
+      DocumentSnapshot<Object?> lastDocument,
+      bool loadingMore});
 }
 
 /// @nodoc
@@ -245,16 +246,21 @@ class __$$THistoryReadyImplCopyWithImpl<$Res>
   $Res call({
     Object? transactions = null,
     Object? lastDocument = null,
+    Object? loadingMore = null,
   }) {
     return _then(_$THistoryReadyImpl(
-      null == transactions
+      transactions: null == transactions
           ? _value._transactions
           : transactions // ignore: cast_nullable_to_non_nullable
               as List<TransactionEntity>,
-      null == lastDocument
+      lastDocument: null == lastDocument
           ? _value.lastDocument
           : lastDocument // ignore: cast_nullable_to_non_nullable
               as DocumentSnapshot<Object?>,
+      loadingMore: null == loadingMore
+          ? _value.loadingMore
+          : loadingMore // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -263,7 +269,9 @@ class __$$THistoryReadyImplCopyWithImpl<$Res>
 
 class _$THistoryReadyImpl implements THistoryReady {
   const _$THistoryReadyImpl(
-      final List<TransactionEntity> transactions, this.lastDocument)
+      {required final List<TransactionEntity> transactions,
+      required this.lastDocument,
+      this.loadingMore = false})
       : _transactions = transactions;
 
   final List<TransactionEntity> _transactions;
@@ -276,10 +284,13 @@ class _$THistoryReadyImpl implements THistoryReady {
 
   @override
   final DocumentSnapshot<Object?> lastDocument;
+  @override
+  @JsonKey()
+  final bool loadingMore;
 
   @override
   String toString() {
-    return 'TransactionHistoryState.ready(transactions: $transactions, lastDocument: $lastDocument)';
+    return 'TransactionHistoryState.ready(transactions: $transactions, lastDocument: $lastDocument, loadingMore: $loadingMore)';
   }
 
   @override
@@ -290,12 +301,17 @@ class _$THistoryReadyImpl implements THistoryReady {
             const DeepCollectionEquality()
                 .equals(other._transactions, _transactions) &&
             (identical(other.lastDocument, lastDocument) ||
-                other.lastDocument == lastDocument));
+                other.lastDocument == lastDocument) &&
+            (identical(other.loadingMore, loadingMore) ||
+                other.loadingMore == loadingMore));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_transactions), lastDocument);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_transactions),
+      lastDocument,
+      loadingMore);
 
   /// Create a copy of TransactionHistoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -310,12 +326,12 @@ class _$THistoryReadyImpl implements THistoryReady {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)
         ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
   }) {
-    return ready(transactions, lastDocument);
+    return ready(transactions, lastDocument, loadingMore);
   }
 
   @override
@@ -323,12 +339,12 @@ class _$THistoryReadyImpl implements THistoryReady {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
   }) {
-    return ready?.call(transactions, lastDocument);
+    return ready?.call(transactions, lastDocument, loadingMore);
   }
 
   @override
@@ -336,14 +352,14 @@ class _$THistoryReadyImpl implements THistoryReady {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (ready != null) {
-      return ready(transactions, lastDocument);
+      return ready(transactions, lastDocument, loadingMore);
     }
     return orElse();
   }
@@ -387,11 +403,14 @@ class _$THistoryReadyImpl implements THistoryReady {
 }
 
 abstract class THistoryReady implements TransactionHistoryState {
-  const factory THistoryReady(final List<TransactionEntity> transactions,
-      final DocumentSnapshot<Object?> lastDocument) = _$THistoryReadyImpl;
+  const factory THistoryReady(
+      {required final List<TransactionEntity> transactions,
+      required final DocumentSnapshot<Object?> lastDocument,
+      final bool loadingMore}) = _$THistoryReadyImpl;
 
   List<TransactionEntity> get transactions;
   DocumentSnapshot<Object?> get lastDocument;
+  bool get loadingMore;
 
   /// Create a copy of TransactionHistoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -443,7 +462,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)
         ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
@@ -456,7 +475,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
@@ -469,7 +488,7 @@ class _$THistoryLoadingImpl implements THistoryLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult Function()? loading,
     TResult Function(String message)? error,
@@ -593,7 +612,7 @@ class _$THistoryErrorImpl implements THistoryError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)
         ready,
     required TResult Function() loading,
     required TResult Function(String message) error,
@@ -606,7 +625,7 @@ class _$THistoryErrorImpl implements THistoryError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
@@ -619,7 +638,7 @@ class _$THistoryErrorImpl implements THistoryError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<TransactionEntity> transactions,
-            DocumentSnapshot<Object?> lastDocument)?
+            DocumentSnapshot<Object?> lastDocument, bool loadingMore)?
         ready,
     TResult Function()? loading,
     TResult Function(String message)? error,

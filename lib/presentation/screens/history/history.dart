@@ -15,24 +15,22 @@ class HistoryScreen extends StatelessWidget {
           THistoryReady() => ListView.separated(
               controller: context
                   .read<TransactionHistoryCubit>()
-                  .historyScrollController,
+                  .scrollController,
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               itemBuilder: (context, index) {
                 final cubit = context.read<TransactionHistoryCubit>();
-
                 if (index == state.transactions.length) {
                   if (cubit.isLoadingMore) {
                     return const Center(
                       child: Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: CircularProgressIndicator(),
+                        child: CustomCircularIndicator(),
                       ),
                     );
                   } else {
                     return const SizedBox(); // Return empty widget if not loading
                   }
                 }
-
                 final transaction = state.transactions[index];
                 return ListTile(
                   title: Text('Transaction ${transaction.amount}'),
@@ -40,10 +38,8 @@ class HistoryScreen extends StatelessWidget {
                 );
               },
               separatorBuilder: (context, index) => const Divider(),
-              itemCount: state.transactions.length +
-                  (context.read<TransactionHistoryCubit>().isLoadingMore
-                      ? 1
-                      : 0),
+              itemCount: state.transactions.length
+                  + (state.loadingMore ? 1 : 0),
             ),
           THistoryError() => Center(
               child: Text(state.message),
