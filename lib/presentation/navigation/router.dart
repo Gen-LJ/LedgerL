@@ -83,8 +83,14 @@ class NavigationRouter {
             GoRoute(
                 path: TransactionDetailScreen.routeName,
                 builder: (context, state) {
-                  final extra = state.extra as TransactionEntity;
-                  return TransactionDetailScreen(transactionDetails: extra);
+                  final extras = state.extra as List<dynamic>;
+                  final TransactionEntity transactionDetails =
+                      extras[0] as TransactionEntity;
+                  final bool isSender = extras[1] as bool;
+                  return TransactionDetailScreen(
+                    transactionDetails: transactionDetails,
+                    isSender: isSender,
+                  );
                 })
           ],
         ),

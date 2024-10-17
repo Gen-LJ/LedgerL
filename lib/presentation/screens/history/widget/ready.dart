@@ -21,10 +21,9 @@ class HistoryReadyView extends StatelessWidget {
       itemCount: transactions.length + (loadingMore ? 1 : 0),
       controller: bloc.scrollController,
       padding: EdgeInsets.only(
-        left: $styles.grid.columnsMargin,
-        right: $styles.grid.columnsMargin,
-        bottom: $styles.insets.sm
-      ),
+          left: $styles.grid.columnsMargin,
+          right: $styles.grid.columnsMargin,
+          bottom: $styles.insets.sm),
       itemBuilder: (context, index) {
         if (index >= transactions.length) {
           return loadingMore
@@ -40,7 +39,10 @@ class HistoryReadyView extends StatelessWidget {
         final transaction = transactions[index];
         return HistoryTile(
           onPressed: () {
-            context.pushTransactionDetails(transaction);
+            context.pushTransactionDetails(
+              transactionDetails: transaction,
+              isSender: userID == transaction.senderId,
+            );
           },
           currencyType: transaction.currencyType,
           amount: transaction.amount.toString(),
@@ -49,11 +51,9 @@ class HistoryReadyView extends StatelessWidget {
           isSender: userID == transaction.senderId,
         );
       },
-      separatorBuilder: (context, index) => Divider(
-        height: $styles.insets.sm,
-        color: context.theme.cardColor,
-        thickness: 2,
-      ),
+      separatorBuilder: (context, index) => const CustomDivider(),
     );
   }
 }
+
+

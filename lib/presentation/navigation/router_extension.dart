@@ -40,6 +40,6 @@ extension NavigationExtension on BuildContext {
       push(TransferBalanceScreen.routePath,
           extra: [senderBalance, receiverInfo]);
 
-  void pushTransactionDetails(TransactionEntity transactionDetails) =>
-      push(TransactionDetailScreen.routePath, extra: transactionDetails);
+  void pushTransactionDetails({required TransactionEntity transactionDetails,required bool isSender}) =>
+      push(TransactionDetailScreen.routePath, extra: [transactionDetails,isSender]);
 }
