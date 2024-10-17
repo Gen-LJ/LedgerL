@@ -13,6 +13,7 @@ export 'home/home.dart';
 export 'login/widget/login_elevated_button.dart';
 export 'login/login.dart';
 export 'profile/profile.dart';
+export 'transaction_detail/transaction_detail.dart';
 export 'transfer_balance/cubit/transfer_balance_cubit.dart';
 export 'transfer_balance/widget/receiver_profile.dart';
 export 'transfer_balance/widget/transaction_container.dart';

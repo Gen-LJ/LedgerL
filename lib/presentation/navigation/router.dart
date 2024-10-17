@@ -80,6 +80,12 @@ class NavigationRouter {
                 );
               },
             ),
+            GoRoute(
+                path: TransactionDetailScreen.routeName,
+                builder: (context, state) {
+                  final extra = state.extra as TransactionEntity;
+                  return TransactionDetailScreen(transactionDetails: extra);
+                })
           ],
         ),
         GoRoute(
@@ -96,15 +102,17 @@ class NavigationRouter {
               return LoginScreen(redirectRoute: redirectRoute);
             }),
         GoRoute(
-          onExit: (context,state){
-            context.goIndex();
-            return true;
-          },
+            onExit: (context, state) {
+              context.goIndex();
+              return true;
+            },
             path: TransferSuccessScreen.routePath,
             builder: (context, state) {
               final extras = state.extra as TransactionEntity;
               debugPrint('Transaction Data = $extras');
-              return  TransferSuccessScreen(transactionData: extras,);
+              return TransferSuccessScreen(
+                transactionData: extras,
+              );
             })
       ]);
 }

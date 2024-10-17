@@ -25,5 +25,3 @@ class HistoryScreen extends StatelessWidget {
     );
   }
 }
-
-

@@ -20,7 +20,11 @@ class HistoryReadyView extends StatelessWidget {
     return ListView.separated(
       itemCount: transactions.length + (loadingMore ? 1 : 0),
       controller: bloc.scrollController,
-      padding: EdgeInsets.symmetric(horizontal: $styles.grid.columnsMargin),
+      padding: EdgeInsets.only(
+        left: $styles.grid.columnsMargin,
+        right: $styles.grid.columnsMargin,
+        bottom: $styles.insets.sm
+      ),
       itemBuilder: (context, index) {
         if (index >= transactions.length) {
           return loadingMore
@@ -34,58 +38,15 @@ class HistoryReadyView extends StatelessWidget {
         }
         final userID = context.read<AuthenticationCubit>().userId;
         final transaction = transactions[index];
-        final receiverEmail = transaction.receiverEmail;
-        final senderEmail = transaction.senderEmail;
-        final senderID = transaction.senderId;
-        bool isSender = userID == senderID;
-        return InkWell(
-          onTap: () {
-            debugPrint('Tapping Index $index');
+        return HistoryTile(
+          onPressed: () {
+            context.pushTransactionDetails(transaction);
           },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        isSender ? R.strings.lblTo : R.strings.lblFrom,
-                        style: context.textTheme.titleMedium?.copyWith(
-                            color: context.textTheme.titleMedium?.color),
-                      ),
-                      Text(
-                        isSender ? receiverEmail : senderEmail,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              $styles.insets.xs.toWidthSizedBox,
-              Row(
-                children: [
-                  Text(
-                    isSender
-                        ? '- ${transaction.amount.toString()}'
-                        : '+ ${transaction.amount.toString()}',
-                    style: context.textTheme.titleMedium?.copyWith(
-                      color: isSender
-                          ? $styles.color.clrRed
-                          : $styles.color.clrGreen,
-                    ),
-                  ),
-                  $styles.insets.xxs.toWidthSizedBox,
-                  Text(
-                    '(${transaction.currencyType})',
-                    style: context.textTheme.titleSmall
-                        ?.copyWith(color: context.theme.primaryColor),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          currencyType: transaction.currencyType,
+          amount: transaction.amount.toString(),
+          receiverEmail: transaction.receiverEmail,
+          senderEmail: transaction.senderEmail,
+          isSender: userID == transaction.senderId,
         );
       },
       separatorBuilder: (context, index) => Divider(

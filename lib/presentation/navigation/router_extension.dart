@@ -14,7 +14,8 @@ extension NavigationExtension on BuildContext {
     goIndex();
   }
 
-  void goTransferSuccess(TransactionEntity transactionData)=> go(TransferSuccessScreen.routePath,extra: transactionData);
+  void goTransferSuccess(TransactionEntity transactionData) =>
+      go(TransferSuccessScreen.routePath, extra: transactionData);
 
   void goHistory() {
     final router = inject<NavigationRouter>();
@@ -36,5 +37,9 @@ extension NavigationExtension on BuildContext {
     required List<BalanceEntity> senderBalance,
     required UserInfoEntity receiverInfo,
   }) =>
-      push(TransferBalanceScreen.routePath, extra: [senderBalance,receiverInfo]);
+      push(TransferBalanceScreen.routePath,
+          extra: [senderBalance, receiverInfo]);
+
+  void pushTransactionDetails(TransactionEntity transactionDetails) =>
+      push(TransactionDetailScreen.routePath, extra: transactionDetails);
 }
