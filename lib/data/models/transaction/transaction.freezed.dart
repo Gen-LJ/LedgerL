@@ -22,6 +22,7 @@ TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) {
 mixin _$TransactionModel {
   String get transactionId => throw _privateConstructorUsedError;
   String get senderId => throw _privateConstructorUsedError;
+  String get senderEmail => throw _privateConstructorUsedError;
   String get receiverId => throw _privateConstructorUsedError;
   String get receiverEmail => throw _privateConstructorUsedError;
   String get currencyType => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $TransactionModelCopyWith<$Res> {
   $Res call(
       {String transactionId,
       String senderId,
+      String senderEmail,
       String receiverId,
       String receiverEmail,
       String currencyType,
@@ -71,6 +73,7 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
   $Res call({
     Object? transactionId = null,
     Object? senderId = null,
+    Object? senderEmail = null,
     Object? receiverId = null,
     Object? receiverEmail = null,
     Object? currencyType = null,
@@ -85,6 +88,10 @@ class _$TransactionModelCopyWithImpl<$Res, $Val extends TransactionModel>
       senderId: null == senderId
           ? _value.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      senderEmail: null == senderEmail
+          ? _value.senderEmail
+          : senderEmail // ignore: cast_nullable_to_non_nullable
               as String,
       receiverId: null == receiverId
           ? _value.receiverId
@@ -121,6 +128,7 @@ abstract class _$$TransactionModelImplCopyWith<$Res>
   $Res call(
       {String transactionId,
       String senderId,
+      String senderEmail,
       String receiverId,
       String receiverEmail,
       String currencyType,
@@ -143,6 +151,7 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
   $Res call({
     Object? transactionId = null,
     Object? senderId = null,
+    Object? senderEmail = null,
     Object? receiverId = null,
     Object? receiverEmail = null,
     Object? currencyType = null,
@@ -157,6 +166,10 @@ class __$$TransactionModelImplCopyWithImpl<$Res>
       senderId: null == senderId
           ? _value.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      senderEmail: null == senderEmail
+          ? _value.senderEmail
+          : senderEmail // ignore: cast_nullable_to_non_nullable
               as String,
       receiverId: null == receiverId
           ? _value.receiverId
@@ -188,6 +201,7 @@ class _$TransactionModelImpl implements _TransactionModel {
   const _$TransactionModelImpl(
       {required this.transactionId,
       required this.senderId,
+      required this.senderEmail,
       required this.receiverId,
       required this.receiverEmail,
       required this.currencyType,
@@ -202,6 +216,8 @@ class _$TransactionModelImpl implements _TransactionModel {
   @override
   final String senderId;
   @override
+  final String senderEmail;
+  @override
   final String receiverId;
   @override
   final String receiverEmail;
@@ -214,7 +230,7 @@ class _$TransactionModelImpl implements _TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(transactionId: $transactionId, senderId: $senderId, receiverId: $receiverId, receiverEmail: $receiverEmail, currencyType: $currencyType, amount: $amount, createdAt: $createdAt)';
+    return 'TransactionModel(transactionId: $transactionId, senderId: $senderId, senderEmail: $senderEmail, receiverId: $receiverId, receiverEmail: $receiverEmail, currencyType: $currencyType, amount: $amount, createdAt: $createdAt)';
   }
 
   @override
@@ -226,6 +242,8 @@ class _$TransactionModelImpl implements _TransactionModel {
                 other.transactionId == transactionId) &&
             (identical(other.senderId, senderId) ||
                 other.senderId == senderId) &&
+            (identical(other.senderEmail, senderEmail) ||
+                other.senderEmail == senderEmail) &&
             (identical(other.receiverId, receiverId) ||
                 other.receiverId == receiverId) &&
             (identical(other.receiverEmail, receiverEmail) ||
@@ -240,7 +258,7 @@ class _$TransactionModelImpl implements _TransactionModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, transactionId, senderId,
-      receiverId, receiverEmail, currencyType, amount, createdAt);
+      senderEmail, receiverId, receiverEmail, currencyType, amount, createdAt);
 
   /// Create a copy of TransactionModel
   /// with the given fields replaced by the non-null parameter values.
@@ -263,6 +281,7 @@ abstract class _TransactionModel implements TransactionModel {
   const factory _TransactionModel(
       {required final String transactionId,
       required final String senderId,
+      required final String senderEmail,
       required final String receiverId,
       required final String receiverEmail,
       required final String currencyType,
@@ -276,6 +295,8 @@ abstract class _TransactionModel implements TransactionModel {
   String get transactionId;
   @override
   String get senderId;
+  @override
+  String get senderEmail;
   @override
   String get receiverId;
   @override

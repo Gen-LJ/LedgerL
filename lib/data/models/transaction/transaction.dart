@@ -12,6 +12,7 @@ class TransactionModel extends TransactionEntity with _$TransactionModel {
   const factory TransactionModel({
     required String transactionId,
     required String senderId,
+    required String senderEmail,
     required String receiverId,
     required String receiverEmail,
     required String currencyType,
@@ -27,6 +28,7 @@ class TransactionModel extends TransactionEntity with _$TransactionModel {
       transactionId: json['id'] as String? ?? '', // Handle null
       currencyType: json['currencyType'] as String? ?? '', // Handle null
       senderId: json['senderId'] as String? ?? '', // Handle null
+      senderEmail: json['senderEmail'] as String? ?? '', // Handle null
       amount: json['amount'] as int? ?? 0, // Handle null
       receiverId: json['receiverId'] as String? ?? '', // Handle null
       receiverEmail: json['receiverEmail'] as String? ?? '', // Handle null
@@ -43,6 +45,7 @@ extension TransactionModelExtension on TransactionModel {
     return {
       'id': transactionId,
       'senderId': senderId,
+      'senderEmail': senderEmail,
       'receiverId': receiverId,
       'receiverEmail': receiverEmail,
       'currencyType': currencyType,

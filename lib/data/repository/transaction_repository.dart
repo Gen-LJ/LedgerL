@@ -13,6 +13,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
   @override
   Future<TransactionStatusResponseEntity> balanceTransfer({
     required String senderId,
+    required String senderEmail,
     required String receiverId,
     required String receiverEmail,
     required String currencyType,
@@ -20,6 +21,7 @@ class TransactionRepositoryImpl implements TransactionRepository {
   }) async {
     final response = await _remoteDataSource.balanceTransfer(
         senderId: senderId,
+        senderEmail: senderEmail,
         receiverId: receiverId,
         receiverEmail: receiverEmail,
         currencyType: currencyType,

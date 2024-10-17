@@ -67,6 +67,7 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
     try {
       final response = await _transactionRepository.balanceTransfer(
           senderId: _auth.userId!,
+          senderEmail: _auth.userEmail!,
           receiverId: receiverId,
           receiverEmail: receiverEmail,
           currencyType: currency,
