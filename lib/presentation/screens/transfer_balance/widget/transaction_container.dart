@@ -158,6 +158,7 @@ class TransactionContainer extends StatelessWidget {
                                     context.pop();
                                     bloc.onTapTransfer(
                                       receiverId: receiverInfo.id,
+                                      receiverName: receiverInfo.name,
                                       receiverEmail: receiverInfo.email,
                                       currency: senderBalance[bloc.currentIndex]
                                           .currency,

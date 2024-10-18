@@ -60,6 +60,7 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
 
   Future<void> onTapTransfer({
     required String receiverId,
+    required String receiverName,
     required String receiverEmail,
     required String currency,
   }) async {
@@ -68,7 +69,9 @@ class TransferBalanceCubit extends Cubit<TransferBalanceState> {
       final response = await _transactionRepository.balanceTransfer(
           senderId: _auth.userId!,
           senderEmail: _auth.userEmail!,
+          senderName: _auth.userName!,
           receiverId: receiverId,
+          receiverName: receiverName,
           receiverEmail: receiverEmail,
           currencyType: currency,
           amount: int.parse(_textEditingController.text));

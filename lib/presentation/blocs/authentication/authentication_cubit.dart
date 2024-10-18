@@ -27,6 +27,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         _ => null
       };
 
+  String? get userName =>
+      switch (state) { Authenticated(user: final user) => user.name, _ => null };
+
   Future<void> loadData() async {
     final user = await _userRepository.getSavedUserInfo();
 

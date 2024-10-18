@@ -11,8 +11,10 @@ _$TransactionModelImpl _$$TransactionModelImplFromJson(
     _$TransactionModelImpl(
       transactionId: json['transactionId'] as String,
       senderId: json['senderId'] as String,
+      senderName: json['senderName'] as String,
       senderEmail: json['senderEmail'] as String,
       receiverId: json['receiverId'] as String,
+      receiverName: json['receiverName'] as String,
       receiverEmail: json['receiverEmail'] as String,
       currencyType: json['currencyType'] as String,
       amount: (json['amount'] as num).toInt(),
@@ -24,8 +26,10 @@ Map<String, dynamic> _$$TransactionModelImplToJson(
     <String, dynamic>{
       'transactionId': instance.transactionId,
       'senderId': instance.senderId,
+      'senderName': instance.senderName,
       'senderEmail': instance.senderEmail,
       'receiverId': instance.receiverId,
+      'receiverName': instance.receiverName,
       'receiverEmail': instance.receiverEmail,
       'currencyType': instance.currencyType,
       'amount': instance.amount,

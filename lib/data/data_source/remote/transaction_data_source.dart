@@ -7,8 +7,10 @@ import 'package:logger/logger.dart';
 abstract class TransactionRemoteDataSource {
   Future<TransactionStatusResponseModel> balanceTransfer({
     required String senderId,
+    required String senderName,
     required String senderEmail,
     required String receiverId,
+    required String receiverName,
     required String receiverEmail,
     required String currencyType,
     required int amount,
@@ -33,8 +35,10 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
   @override
   Future<TransactionStatusResponseModel> balanceTransfer({
     required String senderId,
+    required String senderName,
     required String senderEmail,
     required String receiverId,
+    required String receiverName,
     required String receiverEmail,
     required String currencyType,
     required int amount,
@@ -45,8 +49,10 @@ class TransactionRemoteDataSourceImpl implements TransactionRemoteDataSource {
     final transactionModel = TransactionModel(
       transactionId: _transactionIdGenerator.generate(),
       senderId: senderId,
+      senderName: senderName,
       senderEmail: senderEmail,
       receiverId: receiverId,
+      receiverName: receiverName,
       receiverEmail: receiverEmail,
       currencyType: currencyType,
       amount: amount,
