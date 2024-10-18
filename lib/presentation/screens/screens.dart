@@ -23,4 +23,5 @@ export 'transfer_user_check/cubit/transfer_user_check_cubit.dart';
 export 'transfer_user_check/receiver_data_check_container/cubit/receiver_data_validation_cubit.dart';
 export 'transfer_user_check/receiver_data_check_container/receiver_data_check_container.dart';
 export 'transfer_user_check/transfer_user_check.dart';
+export 'widgets/widgets.dart';
 export 'index.dart';

@@ -7,8 +7,16 @@ class AppStrings {
   String get lblTransfer => _lblTransfer;
   String get lblCurrency => _lblCurrency;
   String get lblTo => _lblTo;
+  String get lblTransferTo => _lblTransferTo;
   String get lblFrom => _lblFrom;
+  String get lblTransferFrom => _lblTransferFrom;
   String get lblTransactionDetails => _lblTransactionDetails;
+  String get lblTransactionSuccess => _lblTransactionSuccess;
+  String get lblTransactionID => _lblTransactionID;
+  String get lblTransactionTime => _lblTransactionTime;
+  String get lblEmail => _lblEmail;
+  String get lblID => _lblID;
+  String get lblAmount => _lblAmount;
 
   static const _lblWelcome = 'Welcome to LedgerL';
   static const _lblAuthRequired = 'Authentication Required!';
@@ -18,6 +26,14 @@ class AppStrings {
   static const _lblTransfer = 'Transfer';
   static const _lblCurrency = 'Currency';
   static const _lblTo = 'To';
+  static const _lblTransferTo = 'Transfer To';
   static const _lblFrom = 'From';
+  static const _lblTransferFrom = 'Transfer From';
   static const _lblTransactionDetails = 'Transaction Details';
+  static const _lblTransactionSuccess = 'Transaction Successful';
+  static const _lblTransactionID = 'Transaction ID';
+  static const _lblTransactionTime = 'Transaction Time';
+  static const _lblEmail = 'Email';
+  static const _lblID = 'ID';
+  static const _lblAmount = 'Amount';
 }

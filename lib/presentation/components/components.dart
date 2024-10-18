@@ -4,6 +4,7 @@ export 'button/confirm_cancel_row_button.dart';
 export 'button/elevated_button.dart';
 export 'dialog/error_dialog.dart';
 export 'divider/divider.dart';
+export 'icons/check_mark.dart';
 export 'icons/chvron.dart';
 export 'icons/circular_icon.dart';
 export 'icons/icons.dart';
