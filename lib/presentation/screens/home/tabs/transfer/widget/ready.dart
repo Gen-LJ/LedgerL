@@ -18,7 +18,11 @@ class TransferReadyView extends StatelessWidget {
         },
         itemCount: walletUsers.length,
         itemBuilder: (context, index) {
-          return Text(walletUsers[index].email);
+          return ProfileCardTile(
+            imageUrl: walletUsers[index].profileImage ?? '',
+            name: walletUsers[index].name,
+            email: walletUsers[index].email.maskEmail(),
+          );
         });
   }
 }
