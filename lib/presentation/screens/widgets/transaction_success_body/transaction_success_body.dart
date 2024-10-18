@@ -7,9 +7,11 @@ class TransactionSuccessBody extends StatelessWidget {
     super.key,
     required this.isSender,
     required this.transactionDetails,
+    this.isDetails = true,
   });
 
   final bool isSender;
+  final bool isDetails;
   final TransactionEntity transactionDetails;
 
   @override
@@ -23,11 +25,23 @@ class TransactionSuccessBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           $styles.insets.sm.toHeightSizedBox,
-          SuccessMarker(isSender: isSender, transactionDetails: transactionDetails),
+          SuccessMarker(
+            isSender: isSender,
+            transactionDetails: transactionDetails,
+          ),
           $styles.insets.sm.toHeightSizedBox,
           const CustomDivider(),
           $styles.insets.sm.toHeightSizedBox,
-          DetailsSection(transactionDetails: transactionDetails, isSender: isSender),
+          DetailsSection(
+            transactionDetails: transactionDetails,
+            isSender: isSender,
+          ),
+          ($styles.grid.columnsMargin * 2).toHeightSizedBox,
+          !isDetails
+              ? CustomElevatedButton(
+                  onPressed: context.goIndex,
+                  child: Text(R.strings.lblContinue))
+              : const SizedBox.shrink()
         ],
       ),
     );

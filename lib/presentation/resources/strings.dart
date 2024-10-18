@@ -17,6 +17,7 @@ class AppStrings {
   String get lblEmail => _lblEmail;
   String get lblID => _lblID;
   String get lblAmount => _lblAmount;
+  String get lblContinue => _lblContinue;
 
   static const _lblWelcome = 'Welcome to LedgerL';
   static const _lblAuthRequired = 'Authentication Required!';
@@ -36,4 +37,5 @@ class AppStrings {
   static const _lblEmail = 'Email';
   static const _lblID = 'ID';
   static const _lblAmount = 'Amount';
+  static const _lblContinue = 'Continue';
 }

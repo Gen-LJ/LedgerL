@@ -21,13 +21,10 @@ class TransactionDetailScreen extends StatelessWidget {
           style: context.textTheme.titleLarge,
         ),
       ),
-      body: TransactionSuccessBody(isSender: isSender, transactionDetails: transactionDetails),
+      body: TransactionSuccessBody(
+        isSender: isSender,
+        transactionDetails: transactionDetails,
+      ),
     );
   }
 }
-
-
-
-
-
-
