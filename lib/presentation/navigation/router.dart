@@ -41,6 +41,8 @@ class NavigationRouter {
             return MultiBlocProvider(
               providers: [
                 BlocProvider(create: (_) => inject<TransferViewCubit>()),
+                BlocProvider(
+                    create: (_) => inject<TransferUserCheckCubit>()),
               ],
               child: IndexScreen(
                 indexCallback: (useIndexPageNavigator) {
