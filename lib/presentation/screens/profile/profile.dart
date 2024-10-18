@@ -21,9 +21,9 @@ class ProfileScreen extends StatelessWidget {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('ID - ${state.user.id}'),
                     Text('UserName - ${state.user.name}'),
-                    Text('Email - ${state.user.email}'),
+                    Text('Email - ${state.user.email.maskEmail()}'),
+                    Text('ID - ${state.user.id.maskAndShowLastFour()}'),
                   ],
                 );
               }
