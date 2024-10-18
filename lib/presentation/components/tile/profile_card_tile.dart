@@ -33,7 +33,7 @@ class ProfileCardTile extends StatelessWidget {
                 child: const CustomCircularIndicator(),
               ),
               errorWidget: (context, url, error) {
-                String firstChar = email[0].toUpperCase();
+                String firstChar = name[0].toUpperCase();
                 return CircleAvatar(
                   radius: $styles.size.size100 * 4,
                   backgroundColor: $styles.color.getRandomColor(firstChar),

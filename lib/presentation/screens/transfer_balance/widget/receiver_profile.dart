@@ -24,7 +24,7 @@ class ReceiverProfile extends StatelessWidget {
           ProfileCardTile(
             imageUrl: receiverInfo.profileImage ?? '',
             name: receiverInfo.name,
-            email: receiverInfo.email,
+            email: receiverInfo.email.maskEmail(),
           ),
         ],
       ),
