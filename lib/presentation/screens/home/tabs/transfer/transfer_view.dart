@@ -20,7 +20,7 @@ class TransferView extends StatelessWidget {
         children: [
           const TransferCard(),
           $styles.grid.columnsMargin.toHeightSizedBox,
-          const SectionTitle(title: 'All Users'),
+           SectionTitle(title: R.strings.lblAllUsers),
           $styles.insets.xs.toHeightSizedBox,
           Expanded(
             child: BlocBuilder<TransferViewCubit, TransferViewState>(
