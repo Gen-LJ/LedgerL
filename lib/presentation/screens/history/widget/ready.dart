@@ -46,8 +46,8 @@ class HistoryReadyView extends StatelessWidget {
           },
           currencyType: transaction.currencyType,
           amount: transaction.amount.toString(),
-          receiverEmail: transaction.receiverEmail,
-          senderEmail: transaction.senderEmail,
+          receiverName: transaction.receiverName,
+          senderName: transaction.senderName,
           isSender: userID == transaction.senderId,
         );
       },

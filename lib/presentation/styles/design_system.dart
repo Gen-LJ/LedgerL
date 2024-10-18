@@ -133,7 +133,7 @@ class AppStyles {
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: color.light.colorScheme.primary,
+      indicatorColor: color.light.colorScheme.secondary,
     ),
     tabBarTheme: TabBarTheme(
       indicatorColor: color.dark.colorScheme.primary,
@@ -141,8 +141,8 @@ class AppStyles {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        backgroundColor: color.light.colorScheme.primaryContainer,
-        foregroundColor: color.dark.colorScheme.onPrimaryContainer,
+        backgroundColor: color.light.colorScheme.secondaryContainer,
+        foregroundColor: color.dark.colorScheme.onSecondaryContainer,
         shape: RoundedRectangleBorder(
           borderRadius:
           BorderRadius.circular(insets.xs), // Rounded corners

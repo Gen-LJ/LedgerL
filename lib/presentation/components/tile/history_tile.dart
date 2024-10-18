@@ -5,8 +5,8 @@ class HistoryTile extends StatelessWidget {
   const HistoryTile({
     super.key,
     required this.isSender,
-    required this.receiverEmail,
-    required this.senderEmail,
+    required this.receiverName,
+    required this.senderName,
     required this.onPressed,
     required this.currencyType,
     required this.amount,
@@ -15,8 +15,8 @@ class HistoryTile extends StatelessWidget {
   final String currencyType;
   final String amount;
   final bool isSender;
-  final String receiverEmail;
-  final String senderEmail;
+  final String receiverName;
+  final String senderName;
   final VoidCallback onPressed;
 
   @override
@@ -37,7 +37,7 @@ class HistoryTile extends StatelessWidget {
                         ?.copyWith(color: context.textTheme.titleMedium?.color),
                   ),
                   Text(
-                    isSender ? receiverEmail : senderEmail,
+                    isSender ? receiverName : senderName,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],

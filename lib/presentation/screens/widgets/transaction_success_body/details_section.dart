@@ -39,16 +39,24 @@ class DetailsSection extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const Text('Name'),
+                Flexible(
+                    child: Text(transactionDetails.receiverName))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Text(R.strings.lblEmail),
                 Flexible(
-                    child: Text(transactionDetails.receiverEmail))
+                    child: Text(transactionDetails.receiverEmail.maskEmail()))
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(R.strings.lblID),
-                Flexible(child: Text(transactionDetails.receiverId))
+                Flexible(child: Text(transactionDetails.receiverId.maskAndShowLastFour()))
               ],
             ),
           ],
@@ -60,15 +68,23 @@ class DetailsSection extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const Text('Name'),
+                Flexible(
+                    child: Text(transactionDetails.senderName))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Text(R.strings.lblEmail),
-                Flexible(child: Text(transactionDetails.senderEmail))
+                Flexible(child: Text(transactionDetails.senderEmail.maskEmail()))
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(R.strings.lblID),
-                Flexible(child: Text(transactionDetails.senderId))
+                Flexible(child: Text(transactionDetails.senderId.maskAndShowLastFour()))
               ],
             ),
           ],
