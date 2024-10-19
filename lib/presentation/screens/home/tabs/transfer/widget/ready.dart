@@ -42,6 +42,7 @@ class TransferReadyView extends StatelessWidget {
             isLoading: loading,
             loadingInfo: 'Receiver Data Validation',
             child: ListView.separated(
+              padding: EdgeInsets.only(bottom: $styles.grid.columnsMargin),
                 separatorBuilder: (context, index) {
                   return $styles.insets.xs.toHeightSizedBox;
                 },

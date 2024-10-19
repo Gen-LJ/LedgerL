@@ -141,10 +141,12 @@ class TransactionContainer extends StatelessWidget {
                                         text: ' (${senderBalance[bloc.currentIndex].currency}) to ',
                                         style: context.textTheme.bodyMedium),
                                     TextSpan(
-                                      text: receiverInfo.email,
-                                      // Highlighted email
-                                      style: context.textTheme.bodyLarge
-                                          ,
+                                      text: receiverInfo.name,
+                                      style: context.textTheme.bodyLarge,
+                                    ),
+                                    TextSpan(
+                                      text: ' (${receiverInfo.email.maskEmail()}) ',
+                                      style: context.textTheme.bodyLarge,
                                     ),
                                     TextSpan(
                                         text: '?',

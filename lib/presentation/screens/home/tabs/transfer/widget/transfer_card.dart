@@ -15,7 +15,7 @@ class TransferCard extends StatelessWidget {
           children: [
             const Icon(Icons.currency_exchange),
             $styles.insets.xs.toHeightSizedBox,
-            const Text('Transfer'),
+             Text(R.strings.lblTransfer),
           ],
         ));
   }
