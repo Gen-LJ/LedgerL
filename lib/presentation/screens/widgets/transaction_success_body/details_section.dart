@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ledger_l/domain/domain.dart';
+import 'package:ledger_l/presentation/extensions/date_time.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 
 class DetailsSection extends StatelessWidget {
@@ -27,7 +28,7 @@ class DetailsSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(R.strings.lblTransactionTime),
-            Flexible(child: Text(transactionDetails.createdAt.toString()))
+            Flexible(child: Text(transactionDetails.createdAt.toAMPMFormat()))
           ],
         ),
         const CustomDivider(),

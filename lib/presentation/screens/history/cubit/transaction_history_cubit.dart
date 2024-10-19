@@ -69,7 +69,7 @@ class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
       _updatePaginatedData(result);
 
       _hasMore = result.transactions.isNotEmpty;
-      await Future.delayed(const Duration(seconds: 1)); //This is to certify loading more indicator
+      await Future.delayed(const Duration(milliseconds: 500)); //This is to certify loading more indicator
       _stopLoadingMore();
       emit(TransactionHistoryState.ready(
         transactions: _getAllTransactions(),
