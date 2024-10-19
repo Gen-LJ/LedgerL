@@ -80,10 +80,7 @@ class AppStyles {
         color: color.light.colorScheme.primary,
       ),
     ),
-    cardTheme:  CardTheme(
-      color: color.clrSofterGrey,
-      elevation: 0
-    ),
+    cardTheme: CardTheme(color: color.clrSofterGrey, elevation: 0),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: color.clrSofterGrey,
       indicatorColor: color.light.colorScheme.primary,
@@ -94,8 +91,7 @@ class AppStyles {
         backgroundColor: color.light.colorScheme.primaryContainer,
         foregroundColor: color.dark.colorScheme.onPrimaryContainer,
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(insets.xs), // Rounded corners
+          borderRadius: BorderRadius.circular(insets.xs), // Rounded corners
         ),
       ),
     ),
@@ -144,8 +140,7 @@ class AppStyles {
         backgroundColor: color.light.colorScheme.secondaryContainer,
         foregroundColor: color.dark.colorScheme.onSecondaryContainer,
         shape: RoundedRectangleBorder(
-          borderRadius:
-          BorderRadius.circular(insets.xs), // Rounded corners
+          borderRadius: BorderRadius.circular(insets.xs), // Rounded corners
         ),
       ),
     ),
@@ -178,7 +173,6 @@ class _Colors {
 
   _Colors(this._useMaterial3, this._typography);
 
-
   final List<Color> colors = [
     Colors.red,
     Colors.blue,
@@ -187,10 +181,15 @@ class _Colors {
     Colors.purple,
     Colors.teal,
     Colors.amber,
+    Colors.cyan,
+    Colors.brown,
+    Colors.indigo,
+    Colors.deepPurple,
+    Colors.lime,
+    Colors.pink,
   ];
 
   Color getRandomColor(String firstChar) {
-    // Get the ASCII value of the first character and map it to the color list
     int index = firstChar.codeUnitAt(0) % colors.length;
     return colors[index];
   }
