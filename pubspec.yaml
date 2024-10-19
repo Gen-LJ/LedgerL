@@ -25,8 +25,8 @@ dependencies:
   google_sign_in: ^6.2.1
   shared_preferences: ^2.3.2
   logger: ^2.4.0
-  connectivity_plus: ^6.0.5
   cached_network_image: ^3.4.1
+  connectivity_plus: ^6.0.5
 
 dev_dependencies:
   flutter_test:
