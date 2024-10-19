@@ -15,6 +15,7 @@ class HistoryScreen extends StatelessWidget {
               bloc: context.read<TransactionHistoryCubit>(),
               transactions: state.transactions,
               loadingMore: state.loadingMore,
+              onRefresh: context.read<TransactionHistoryCubit>().loadData,
             ),
           THistoryError() => Center(
               child: Text(state.message),
