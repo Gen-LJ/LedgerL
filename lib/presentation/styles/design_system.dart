@@ -175,18 +175,16 @@ class _Colors {
 
   final List<Color> colors = [
     Colors.red,
-    Colors.blue,
     Colors.green,
     Colors.orange,
     Colors.purple,
     Colors.teal,
-    Colors.amber,
-    Colors.cyan,
-    Colors.brown,
     Colors.indigo,
-    Colors.deepPurple,
-    Colors.lime,
+    Colors.cyan,
+    Colors.amber,
     Colors.pink,
+    Colors.brown,
+    Colors.grey,
   ];
 
   Color getRandomColor(String firstChar) {
