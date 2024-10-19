@@ -125,32 +125,45 @@ class TransactionContainer extends StatelessWidget {
                           builder: (context) {
                             return AlertDialog(
                               title: Text(
-                                'Confirmation',
-                                style: context.textTheme.titleMedium,
+                                R.strings.lblConfirmation,
+                                style: context.textTheme.titleLarge,
                               ),
-                              content:RichText(
+                              content: RichText(
                                 text: TextSpan(
                                   children: [
-                                     TextSpan(text: 'Transfer ',style: context.textTheme.bodyMedium),
                                     TextSpan(
-                                      text: bloc.textEditingController.text, // Highlighted amount
-                                      style: context.textTheme.titleLarge
-                                          ?.copyWith(color: context.theme.primaryColor),
+                                      text: R.strings.lblTransfer,
+                                      style: context.textTheme.bodyMedium,
                                     ),
                                     TextSpan(
-                                        text: ' (${senderBalance[bloc.currentIndex].currency}) to ',
-                                        style: context.textTheme.bodyMedium),
+                                      text: ' ',
+                                      style: context.textTheme.bodyMedium,
+                                    ),
+                                    TextSpan(
+                                      text: bloc.textEditingController.text,
+                                      style: context.textTheme.titleLarge
+                                          ?.copyWith(
+                                        color: context.theme.primaryColor,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text:
+                                          ' (${senderBalance[bloc.currentIndex].currency}) to ',
+                                      style: context.textTheme.bodyMedium,
+                                    ),
                                     TextSpan(
                                       text: receiverInfo.name,
-                                      style: context.textTheme.bodyLarge,
+                                      style: context.textTheme.bodyMedium,
                                     ),
                                     TextSpan(
-                                      text: ' (${receiverInfo.email.maskEmail()}) ',
-                                      style: context.textTheme.bodyLarge,
+                                      text:
+                                          ' (${receiverInfo.email.maskEmail()}) ',
+                                      style: context.textTheme.bodyMedium,
                                     ),
                                     TextSpan(
-                                        text: '?',
-                                        style: context.textTheme.bodyMedium),
+                                      text: '?',
+                                      style: context.textTheme.bodyMedium,
+                                    ),
                                   ],
                                 ),
                               ),

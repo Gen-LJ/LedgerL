@@ -58,7 +58,6 @@ class HistoryTile extends StatelessWidget {
               Text(
                 '($currencyType)',
                 style: context.textTheme.titleSmall
-                    ?.copyWith(color: context.theme.primaryColor),
               ),
             ],
           ),

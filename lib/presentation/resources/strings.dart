@@ -19,6 +19,7 @@ class AppStrings {
   String get lblAmount => _lblAmount;
   String get lblContinue => _lblContinue;
   String get lblAllUsers => _lblAllUsers;
+  String get lblConfirmation => _lblConfirmation;
 
   static const _lblWelcome = 'Welcome to LedgerL';
   static const _lblAuthRequired = 'Authentication Required!';
@@ -40,4 +41,5 @@ class AppStrings {
   static const _lblAmount = 'Amount';
   static const _lblContinue = 'Continue';
   static const _lblAllUsers = 'All Users';
+  static const _lblConfirmation = 'Confirmation';
 }
