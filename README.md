@@ -30,9 +30,6 @@ Transaction guard:
 balance transfer method is guarded with fireStore runTransaction guard build-in .
 (This method MUST be more atomic, sensitive and secure in production apps).(done)
 
-Transaction History:
-Users can view their history and view detail. Transaction have two filter(in/out).
-
 Notification
 The users get the notification when the other user transfer balance(In/Out).(in progress)
 
