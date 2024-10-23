@@ -46,6 +46,7 @@ flutter:
    - assets/
    - assets/icons/
    - assets/logos/
+   - assets/flags/
 
   # example:
   # fonts:
