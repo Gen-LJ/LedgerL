@@ -34,19 +34,7 @@ class LedgerReadyView extends StatelessWidget {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        children: [
-                         index == 0 ?  SvgPicture.asset(
-                            R.flags.singapore,
-                          ): index == 1 ? SvgPicture.asset(
-                           fit: BoxFit.fill,
-                           R.flags.usa,
-                         ) : SvgPicture.asset(
-                           R.flags.europe,
-                         ),
-                          Text(allBalance[index].currency),
-                        ],
-                      ),
+                      Text(allBalance[index].currency),
                       Text(allBalance[index].amount.toString()),
                     ],
                   );
