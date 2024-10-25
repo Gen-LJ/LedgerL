@@ -14,22 +14,28 @@ class ProfileScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        body: Center(
-          child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
-            builder: (context, state) {
-              if (state is Authenticated) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
+        body: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+          builder: (context, state) {
+            if (state is Authenticated) {
+              return SingleChildScrollView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: $styles.grid.columnsMargin,
+                  vertical: $styles.grid.columnsMargin,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('UserName - ${state.user.name}'),
-                    Text('Email - ${state.user.email.maskEmail()}'),
-                    Text('ID - ${state.user.id.maskAndShowLastFour()}'),
+                    ProfileCardTile(
+                      imageUrl: state.user.profileImage ?? '',
+                      name: state.user.name,
+                      email: state.user.email.maskEmail(),
+                    ),
                   ],
-                );
-              }
-              return Text(R.strings.lblAuthRequired);
-            },
-          ),
+                ),
+              );
+            }
+            return Center(child: Text(R.strings.lblAuthRequired));
+          },
         ),
       ),
     );
