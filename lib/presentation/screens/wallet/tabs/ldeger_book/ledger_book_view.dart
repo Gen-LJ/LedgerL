@@ -14,6 +14,7 @@ class LedgerBookView extends StatelessWidget {
       builder: (context, state) {
         return switch (state) {
           LedgerReady() => LedgerReadyView(
+              onRefresh: context.read<LedgerCubit>().loadData,
               allBalance: state.allBalance,
             ),
           _ => const Center(child: CustomCircularIndicator())
@@ -22,5 +23,3 @@ class LedgerBookView extends StatelessWidget {
     );
   }
 }
-
-
