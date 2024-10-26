@@ -7,3 +7,4 @@ export 'navigation/router_extension.dart';
 export 'resources/resources.dart';
 export 'screens/screens.dart';
 export 'styles/styles.dart';
+export 'app.dart';
