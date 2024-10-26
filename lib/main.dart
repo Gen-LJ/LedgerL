@@ -7,7 +7,5 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await configureDependencies();
-  runApp( const LedgerL());
+  runApp(const LedgerL());
 }
-
-

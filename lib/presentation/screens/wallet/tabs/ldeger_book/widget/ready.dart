@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ledger_l/domain/domain.dart';
+import 'package:ledger_l/presentation/extensions/flag.dart';
 import '../../../../../presentation.dart';
 
 class LedgerReadyView extends StatelessWidget {
@@ -34,7 +35,17 @@ class LedgerReadyView extends StatelessWidget {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(allBalance[index].currency),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            height: $styles.size.size700,
+                            fit: BoxFit.fitHeight,
+                            allBalance[index].currency.flag,
+                          ),
+                          $styles.insets.xs.toWidthSizedBox,
+                          Text(allBalance[index].currency,style: context.textTheme.titleMedium,),
+                        ],
+                      ),
                       Text(allBalance[index].amount.toString()),
                     ],
                   );

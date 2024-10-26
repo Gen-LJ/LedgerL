@@ -28,7 +28,7 @@ class IndexScreen extends StatelessWidget {
     });
 
     const List<Widget> screens = [
-      HomeScreen(),
+      WalletScreen(),
       HistoryScreen(),
       ProfileScreen(),
     ];
@@ -36,10 +36,10 @@ class IndexScreen extends StatelessWidget {
     final navItems = [
       NavItem(
         color: context.textTheme.bodySmall!.color!,
-        icon: Icons.home,
-        selectedIcon: Icons.home,
+        icon: Icons.account_balance_wallet_outlined,
+        selectedIcon: Icons.account_balance_wallet,
         selectedColor: context.theme.primaryColor,
-        label: R.strings.lblHome,
+        label: R.strings.lblWallet,
       ),
       NavItem(
         color: context.textTheme.bodySmall!.color!,

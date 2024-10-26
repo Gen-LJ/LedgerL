@@ -49,16 +49,16 @@ import 'package:ledger_l/presentation/navigation/router.dart' as _i426;
 import 'package:ledger_l/presentation/presentation.dart' as _i890;
 import 'package:ledger_l/presentation/screens/history/cubit/transaction_history_cubit.dart'
     as _i373;
-import 'package:ledger_l/presentation/screens/home/tabs/ldeger_book/cubit/ledger_cubit.dart'
-    as _i1070;
-import 'package:ledger_l/presentation/screens/home/tabs/transfer/cubit/transfer_view_cubit.dart'
-    as _i725;
 import 'package:ledger_l/presentation/screens/transfer_balance/cubit/transfer_balance_cubit.dart'
     as _i515;
 import 'package:ledger_l/presentation/screens/transfer_user_check/cubit/transfer_user_check_cubit.dart'
     as _i693;
 import 'package:ledger_l/presentation/screens/transfer_user_check/receiver_data_check_container/cubit/receiver_data_validation_cubit.dart'
     as _i431;
+import 'package:ledger_l/presentation/screens/wallet/tabs/ldeger_book/cubit/ledger_cubit.dart'
+    as _i201;
+import 'package:ledger_l/presentation/screens/wallet/tabs/transfer/cubit/transfer_view_cubit.dart'
+    as _i958;
 import 'package:logger/logger.dart' as _i974;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
@@ -129,8 +129,8 @@ extension GetItInjectableX on _i174.GetIt {
       ),
       preResolve: true,
     );
-    gh.factory<_i725.TransferViewCubit>(
-        () => _i725.TransferViewCubit(gh<_i560.UserRepository>()));
+    gh.factory<_i958.TransferViewCubit>(
+        () => _i958.TransferViewCubit(gh<_i560.UserRepository>()));
     gh.lazySingleton<_i560.TransactionRepository>(() =>
         _i954.TransactionRepositoryImpl(
             gh<_i760.TransactionRemoteDataSource>()));
@@ -151,7 +151,7 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i890.AuthenticationCubit>(),
           gh<_i890.INavigationKeyProvider>(),
         ));
-    gh.factory<_i1070.LedgerCubit>(() => _i1070.LedgerCubit(
+    gh.factory<_i201.LedgerCubit>(() => _i201.LedgerCubit(
           gh<_i560.BalanceRepository>(),
           gh<_i65.AuthenticationCubit>(),
         ));

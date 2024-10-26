@@ -44,6 +44,7 @@ flutter:
 
   assets:
    - assets/
+   - assets/currency/
    - assets/icons/
    - assets/logos/
    - assets/flags/

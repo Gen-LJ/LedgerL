@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class WalletScreen extends StatelessWidget {
+  const WalletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

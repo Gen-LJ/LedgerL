@@ -7,7 +7,7 @@ import 'package:ledger_l/presentation/presentation.dart';
 extension NavigationExtension on BuildContext {
   void goIndex() => go(IndexScreen.routePath);
 
-  void goHome() {
+  void goWallet() {
     final router = inject<NavigationRouter>();
     final selectTab = router.useIndexPageNavigator();
     selectTab(0);
