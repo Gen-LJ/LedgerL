@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 
 class HistoryTile extends StatelessWidget {
@@ -28,6 +29,12 @@ class HistoryTile extends StatelessWidget {
         children: [
           Row(
             children: [
+              SvgPicture.asset(
+                height: $styles.size.size500,
+                fit: BoxFit.fitHeight,
+                currencyType.flag,
+              ),
+              $styles.insets.sm.toWidthSizedBox,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
