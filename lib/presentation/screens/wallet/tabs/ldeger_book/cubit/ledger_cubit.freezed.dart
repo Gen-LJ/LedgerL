@@ -19,21 +19,22 @@ mixin _$LedgerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<BalanceEntity> allBalance) ready,
+    required TResult Function(List<BalanceEntity> allBalance, bool refresh)
+        ready,
     required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<BalanceEntity> allBalance)? ready,
+    TResult? Function(List<BalanceEntity> allBalance, bool refresh)? ready,
     TResult? Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<BalanceEntity> allBalance)? ready,
+    TResult Function(List<BalanceEntity> allBalance, bool refresh)? ready,
     TResult Function()? loading,
     required TResult orElse(),
   }) =>
@@ -125,7 +126,8 @@ class _$LedgerInitialImpl implements LedgerInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<BalanceEntity> allBalance) ready,
+    required TResult Function(List<BalanceEntity> allBalance, bool refresh)
+        ready,
     required TResult Function() loading,
   }) {
     return initial();
@@ -135,7 +137,7 @@ class _$LedgerInitialImpl implements LedgerInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<BalanceEntity> allBalance)? ready,
+    TResult? Function(List<BalanceEntity> allBalance, bool refresh)? ready,
     TResult? Function()? loading,
   }) {
     return initial?.call();
@@ -145,7 +147,7 @@ class _$LedgerInitialImpl implements LedgerInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<BalanceEntity> allBalance)? ready,
+    TResult Function(List<BalanceEntity> allBalance, bool refresh)? ready,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
@@ -200,7 +202,7 @@ abstract class _$$LedgerReadyImplCopyWith<$Res> {
           _$LedgerReadyImpl value, $Res Function(_$LedgerReadyImpl) then) =
       __$$LedgerReadyImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<BalanceEntity> allBalance});
+  $Res call({List<BalanceEntity> allBalance, bool refresh});
 }
 
 /// @nodoc
@@ -217,12 +219,17 @@ class __$$LedgerReadyImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? allBalance = null,
+    Object? refresh = null,
   }) {
     return _then(_$LedgerReadyImpl(
       allBalance: null == allBalance
           ? _value._allBalance
           : allBalance // ignore: cast_nullable_to_non_nullable
               as List<BalanceEntity>,
+      refresh: null == refresh
+          ? _value.refresh
+          : refresh // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -230,7 +237,8 @@ class __$$LedgerReadyImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LedgerReadyImpl implements LedgerReady {
-  const _$LedgerReadyImpl({required final List<BalanceEntity> allBalance})
+  const _$LedgerReadyImpl(
+      {required final List<BalanceEntity> allBalance, this.refresh = false})
       : _allBalance = allBalance;
 
   final List<BalanceEntity> _allBalance;
@@ -242,8 +250,12 @@ class _$LedgerReadyImpl implements LedgerReady {
   }
 
   @override
+  @JsonKey()
+  final bool refresh;
+
+  @override
   String toString() {
-    return 'LedgerState.ready(allBalance: $allBalance)';
+    return 'LedgerState.ready(allBalance: $allBalance, refresh: $refresh)';
   }
 
   @override
@@ -252,12 +264,13 @@ class _$LedgerReadyImpl implements LedgerReady {
         (other.runtimeType == runtimeType &&
             other is _$LedgerReadyImpl &&
             const DeepCollectionEquality()
-                .equals(other._allBalance, _allBalance));
+                .equals(other._allBalance, _allBalance) &&
+            (identical(other.refresh, refresh) || other.refresh == refresh));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_allBalance));
+      runtimeType, const DeepCollectionEquality().hash(_allBalance), refresh);
 
   /// Create a copy of LedgerState
   /// with the given fields replaced by the non-null parameter values.
@@ -271,32 +284,33 @@ class _$LedgerReadyImpl implements LedgerReady {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<BalanceEntity> allBalance) ready,
+    required TResult Function(List<BalanceEntity> allBalance, bool refresh)
+        ready,
     required TResult Function() loading,
   }) {
-    return ready(allBalance);
+    return ready(allBalance, refresh);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<BalanceEntity> allBalance)? ready,
+    TResult? Function(List<BalanceEntity> allBalance, bool refresh)? ready,
     TResult? Function()? loading,
   }) {
-    return ready?.call(allBalance);
+    return ready?.call(allBalance, refresh);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<BalanceEntity> allBalance)? ready,
+    TResult Function(List<BalanceEntity> allBalance, bool refresh)? ready,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (ready != null) {
-      return ready(allBalance);
+      return ready(allBalance, refresh);
     }
     return orElse();
   }
@@ -337,10 +351,12 @@ class _$LedgerReadyImpl implements LedgerReady {
 }
 
 abstract class LedgerReady implements LedgerState {
-  const factory LedgerReady({required final List<BalanceEntity> allBalance}) =
-      _$LedgerReadyImpl;
+  const factory LedgerReady(
+      {required final List<BalanceEntity> allBalance,
+      final bool refresh}) = _$LedgerReadyImpl;
 
   List<BalanceEntity> get allBalance;
+  bool get refresh;
 
   /// Create a copy of LedgerState
   /// with the given fields replaced by the non-null parameter values.
@@ -391,7 +407,8 @@ class _$LedgerLoadingImpl implements LedgerLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<BalanceEntity> allBalance) ready,
+    required TResult Function(List<BalanceEntity> allBalance, bool refresh)
+        ready,
     required TResult Function() loading,
   }) {
     return loading();
@@ -401,7 +418,7 @@ class _$LedgerLoadingImpl implements LedgerLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<BalanceEntity> allBalance)? ready,
+    TResult? Function(List<BalanceEntity> allBalance, bool refresh)? ready,
     TResult? Function()? loading,
   }) {
     return loading?.call();
@@ -411,7 +428,7 @@ class _$LedgerLoadingImpl implements LedgerLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<BalanceEntity> allBalance)? ready,
+    TResult Function(List<BalanceEntity> allBalance, bool refresh)? ready,
     TResult Function()? loading,
     required TResult orElse(),
   }) {
