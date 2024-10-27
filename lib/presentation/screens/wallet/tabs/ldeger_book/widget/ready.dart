@@ -28,6 +28,7 @@ class LedgerReadyView extends StatelessWidget {
         },
         builder: (context, loading) {
           return LoadingOverlay(
+            opacity: 0,
             isLoading: loading,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
