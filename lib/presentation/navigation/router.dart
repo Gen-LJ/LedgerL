@@ -40,6 +40,7 @@ class NavigationRouter {
           builder: (context, state) {
             return MultiBlocProvider(
               providers: [
+                BlocProvider(create: (_) => inject<LedgerCubit>()),
                 BlocProvider(create: (_) => inject<TransferViewCubit>()),
                 BlocProvider(
                     create: (_) => inject<TransferUserCheckCubit>()),

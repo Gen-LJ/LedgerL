@@ -52,6 +52,7 @@ class HistoryReadyView extends StatelessWidget {
             receiverName: transaction.receiverName,
             senderName: transaction.senderName,
             isSender: userID == transaction.senderId,
+            time: transaction.createdAt,
           );
         },
         separatorBuilder: (context, index) => const CustomDivider(),

@@ -15,7 +15,9 @@ class LedgerCubit extends Cubit<LedgerState> {
   final AuthenticationCubit _auth;
 
   LedgerCubit(this._balanceRepository, this._auth)
-      : super(const LedgerState.initial());
+      : super(const LedgerState.initial()){
+    loadData();
+  }
 
   Future<void> loadData() async {
     emit(const LedgerState.loading());
@@ -23,5 +25,12 @@ class LedgerCubit extends Cubit<LedgerState> {
     final userId = _auth.userId!;
     final allBalance = await _balanceRepository.getAllBalance(userId);
     emit(LedgerState.ready(allBalance: allBalance));
+  }
+
+  void initialize() {
+    state.maybeMap(
+      initial: (value) => loadData(),
+      orElse: () {},
+    );
   }
 }

@@ -9,7 +9,6 @@ class LedgerBookView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<LedgerCubit>().loadData();
     return BlocBuilder<LedgerCubit, LedgerState>(
       builder: (context, state) {
         return switch (state) {
