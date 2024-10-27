@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ledger_l/presentation/presentation.dart';
 import '../../../../domain/domain.dart';
@@ -82,8 +83,17 @@ class TransactionContainer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                          'Amount (${senderBalance[bloc.currentIndex].currency})'),
+                      Row(
+                        children: [
+                          Text(
+                              'Amount (${senderBalance[bloc.currentIndex].currency})'),
+                          $styles.insets.xs.toWidthSizedBox,
+                          SvgPicture.asset(
+                              fit: BoxFit.fitHeight,
+                              height: $styles.size.size300,
+                              senderBalance[bloc.currentIndex].currency.flag)
+                        ],
+                      ),
                       $styles.insets.xxs.toHeightSizedBox,
                       TextFormField(
                         style:
@@ -96,12 +106,23 @@ class TransactionContainer extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Available Balance(${senderBalance[bloc.currentIndex].currency}) - '
-                            '${!bloc.hideAvailable ? senderBalance[bloc.currentIndex].amount : '*****'}',
-                            style: context.textTheme.labelSmall?.copyWith(
-                                color: context.textTheme.labelSmall?.color
-                                    ?.withOpacity(0.5)),
+                          Row(
+                            children: [
+                              Text(
+                                'Available Balance(${senderBalance[bloc.currentIndex].currency}) - '
+                                '${!bloc.hideAvailable ? senderBalance[bloc.currentIndex].amount : '*****'}',
+                                style: context.textTheme.labelSmall?.copyWith(
+                                    color: context.textTheme.labelSmall?.color
+                                        ?.withOpacity(0.5)),
+                              ),
+                              $styles.insets.xs.toWidthSizedBox,
+                              SvgIcon(
+                                size: 10,
+                                senderBalance[bloc.currentIndex]
+                                    .currency
+                                    .symbol,
+                              ),
+                            ],
                           ),
                           InkWell(
                               onTap: bloc.onHideAvailableBalance,
