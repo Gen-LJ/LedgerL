@@ -19,14 +19,24 @@ jobs:
         with:
           flutter-version: '3.24.3'
       - run: flutter pub get
+
+      # Generate SHA-1 Key for Google Sign-In
+      - name: Generate SHA-1 Key
+        id: sha_key
+        run: |
+          SHA1_KEY=$(keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android | grep 'SHA1:' | awk '{print $2}')
+          echo "SHA-1 Key: $SHA1_KEY"
+          echo "SHA1_KEY=$SHA1_KEY" >> $GITHUB_ENV
+
       - run: flutter build apk --debug --split-per-abi
       - run: |
           flutter build ios --no-codesign
           cd build/ios/iphoneos
           mkdir Payload
-          ln -s ../Runner.app
+          ln -s ../Runner.app Payload/Runner.app
           cd ..
           zip -r app.ipa Payload
+
       - name: Push to Releases
         uses: ncipollo/release-action@v1
         with:
