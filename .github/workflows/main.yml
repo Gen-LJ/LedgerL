@@ -14,11 +14,11 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v2  # Update to v2 for latest version
-      - uses: actions/setup-java@v2  # Update to v2 for latest version
+      - uses: actions/checkout@v1  # Update to v2 for latest version
+      - uses: actions/setup-java@v1  # Update to v2 for latest version
         with:
           java-version: '17'
-      - uses: subosito/flutter-action@v2  # Update to v2 for the latest features
+      - uses: subosito/flutter-action@v1  # Update to v2 for the latest features
         with:
           flutter-version: '3.24.3'  # Ensure this version is correct
 
